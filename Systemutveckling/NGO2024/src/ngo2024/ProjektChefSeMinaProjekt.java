@@ -38,7 +38,7 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
     public void fyllProjektTabell() {
         try {
             
-            String sql = "SELECT projektnamn, beskrivning " +
+            String sql = "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet " +
                      "FROM projekt " +
                      "WHERE projektchef IN (" +
                      "    SELECT aid " +
@@ -55,10 +55,16 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("Projektnamn");
             model.addColumn("Beskrivning");
+            model.addColumn("Startdatum");
+            model.addColumn("Slutdatum");
+            model.addColumn("Kostnad");
+            model.addColumn("Status");
+            model.addColumn("Prioritet");
             
             
             for (HashMap<String, String> rad : resultat) {
-                model.addRow(new Object[]{rad.get("projektnamn"), rad.get("beskrivning")});
+                model.addRow(new Object[]{rad.get("projektnamn"), rad.get("beskrivning"), rad.get("startdatum"), rad.get("slutdatum"),
+                rad.get("kostnad"), rad.get("status"), rad.get("prioritet")});
             }
             
             tblProjekt.setModel(model);
@@ -80,7 +86,7 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProjekt = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jButton1 = new javax.swing.JButton();
+        btnAndraProjektnamn = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -99,7 +105,12 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblProjekt);
 
-        jButton1.setText("Ändra projektnamn");
+        btnAndraProjektnamn.setText("Ändra projektnamn");
+        btnAndraProjektnamn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraProjektnamnActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Lägg till handläggare");
 
@@ -120,7 +131,7 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jButton1)
+                .addComponent(btnAndraProjektnamn)
                 .addGap(26, 26, 26)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
@@ -132,14 +143,13 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
+                            .addComponent(btnAndraProjektnamn)
                             .addComponent(jButton2)
                             .addComponent(jButton3))
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -151,6 +161,10 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnAndraProjektnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraProjektnamnActionPerformed
+        
+    }//GEN-LAST:event_btnAndraProjektnamnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,7 +202,7 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnAndraProjektnamn;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
