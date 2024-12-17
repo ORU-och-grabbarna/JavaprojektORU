@@ -82,6 +82,8 @@ public class AdminAnställda extends javax.swing.JFrame {
 
     private void taBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taBortActionPerformed
         // TODO add your handling code here:
+        new TaBortAnställd(idb).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_taBortActionPerformed
 
     private void läggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_läggTillActionPerformed
