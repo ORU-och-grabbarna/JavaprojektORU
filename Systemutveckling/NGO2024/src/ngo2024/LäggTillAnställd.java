@@ -30,9 +30,6 @@ public class LäggTillAnställd extends javax.swing.JFrame {
     public LäggTillAnställd(InfDB idb) {
         initComponents();
         this.idb = idb;
-        btnAdmin.setVisible(false);
-        btnHandläggare.setVisible(false);
-        this.process = "start";
     }
 
     /**
@@ -280,44 +277,10 @@ public class LäggTillAnställd extends javax.swing.JFrame {
     }//GEN-LAST:event_tfEpostActionPerformed
 
     private void läggTillAnställdOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_läggTillAnställdOKActionPerformed
-        
-        if (process.equals("admin")){
-            String nivå = tfFörnamnOrNivå.getText();
-            
-            try{
-                String query = "INSERT INTO admin VALUES(" + this.aid + ",'" + nivå + "')";
-                
-                idb.insert(query);
-                
-                lblSuccess2.setText("Admin lades till!");
-            }catch(InfException e){
-                lblSuccess2.setText("Admin kunde inte läggas till");
-            }
-            
-        }
+
         
         // Har svårt att få det att bli null programmet vägrar acceptera det
-        else if(process.equals("handläggare")){
-            String ansvaringhetsområden = tfFörnamnOrNivå.getText();
-            String mentor = tfEfternamnOrMentor.getText();
-            
-            if(mentor.equalsIgnoreCase("")){
-                mentor = "NULL";
-            }
-            
-            try{
-                String query = "INSERT INTO handlaggare VALUES (" + this.aid + ",'" + ansvaringhetsområden + "','" + mentor + "')";
-                
-                idb.insert(query);
-                lblSuccess2.setText("Handläggare lades till!");
-                
-            }catch(InfException e){
-                lblSuccess2.setText("Handläggare kunde inte läggas till");
-            }
-            
-            
-        }
-        else{
+        
             try {
                 // TODO add your handling code here:
 
@@ -351,60 +314,21 @@ public class LäggTillAnställd extends javax.swing.JFrame {
             } catch (InfException ex) {
                 Logger.getLogger(LäggTillAnställd.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        
 
         
     }//GEN-LAST:event_läggTillAnställdOKActionPerformed
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
         // TODO add your handling code here:
-        jLabel2.setVisible(false);
-        jLabel4.setVisible(false);
-        jLabel5.setVisible(false);
-        jLabel6.setVisible(false);
-        jLabel7.setVisible(false);
-        jLabel8.setVisible(false);
-        jLabel9.setVisible(false);
-        lblSuccess.setVisible(false);
         
-        tfAdress.setVisible(false);
-        tfAnsDatum.setVisible(false);
-        tfAvdelning.setVisible(false);
-        tfEfternamnOrMentor.setVisible(false);
-        tfEpost.setVisible(false);
-        tfLösen.setVisible(false);
-        tfTelefon.setVisible(false);
-        
-    
-        process = "admin";
-        
-        jLabel3.setText("Behörighetsnivå");
         
         
     }//GEN-LAST:event_btnAdminActionPerformed
 
     private void btnHandläggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHandläggareActionPerformed
         // TODO add your handling code here:
-        jLabel2.setVisible(false);
-        jLabel5.setVisible(false);
-        jLabel6.setVisible(false);
-        jLabel7.setVisible(false);
-        jLabel8.setVisible(false);
-        jLabel9.setVisible(false);
-        lblSuccess.setVisible(false);
-        
-        tfAdress.setVisible(false);
-        tfAnsDatum.setVisible(false);
-        tfAvdelning.setVisible(false);
-        tfEpost.setVisible(false);
-        tfLösen.setVisible(false);
-        tfTelefon.setVisible(false);
- 
-        
-        process = "handläggare";
-        
-        jLabel3.setText("Ansvaringhetsområden");
-        jLabel4.setText("Mentor");
+       
     }//GEN-LAST:event_btnHandläggareActionPerformed
 
     /**
