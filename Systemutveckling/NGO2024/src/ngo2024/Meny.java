@@ -26,6 +26,7 @@ public class Meny extends javax.swing.JFrame {
         this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
         lblInloggadAnvandare.setText(inloggadAnvandare);
+    
     }
 
     /**
