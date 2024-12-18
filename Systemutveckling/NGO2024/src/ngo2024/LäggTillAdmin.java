@@ -18,7 +18,7 @@ import oru.inf.InfException;
  *
  * @author Mohammed
  */
-public class LäggTillAnställd extends javax.swing.JFrame {
+public class LäggTillAdmin extends javax.swing.JFrame {
     
     private InfDB idb;
     private String aid;
@@ -27,9 +27,10 @@ public class LäggTillAnställd extends javax.swing.JFrame {
     /**
      * Creates new form LäggTillAnställd
      */
-    public LäggTillAnställd(InfDB idb) {
+    public LäggTillAdmin(InfDB idb) {
         initComponents();
         this.idb = idb;
+        this.process = "start";
     }
 
     /**
@@ -60,14 +61,13 @@ public class LäggTillAnställd extends javax.swing.JFrame {
         läggTillAnställdOK = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         tfAvdelning = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        tfNivå = new javax.swing.JTextField();
         lblSuccess = new javax.swing.JLabel();
-        btnAdmin = new javax.swing.JButton();
-        btnHandläggare = new javax.swing.JButton();
-        lblSuccess2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Lägg till anställd");
+        jLabel1.setText("Lägg till Admin");
 
         jLabel3.setText("Förnamn");
 
@@ -130,19 +130,16 @@ public class LäggTillAnställd extends javax.swing.JFrame {
 
         tfAvdelning.setColumns(10);
 
-        btnAdmin.setText("Administratör");
-        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
+        jLabel10.setText("Behörighetsnivå");
+
+        tfNivå.setColumns(3);
+        tfNivå.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdminActionPerformed(evt);
+                tfNivåActionPerformed(evt);
             }
         });
 
-        btnHandläggare.setText("Handläggare");
-        btnHandläggare.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHandläggareActionPerformed(evt);
-            }
-        });
+        lblSuccess.setText("Status");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,7 +147,7 @@ public class LäggTillAnställd extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -159,22 +156,18 @@ public class LäggTillAnställd extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel1))
+                        .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfEfternamnOrMentor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfEfternamnOrMentor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tfFörnamnOrNivå, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
-                                        .addComponent(lblSuccess))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(lblSuccess2)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(tfFörnamnOrNivå, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfNivå, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -183,31 +176,27 @@ public class LäggTillAnställd extends javax.swing.JFrame {
                             .addComponent(läggTillAnställdOK))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAdmin)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnHandläggare))
                             .addComponent(tfAnsDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(tfAvdelning)
                                     .addComponent(tfLösen))
                                 .addGap(53, 53, 53)
-                                .addComponent(slumpaLösenord)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(slumpaLösenord))
+                            .addComponent(lblSuccess))))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblSuccess2))
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tfFörnamnOrNivå, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSuccess))
+                    .addComponent(jLabel10)
+                    .addComponent(tfNivå, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -240,8 +229,7 @@ public class LäggTillAnställd extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(läggTillAnställdOK)
-                    .addComponent(btnAdmin)
-                    .addComponent(btnHandläggare))
+                    .addComponent(lblSuccess))
                 .addContainerGap())
         );
 
@@ -293,43 +281,36 @@ public class LäggTillAnställd extends javax.swing.JFrame {
                 String ansDatum = tfAnsDatum.getText();
                 String lösen = tfLösen.getText();
                 String avdelning = tfAvdelning.getText();
+                String nivå = tfNivå.getText();
 
                 try {
 
                     String query = "INSERT INTO anstalld VALUES(" + this.aid + ",'" + förnamn + "','" + efternamn + "','" + adress + "','" + epost + "','"
                             + telefon + "','" + ansDatum + "','" + lösen + "','" + avdelning + "')";
+                    
+                    String queryAdmin = "INSERT INTO admin VALUES(" + this.aid + ",'" + nivå + "')";
 
                     idb.insert(query);
+                    idb.insert(queryAdmin);
 
                     lblSuccess.setText("Operationen slutfördes");
 
-                    btnAdmin.setVisible(true);
-                    btnHandläggare.setVisible(true);
-                    slumpaLösenord.setVisible(false);
 
                 } catch (InfException ex) {
                     lblSuccess.setText("Operationen misslyckades");
                 }
 
             } catch (InfException ex) {
-                Logger.getLogger(LäggTillAnställd.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LäggTillAdmin.class.getName()).log(Level.SEVERE, null, ex);
             }
         
 
         
     }//GEN-LAST:event_läggTillAnställdOKActionPerformed
 
-    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+    private void tfNivåActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNivåActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-    }//GEN-LAST:event_btnAdminActionPerformed
-
-    private void btnHandläggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHandläggareActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_btnHandläggareActionPerformed
+    }//GEN-LAST:event_tfNivåActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,14 +329,15 @@ public class LäggTillAnställd extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LäggTillAnställd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LäggTillAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LäggTillAnställd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LäggTillAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LäggTillAnställd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LäggTillAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LäggTillAnställd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LäggTillAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -368,9 +350,8 @@ public class LäggTillAnställd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdmin;
-    private javax.swing.JButton btnHandläggare;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -380,7 +361,6 @@ public class LäggTillAnställd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lblSuccess;
-    private javax.swing.JLabel lblSuccess2;
     private javax.swing.JButton läggTillAnställdOK;
     private javax.swing.JButton slumpaLösenord;
     private javax.swing.JTextField tfAdress;
@@ -390,6 +370,7 @@ public class LäggTillAnställd extends javax.swing.JFrame {
     private javax.swing.JTextField tfEpost;
     private javax.swing.JTextField tfFörnamnOrNivå;
     private javax.swing.JTextField tfLösen;
+    private javax.swing.JTextField tfNivå;
     private javax.swing.JTextField tfTelefon;
     // End of variables declaration//GEN-END:variables
 }
