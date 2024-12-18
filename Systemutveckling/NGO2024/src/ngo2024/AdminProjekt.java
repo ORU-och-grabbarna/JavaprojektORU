@@ -36,6 +36,7 @@ public class AdminProjekt extends javax.swing.JFrame {
         btnTaBort = new javax.swing.JButton();
         btnÄndra = new javax.swing.JButton();
 
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Land");
@@ -61,6 +62,7 @@ public class AdminProjekt extends javax.swing.JFrame {
             }
         });
 
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,6 +75,8 @@ public class AdminProjekt extends javax.swing.JFrame {
                     .addComponent(btnLäggTill)
                     .addComponent(jLabel1))
                 .addContainerGap(202, Short.MAX_VALUE))
+
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,11 +85,14 @@ public class AdminProjekt extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(43, 43, 43)
                 .addComponent(btnLäggTill)
+
                 .addGap(40, 40, 40)
                 .addComponent(btnTaBort)
                 .addGap(42, 42, 42)
                 .addComponent(btnÄndra)
                 .addContainerGap(70, Short.MAX_VALUE))
+
+
         );
 
         pack();
@@ -96,6 +103,7 @@ public class AdminProjekt extends javax.swing.JFrame {
         new LäggTillProjekt(idb).setVisible(true);
     }//GEN-LAST:event_btnLäggTillActionPerformed
 
+
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
         // TODO add your handling code here:
         new TaBortProjekt(idb).setVisible(true);
@@ -105,6 +113,7 @@ public class AdminProjekt extends javax.swing.JFrame {
         // TODO add your handling code here:
         new ÄndraProjekt(idb).setVisible(true);
     }//GEN-LAST:event_btnÄndraActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -143,8 +152,10 @@ public class AdminProjekt extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLäggTill;
+
     private javax.swing.JButton btnTaBort;
     private javax.swing.JButton btnÄndra;
+
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
