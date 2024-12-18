@@ -33,23 +33,31 @@ public class AdminAnställda extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         taBort = new javax.swing.JButton();
-        läggTill = new javax.swing.JButton();
+        läggTillAdmin = new javax.swing.JButton();
+        läggTillHand = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Anställda");
 
-        taBort.setText("Ta bort");
+        taBort.setText("Ta bort anställd");
         taBort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 taBortActionPerformed(evt);
             }
         });
 
-        läggTill.setText("Lägg till");
-        läggTill.addActionListener(new java.awt.event.ActionListener() {
+        läggTillAdmin.setText("Lägg till Admin");
+        läggTillAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                läggTillActionPerformed(evt);
+                läggTillAdminActionPerformed(evt);
+            }
+        });
+
+        läggTillHand.setText("Lägg till handläggare");
+        läggTillHand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                läggTillHandActionPerformed(evt);
             }
         });
 
@@ -60,10 +68,13 @@ public class AdminAnställda extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(läggTill)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(läggTillAdmin)
+                        .addGap(56, 56, 56)
+                        .addComponent(läggTillHand))
                     .addComponent(taBort)
                     .addComponent(jLabel1))
-                .addContainerGap(313, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,7 +82,9 @@ public class AdminAnställda extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addGap(40, 40, 40)
-                .addComponent(läggTill)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(läggTillAdmin)
+                    .addComponent(läggTillHand))
                 .addGap(48, 48, 48)
                 .addComponent(taBort)
                 .addContainerGap(130, Short.MAX_VALUE))
@@ -83,14 +96,17 @@ public class AdminAnställda extends javax.swing.JFrame {
     private void taBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taBortActionPerformed
         // TODO add your handling code here:
         new TaBortAnställd(idb).setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_taBortActionPerformed
 
-    private void läggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_läggTillActionPerformed
+    private void läggTillAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_läggTillAdminActionPerformed
         // TODO add your handling code here:
-        new LäggTillAnställd(idb).setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_läggTillActionPerformed
+        new LäggTillAdmin(idb).setVisible(true);
+    }//GEN-LAST:event_läggTillAdminActionPerformed
+
+    private void läggTillHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_läggTillHandActionPerformed
+        // TODO add your handling code here:
+        new LäggTillHandläggare(idb).setVisible(true);
+    }//GEN-LAST:event_läggTillHandActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,7 +145,8 @@ public class AdminAnställda extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton läggTill;
+    private javax.swing.JButton läggTillAdmin;
+    private javax.swing.JButton läggTillHand;
     private javax.swing.JButton taBort;
     // End of variables declaration//GEN-END:variables
 }
