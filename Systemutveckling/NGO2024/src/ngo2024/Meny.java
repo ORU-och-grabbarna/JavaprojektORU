@@ -15,6 +15,8 @@ public class Meny extends javax.swing.JFrame {
     
     private InfDB idb;
     private String inloggadAnvandare;
+    
+    
 
     /**
      * Creates new form Meny
