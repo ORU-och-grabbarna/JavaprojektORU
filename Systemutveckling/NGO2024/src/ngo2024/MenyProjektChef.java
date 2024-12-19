@@ -38,6 +38,7 @@ public class MenyProjektChef extends javax.swing.JFrame {
         lblinloggadAnvandare = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnSeMinaProjekt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,6 +47,13 @@ public class MenyProjektChef extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         jButton2.setText("jButton2");
+
+        btnSeMinaProjekt.setText("Se mina projekt");
+        btnSeMinaProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeMinaProjektActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,6 +67,10 @@ public class MenyProjektChef extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(25, 25, 25))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSeMinaProjekt)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,11 +80,18 @@ public class MenyProjektChef extends javax.swing.JFrame {
                     .addComponent(lblinloggadAnvandare)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(250, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(btnSeMinaProjekt)
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSeMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeMinaProjektActionPerformed
+    ProjektChefSeMinaProjekt projektFönster = new ProjektChefSeMinaProjekt(idb, inloggadAnvandare);
+    projektFönster.setVisible(true);
+    }//GEN-LAST:event_btnSeMinaProjektActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,6 +129,7 @@ public class MenyProjektChef extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSeMinaProjekt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel lblinloggadAnvandare;

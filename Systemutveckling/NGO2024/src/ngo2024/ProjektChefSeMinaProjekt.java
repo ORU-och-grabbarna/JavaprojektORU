@@ -29,6 +29,7 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         initComponents();
         fyllProjektTabell();
         fyllPartnerTabell();
+        fyllHandlaggareTabell();
     }
     
     
@@ -77,12 +78,37 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
     
     
     
-    //public void fyllHandlaggareTabell () {
+    public void fyllHandlaggareTabell () {
         
-        //try {
-            //String sqlHandlaggare = 
-        //}
-    //}
+        try {
+            
+            String sqlHandlaggare = "SELECT fornamn, ansvarighetsomrade " +
+             "FROM anstalld " +
+             "JOIN handlaggare ON handlaggare.aid = anstalld.aid " +
+             "WHERE epost = '" + inloggadAnvandare + "';";
+            
+            ArrayList<HashMap<String, String>> resultatx = idb.fetchRows(sqlHandlaggare);
+            
+            if (resultatx == null || resultatx.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Inga handläggare hittades." );
+            }
+            
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("Handläggare");
+            model.addColumn("Ansvarighetsområde");
+            
+            for (HashMap<String, String> rad : resultatx) {
+                model.addRow(new Object[]{rad.get("fornamn"), rad.get("ansvarighetsomrade")});
+                
+            }
+            
+            tblHandlaggare.setModel(model);
+            
+        } catch (InfException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av handläggare: " + e.getMessage());
+            
+        }
+    }
     
     
     
@@ -154,19 +180,11 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProjekt = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        btnAndraProjektnamn = new javax.swing.JButton();
-        btnLaggTillhandlagare = new javax.swing.JButton();
-        btnTaBortHandlaggare = new javax.swing.JButton();
-        btnLaggTillPartner = new javax.swing.JButton();
-        btnTaBortPartner = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        btnRaknaUtKostnad = new javax.swing.JButton();
-        btnAndraPrioritet = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblHandlaggare = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblPartner = new javax.swing.JTable();
+        btnTaBortHandlaggare = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -182,37 +200,6 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(tblProjekt);
-
-        btnAndraProjektnamn.setText("Ändra projektnamn");
-        btnAndraProjektnamn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAndraProjektnamnActionPerformed(evt);
-            }
-        });
-
-        btnLaggTillhandlagare.setText("Lägg till handläggare");
-
-        btnTaBortHandlaggare.setText("Ta bort handläggare");
-        btnTaBortHandlaggare.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaBortHandlaggareActionPerformed(evt);
-            }
-        });
-
-        btnLaggTillPartner.setText("Lägg till partner");
-        btnLaggTillPartner.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLaggTillPartnerActionPerformed(evt);
-            }
-        });
-
-        btnTaBortPartner.setText("Ta bort partner");
-
-        jButton1.setText("Ändra status");
-
-        btnRaknaUtKostnad.setText("Räkna ut total kostnad");
-
-        btnAndraPrioritet.setText("Ändra prioritet");
 
         tblHandlaggare.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -240,43 +227,28 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(tblPartner);
 
+        btnTaBortHandlaggare.setText("Ta bort handläggare");
+        btnTaBortHandlaggare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortHandlaggareActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(866, 866, 866)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAndraProjektnamn)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnLaggTillhandlagare))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(48, 48, 48)
-                        .addComponent(btnTaBortHandlaggare)))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTaBortPartner)
-                        .addGap(43, 43, 43)
-                        .addComponent(btnAndraPrioritet))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLaggTillPartner)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnRaknaUtKostnad)))
+                .addContainerGap()
+                .addComponent(btnTaBortHandlaggare)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -287,36 +259,19 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAndraProjektnamn)
-                    .addComponent(btnLaggTillhandlagare)
-                    .addComponent(btnLaggTillPartner)
-                    .addComponent(btnRaknaUtKostnad))
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btnTaBortHandlaggare)
-                    .addComponent(btnTaBortPartner)
-                    .addComponent(btnAndraPrioritet))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnTaBortHandlaggare)
+                .addContainerGap(278, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTaBortHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortHandlaggareActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnTaBortHandlaggareActionPerformed
-
-    private void btnAndraProjektnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraProjektnamnActionPerformed
+        ChefTaBortHandlaggare taborthandlaggareWindow = new ChefTaBortHandlaggare(idb, inloggadAnvandare);
+        taborthandlaggareWindow.setVisible(true);
         
-    }//GEN-LAST:event_btnAndraProjektnamnActionPerformed
-
-    private void btnLaggTillPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillPartnerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLaggTillPartnerActionPerformed
+    }//GEN-LAST:event_btnTaBortHandlaggareActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,16 +309,8 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAndraPrioritet;
-    private javax.swing.JButton btnAndraProjektnamn;
-    private javax.swing.JButton btnLaggTillPartner;
-    private javax.swing.JButton btnLaggTillhandlagare;
-    private javax.swing.JButton btnRaknaUtKostnad;
     private javax.swing.JButton btnTaBortHandlaggare;
-    private javax.swing.JButton btnTaBortPartner;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable tblHandlaggare;
