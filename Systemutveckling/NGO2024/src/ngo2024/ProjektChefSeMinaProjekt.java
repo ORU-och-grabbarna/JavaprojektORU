@@ -82,10 +82,12 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         
         try {
             
-            String sqlHandlaggare = "SELECT fornamn, ansvarighetsomrade " +
-             "FROM anstalld " +
-             "JOIN handlaggare ON handlaggare.aid = anstalld.aid " +
-             "WHERE epost = '" + inloggadAnvandare + "';";
+            String sqlHandlaggare = "SELECT anstalld.fornamn, anstalld.efternamn, handlaggare.ansvarighetsomrade " +
+                        "FROM anstalld " +
+                        "JOIN handlaggare ON anstalld.aid = handlaggare.aid " +
+                        "JOIN ans_proj ON anstalld.aid = ans_proj.aid " +
+                        "JOIN projekt ON ans_proj.pid = projekt.pid " +
+                        "WHERE projekt.projektchef IN (SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "')";
             
             ArrayList<HashMap<String, String>> resultatx = idb.fetchRows(sqlHandlaggare);
             
@@ -185,8 +187,10 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tblPartner = new javax.swing.JTable();
         btnTaBortHandlaggare = new javax.swing.JButton();
+        btnUppdateraTabeller = new javax.swing.JButton();
+        btnLaggTillHandlaggare = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tblProjekt.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -234,6 +238,20 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
             }
         });
 
+        btnUppdateraTabeller.setText("Uppdatera tabellerna");
+        btnUppdateraTabeller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUppdateraTabellerActionPerformed(evt);
+            }
+        });
+
+        btnLaggTillHandlaggare.setText("Lägg till handläggare");
+        btnLaggTillHandlaggare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaggTillHandlaggareActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -248,8 +266,15 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnTaBortHandlaggare)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnTaBortHandlaggare)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUppdateraTabeller)
+                        .addGap(44, 44, 44))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnLaggTillHandlaggare)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,8 +285,12 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnTaBortHandlaggare)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTaBortHandlaggare)
+                    .addComponent(btnUppdateraTabeller))
+                .addGap(18, 18, 18)
+                .addComponent(btnLaggTillHandlaggare)
+                .addContainerGap(237, Short.MAX_VALUE))
         );
 
         pack();
@@ -272,6 +301,27 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         taborthandlaggareWindow.setVisible(true);
         
     }//GEN-LAST:event_btnTaBortHandlaggareActionPerformed
+
+    private void btnUppdateraTabellerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUppdateraTabellerActionPerformed
+        
+        try {
+            
+            fyllHandlaggareTabell();
+            fyllProjektTabell();
+            fyllPartnerTabell();
+            
+            javax.swing.JOptionPane.showMessageDialog(this, "Tabellerna har uppdaterats");
+            
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog (this, "Fel vid uppdatering av tabeller: " + e.getMessage());
+        }
+        
+    }//GEN-LAST:event_btnUppdateraTabellerActionPerformed
+
+    private void btnLaggTillHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillHandlaggareActionPerformed
+        ChefLäggTillHandläggare laggTillWindow = new ChefLäggTillHandläggare (idb, inloggadAnvandare);
+        laggTillWindow.setVisible(true);
+    }//GEN-LAST:event_btnLaggTillHandlaggareActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,7 +359,9 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLaggTillHandlaggare;
     private javax.swing.JButton btnTaBortHandlaggare;
+    private javax.swing.JButton btnUppdateraTabeller;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;

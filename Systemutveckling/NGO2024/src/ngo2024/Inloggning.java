@@ -116,7 +116,7 @@ public class Inloggning extends javax.swing.JFrame {
                                 "WHERE anstalld.epost = '" + ePost + "'";
             
             
-            System.out.println (sqlFraga);
+             System.out.println (sqlFraga);
             String dbLosen = idb.fetchSingle(sqlFraga);
             String dbAdmin = idb.fetchSingle(sqlAdmin);
             String dbProjektChef = idb.fetchSingle(sqlProjektChef);

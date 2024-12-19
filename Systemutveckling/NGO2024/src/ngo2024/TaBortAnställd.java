@@ -35,23 +35,39 @@ public class TaBortAnställd extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        taBortAnställdComboBox = new javax.swing.JComboBox<>();
-        tfTaBort = new javax.swing.JTextField();
+        tfFörnamn = new javax.swing.JTextField();
         btnOK = new javax.swing.JButton();
+        lblFörnamn = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tfEfternamn = new javax.swing.JTextField();
         lblSuccess = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Ta bort anställd");
 
-        taBortAnställdComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Namn", "Aid" }));
-
-        tfTaBort.setColumns(20);
+        tfFörnamn.setColumns(20);
+        tfFörnamn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfFörnamnActionPerformed(evt);
+            }
+        });
 
         btnOK.setText("OK");
         btnOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOKActionPerformed(evt);
+            }
+        });
+
+        lblFörnamn.setText("Förnamn");
+
+        jLabel2.setText("Efternamn");
+
+        tfEfternamn.setColumns(20);
+        tfEfternamn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfEfternamnActionPerformed(evt);
             }
         });
 
@@ -64,14 +80,19 @@ public class TaBortAnställd extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnOK)
-                        .addGap(54, 54, 54)
+                        .addGap(32, 32, 32)
                         .addComponent(lblSuccess))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(taBortAnställdComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1))
-                .addContainerGap(59, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblFörnamn)
+                            .addGap(27, 27, 27)
+                            .addComponent(tfFörnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,13 +101,17 @@ public class TaBortAnställd extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(taBortAnställdComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                    .addComponent(tfFörnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFörnamn))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOK)
                     .addComponent(lblSuccess))
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         pack();
@@ -94,41 +119,57 @@ public class TaBortAnställd extends javax.swing.JFrame {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
-        String getSelectedInput = taBortAnställdComboBox.getSelectedItem().toString();
         
-        if(getSelectedInput.equalsIgnoreCase("namn")){
+        
             // gör en delete där du använder namnet
-            String namn = tfTaBort.getText();
+            String fNamn = tfFörnamn.getText();
+            String eNamn = tfEfternamn.getText();
             
             
+            // behöver göra olika under frågor beroende på om det är en handläggare eller admin
+            // se om det är handläggare eller admin
+          try {
+            String selectAid = "SELECT aid FROM anstalld where fornamn = '" + fNamn + "'" + "AND efternamn = '" + eNamn + "'";
+            String aid = idb.fetchSingle(selectAid);
+            String deleteAnstalld = "DELETE FROM anstalld WHERE aid =" + "'" + aid +"'";
+
             
+
+            String selectAdmin = "SELECT behorighetsniva FROM admin WHERE aid = " + "'" + aid + "'";
+
+            String behörighetsnivå = idb.fetchSingle(selectAdmin);
+
+            // for admin:
+            if (behörighetsnivå != null) {
+                String deleteAdmin = "DELETE FROM admin WHERE aid =" + "'" + aid + "'";
+                idb.delete(deleteAdmin);
+                idb.delete(deleteAnstalld);
+                
+            }else{
+                String deleteHandlaggare = "DELETE FROM handlaggare WHERE aid =" + "'" + aid + "'";
+                idb.delete(deleteHandlaggare);
+                idb.delete(deleteAnstalld);
+            }
+            
+            lblSuccess.setText("Operationen lyckades");
  
-            
-            String query = "DELETE FROM anstalld WHERE fornamn = '" + namn + "'";
-            
-            try {
-                idb.delete(query);
-                lblSuccess.setText("Operationen lyckades");
-            } catch (InfException ex) {
-                lblSuccess.setText("Operationen misslyckades");
-            }
+        } catch (InfException e) {
+            // fel medelleande här
+            lblSuccess.setText("Operationen misslyckades");
         }
-        else{
-            // gör en delte där du använder aid
             
-            String aid = tfTaBort.getText();
             
-            String query = "DELETE FROM anstalld WHERE aid = " + aid;
-            
-            try {
-                idb.delete(query);
-                lblSuccess.setText("Operationen lyckades");
-            }catch (InfException ex){
-                lblSuccess.setText("Operationen misslyckades");
-            }
-        }
+        
         
     }//GEN-LAST:event_btnOKActionPerformed
+
+    private void tfFörnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfFörnamnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfFörnamnActionPerformed
+
+    private void tfEfternamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEfternamnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfEfternamnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,8 +209,10 @@ public class TaBortAnställd extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOK;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblFörnamn;
     private javax.swing.JLabel lblSuccess;
-    private javax.swing.JComboBox<String> taBortAnställdComboBox;
-    private javax.swing.JTextField tfTaBort;
+    private javax.swing.JTextField tfEfternamn;
+    private javax.swing.JTextField tfFörnamn;
     // End of variables declaration//GEN-END:variables
 }

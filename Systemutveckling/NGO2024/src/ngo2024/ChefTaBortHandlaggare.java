@@ -24,6 +24,7 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
+        fyllComboBox();
     }
 
     /**
@@ -40,20 +41,22 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
         txtAnstalldasNamn = new javax.swing.JTextField();
         btnRemovePerson = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblAnstalldasNamn.setText("Ta bort handläggare:");
 
-        comboNamn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboNamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboNamnActionPerformed(evt);
             }
         });
 
-        txtAnstalldasNamn.setText("jTextField1");
-
         btnRemovePerson.setText("OK");
+        btnRemovePerson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemovePersonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -71,7 +74,7 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnRemovePerson)
                             .addComponent(comboNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,24 +93,82 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void comboNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNamnActionPerformed
+    
+    
+    private void fyllComboBox () {
+        
         try {
             
-            String sql = "SELECT fornamn FROM anstalld WHERE aid IN (SELECT aid FROM handlaggare)";
-            ArrayList<String> handlaggare = idb.fetchColumn(sql);
+            String sqlHandlaggare = "SELECT anstalld.fornamn " +
+                                "FROM anstalld " +
+                                "JOIN ans_proj ON anstalld.aid = ans_proj.aid " +
+                                "JOIN projekt ON ans_proj.pid = projekt.pid " +
+                                "WHERE projekt.projektchef IN (SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "')";
+
+            
+            ArrayList <String > handlaggare = idb.fetchColumn (sqlHandlaggare);
             
             
-            if (handlaggare != null) {
-                for (String namn : handlaggare) {
-                    comboNamn.addItem(namn);
-                }
-            } else {
-                javax.swing.JOptionPane.showMessageDialog (this, "Inga handläggare hittades i databasen.");
+            if (handlaggare.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog (this, "Inga handläggare hittades.");
+                return;
+                
             }
+            
+            for (String namn : handlaggare) {
+                comboNamn.addItem(namn);
+            }
+            
         } catch (InfException e) {
-            JOptionPane.ShowMessageDialog (this, "Fel vid hämtning av handläggare: " + e.getMessage());
+            javax.swing.JOptionPane.showMessageDialog (this, "Fel vid hämtning av handläggare: " + e.getMessage());
         }
+    }
+    
+    
+    private void comboNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNamnActionPerformed
+        
+        String valtNamn = (String) comboNamn.getSelectedItem();
+        txtAnstalldasNamn.setText(valtNamn);
     }//GEN-LAST:event_comboNamnActionPerformed
+
+    private void btnRemovePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemovePersonActionPerformed
+        
+        try {
+            
+            String handlaggarNamn = txtAnstalldasNamn.getText().trim();
+            
+            if (handlaggarNamn.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog (this, "Ange ett namn eller välj ett från listan!");
+                return;
+            }
+            
+            String kontrollSql = "Select aid FROM anstalld WHERE fornamn = '" + handlaggarNamn + "'";
+            String handlaggarID = idb.fetchSingle(kontrollSql);
+            
+           if (handlaggarID == null) {
+               javax.swing.JOptionPane.showMessageDialog (this, "Ingen handläggare med namnet \"" + handlaggarNamn + "\" hittades.");
+               return;
+           }
+            
+           
+           String deleteSql = "DELETE FROM ans_proj WHERE aid = '" + handlaggarID + "' " +
+                           "AND pid IN (SELECT pid FROM projekt WHERE projektchef IN " +
+                           "(SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'))";
+           idb.delete(deleteSql);
+           
+           
+           javax.swing.JOptionPane.showMessageDialog (this, "Handläggaren \"" + handlaggarNamn + "\" har tagits bort från projektet.");
+           
+           fyllComboBox();
+           
+           txtAnstalldasNamn.setText("");
+            
+            
+            
+        } catch (InfException e) {
+            javax.swing.JOptionPane.showMessageDialog (this, "Fel vid borttagning: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnRemovePersonActionPerformed
 
     /**
      * @param args the command line arguments

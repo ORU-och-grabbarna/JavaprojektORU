@@ -42,7 +42,7 @@ public class MenyProjektChef extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblinloggadAnvandare.setText("jLabel1");
+        lblinloggadAnvandare.setText("DU ÄR EN CHEF");
 
         jButton1.setText("jButton1");
 
@@ -62,7 +62,7 @@ public class MenyProjektChef extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(lblinloggadAnvandare)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)

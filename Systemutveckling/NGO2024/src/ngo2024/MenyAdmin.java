@@ -38,7 +38,7 @@ public class MenyAdmin extends javax.swing.JFrame {
         lblinloggadAnvandare = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnProjekt = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -56,7 +56,12 @@ public class MenyAdmin extends javax.swing.JFrame {
 
         jLabel1.setText("Administratör:");
 
-        jButton2.setText("Projekt");
+        btnProjekt.setText("Projekt");
+        btnProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProjektActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Avdelning");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +97,7 @@ public class MenyAdmin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -109,7 +114,7 @@ public class MenyAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addGap(12, 12, 12)
-                .addComponent(jButton2)
+                .addComponent(btnProjekt)
                 .addGap(12, 12, 12)
                 .addComponent(jButton3)
                 .addGap(12, 12, 12)
@@ -126,7 +131,6 @@ public class MenyAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         // hoppa till nya anställda Jframe klassen
         new AdminAnställda(idb).setVisible(true);
-        this.setVisible(false);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -141,6 +145,11 @@ public class MenyAdmin extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void btnProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjektActionPerformed
+        // TODO add your handling code here:
+        new AdminProjekt(idb).setVisible(true);
+    }//GEN-LAST:event_btnProjektActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,8 +187,8 @@ public class MenyAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnProjekt;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
