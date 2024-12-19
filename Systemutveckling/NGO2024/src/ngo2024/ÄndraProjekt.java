@@ -281,7 +281,7 @@ public class ÄndraProjekt extends javax.swing.JFrame {
         // hämta all info från projektet med select och fetchrow
         String projektNamn = tfInputNamn.getText();
         lblProjektNamn.setText(projektNamn);
-        String query = "SELECT * FROM projekt WHERE projektnamn = '" + projektNamn + "'";
+        String query = "SELECT * FROM projekt WHERE projektnamn LIKE '%" + projektNamn + "%'";
         
         HashMap<String, String> projektRows = new HashMap<String, String>();
         
@@ -372,7 +372,7 @@ public class ÄndraProjekt extends javax.swing.JFrame {
         }
         
         // Hitta lid
-        String hittaLidQuery = "SELECT lid FROM land WHERE namn = '" + land + "'";
+        String hittaLidQuery = "SELECT sid FROM land WHERE namn = '" + land + "'";
         String lid = null;
         
         try{
