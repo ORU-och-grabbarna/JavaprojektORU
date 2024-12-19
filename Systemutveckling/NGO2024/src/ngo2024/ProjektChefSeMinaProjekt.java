@@ -189,6 +189,7 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         btnTaBortHandlaggare = new javax.swing.JButton();
         btnUppdateraTabeller = new javax.swing.JButton();
         btnLaggTillHandlaggare = new javax.swing.JButton();
+        btnLaggTillPartner = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -252,6 +253,13 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
             }
         });
 
+        btnLaggTillPartner.setText("Lägg till partner");
+        btnLaggTillPartner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaggTillPartnerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -265,15 +273,17 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTaBortHandlaggare)
+                        .addComponent(btnLaggTillHandlaggare)
+                        .addGap(38, 38, 38)
+                        .addComponent(btnLaggTillPartner)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnUppdateraTabeller)
                         .addGap(44, 44, 44))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLaggTillHandlaggare)
+                        .addComponent(btnTaBortHandlaggare)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -286,11 +296,12 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnTaBortHandlaggare)
-                    .addComponent(btnUppdateraTabeller))
-                .addGap(18, 18, 18)
-                .addComponent(btnLaggTillHandlaggare)
-                .addContainerGap(237, Short.MAX_VALUE))
+                    .addComponent(btnUppdateraTabeller)
+                    .addComponent(btnLaggTillPartner)
+                    .addComponent(btnLaggTillHandlaggare))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTaBortHandlaggare)
+                .addContainerGap(243, Short.MAX_VALUE))
         );
 
         pack();
@@ -322,6 +333,11 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         ChefLäggTillHandläggare laggTillWindow = new ChefLäggTillHandläggare (idb, inloggadAnvandare);
         laggTillWindow.setVisible(true);
     }//GEN-LAST:event_btnLaggTillHandlaggareActionPerformed
+
+    private void btnLaggTillPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillPartnerActionPerformed
+       ChefLäggTillPartner laggTillPartnerFönster = new ChefLäggTillPartner (idb, inloggadAnvandare);
+       laggTillPartnerFönster.setVisible(true);
+    }//GEN-LAST:event_btnLaggTillPartnerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -360,6 +376,7 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLaggTillHandlaggare;
+    private javax.swing.JButton btnLaggTillPartner;
     private javax.swing.JButton btnTaBortHandlaggare;
     private javax.swing.JButton btnUppdateraTabeller;
     private javax.swing.JScrollPane jScrollPane1;
