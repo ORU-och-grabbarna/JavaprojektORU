@@ -60,6 +60,11 @@ public class Meny extends javax.swing.JFrame {
         });
 
         BtnPersonal.setText("Personal ");
+        BtnPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPersonalActionPerformed(evt);
+            }
+        });
 
         lblInloggadAnvandare.setText("inloggadanvändare");
 
@@ -104,6 +109,10 @@ public class Meny extends javax.swing.JFrame {
     private void BtnMinaprojektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMinaprojektActionPerformed
         new MinaProjekt (idb,inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_BtnMinaprojektActionPerformed
+
+    private void BtnPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPersonalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnPersonalActionPerformed
 
     /**
      * @param args the command line arguments
