@@ -253,7 +253,7 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
             }
         });
 
-        btnLaggTillPartner.setText("Lägg till partner");
+        btnLaggTillPartner.setText("Ändra projekt partners");
         btnLaggTillPartner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLaggTillPartnerActionPerformed(evt);

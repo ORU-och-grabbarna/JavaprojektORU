@@ -222,7 +222,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnLaggTillPartner">
       <Properties>
-        <Property name="text" type="java.lang.String" value="L&#xe4;gg till partner"/>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra projekt partners"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLaggTillPartnerActionPerformed"/>
