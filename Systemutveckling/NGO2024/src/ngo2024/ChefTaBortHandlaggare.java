@@ -24,7 +24,7 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
-        fyllComboBox();
+        txtAnstalldasNamn.setText("");
     }
 
     /**
@@ -37,7 +37,6 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
     private void initComponents() {
 
         lblAnstalldasNamn = new javax.swing.JLabel();
-        comboNamn = new javax.swing.JComboBox<>();
         txtAnstalldasNamn = new javax.swing.JTextField();
         btnRemovePerson = new javax.swing.JButton();
 
@@ -45,9 +44,10 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
 
         lblAnstalldasNamn.setText("Ta bort handläggare:");
 
-        comboNamn.addActionListener(new java.awt.event.ActionListener() {
+        txtAnstalldasNamn.setText("placeholder");
+        txtAnstalldasNamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboNamnActionPerformed(evt);
+                txtAnstalldasNamnActionPerformed(evt);
             }
         });
 
@@ -68,13 +68,11 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblAnstalldasNamn)
                         .addGap(18, 18, 18)
-                        .addComponent(txtAnstalldasNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtAnstalldasNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnRemovePerson)
-                            .addComponent(comboNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(202, Short.MAX_VALUE))
+                        .addComponent(btnRemovePerson)))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,9 +81,7 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAnstalldasNamn)
                     .addComponent(txtAnstalldasNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(comboNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(46, 46, 46)
                 .addComponent(btnRemovePerson)
                 .addContainerGap(154, Short.MAX_VALUE))
         );
@@ -95,80 +91,51 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
 
     
     
-    private void fyllComboBox () {
-        
-        try {
-            
-            String sqlHandlaggare = "SELECT anstalld.fornamn " +
-                                "FROM anstalld " +
-                                "JOIN ans_proj ON anstalld.aid = ans_proj.aid " +
-                                "JOIN projekt ON ans_proj.pid = projekt.pid " +
-                                "WHERE projekt.projektchef IN (SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "')";
 
-            
-            ArrayList <String > handlaggare = idb.fetchColumn (sqlHandlaggare);
-            
-            
-            if (handlaggare.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog (this, "Inga handläggare hittades.");
-                return;
-                
-            }
-            
-            for (String namn : handlaggare) {
-                comboNamn.addItem(namn);
-            }
-            
-        } catch (InfException e) {
-            javax.swing.JOptionPane.showMessageDialog (this, "Fel vid hämtning av handläggare: " + e.getMessage());
-        }
-    }
     
     
-    private void comboNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboNamnActionPerformed
-        
-        String valtNamn = (String) comboNamn.getSelectedItem();
-        txtAnstalldasNamn.setText(valtNamn);
-    }//GEN-LAST:event_comboNamnActionPerformed
-
     private void btnRemovePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemovePersonActionPerformed
-        
-        try {
-            
-            String handlaggarNamn = txtAnstalldasNamn.getText().trim();
-            
-            if (handlaggarNamn.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog (this, "Ange ett namn eller välj ett från listan!");
-                return;
-            }
-            
-            String kontrollSql = "Select aid FROM anstalld WHERE fornamn = '" + handlaggarNamn + "'";
-            String handlaggarID = idb.fetchSingle(kontrollSql);
-            
-           if (handlaggarID == null) {
-               javax.swing.JOptionPane.showMessageDialog (this, "Ingen handläggare med namnet \"" + handlaggarNamn + "\" hittades.");
-               return;
-           }
-            
-           
-           String deleteSql = "DELETE FROM ans_proj WHERE aid = '" + handlaggarID + "' " +
+                                                       
+
+    try {
+        // Hämta namnet från textfältet
+        String handlaggarNamn = txtAnstalldasNamn.getText().trim();
+
+        if (handlaggarNamn.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ange ett namn!");
+            return;
+        }
+
+        // Kontrollera om namnet finns i databasen och hämta handläggarens ID
+        String kontrollSql = "SELECT aid FROM anstalld WHERE fornamn = '" + handlaggarNamn + "'";
+        String handlaggarID = idb.fetchSingle(kontrollSql);
+
+        if (handlaggarID == null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Ingen handläggare med namnet \"" + handlaggarNamn + "\" hittades.");
+            return;
+        }
+
+        // Ta bort kopplingen mellan handläggaren och projektet
+        String deleteSql = "DELETE FROM ans_proj WHERE aid = '" + handlaggarID + "' " +
                            "AND pid IN (SELECT pid FROM projekt WHERE projektchef IN " +
                            "(SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'))";
-           idb.delete(deleteSql);
-           
-           
-           javax.swing.JOptionPane.showMessageDialog (this, "Handläggaren \"" + handlaggarNamn + "\" har tagits bort från projektet.");
-           
-           fyllComboBox();
-           
-           txtAnstalldasNamn.setText("");
-            
-            
-            
-        } catch (InfException e) {
-            javax.swing.JOptionPane.showMessageDialog (this, "Fel vid borttagning: " + e.getMessage());
-        }
+        idb.delete(deleteSql);
+
+        javax.swing.JOptionPane.showMessageDialog(this, "Handläggaren \"" + handlaggarNamn + "\" har tagits bort från projektet.");
+
+        // Töm textfältet efter borttagning
+        txtAnstalldasNamn.setText("");
+
+    } catch (InfException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Fel vid borttagning: " + e.getMessage());
+    }
+
+
     }//GEN-LAST:event_btnRemovePersonActionPerformed
+
+    private void txtAnstalldasNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnstalldasNamnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAnstalldasNamnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,7 +174,6 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRemovePerson;
-    private javax.swing.JComboBox<String> comboNamn;
     private javax.swing.JLabel lblAnstalldasNamn;
     private javax.swing.JTextField txtAnstalldasNamn;
     // End of variables declaration//GEN-END:variables

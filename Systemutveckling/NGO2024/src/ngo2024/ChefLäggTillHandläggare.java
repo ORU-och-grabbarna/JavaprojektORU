@@ -25,6 +25,9 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
+        tfFornamn.setText("");
+        tfEfternamn.setText("");
+        tfProjektnamn.setText("");
     }
 
     /**
@@ -56,11 +59,11 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
         lblLaggTillHandlaggare.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblLaggTillHandlaggare.setText("Lägg till handläggare");
 
-        tfFornamn.setText("jTextField1");
+        tfFornamn.setText("Placeholder");
 
-        tfEfternamn.setText("jTextField1");
+        tfEfternamn.setText("Placeholder");
 
-        tfProjektnamn.setText("jTextField1");
+        tfProjektnamn.setText("Placeholder");
 
         btnLaggTillHandlaggare.setText("OK");
         btnLaggTillHandlaggare.addActionListener(new java.awt.event.ActionListener() {
@@ -81,21 +84,22 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblProjektnamn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfProjektnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblEfternamn)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblFornamn)
-                                    .addGap(30, 30, 30)
-                                    .addComponent(tfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnLaggTillHandlaggare)))
+                                .addComponent(tfProjektnamn, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnLaggTillHandlaggare, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblEfternamn, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(11, 11, 11)
+                                .addComponent(tfEfternamn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblFornamn)
+                                .addGap(32, 32, 32)
+                                .addComponent(tfFornamn))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblLaggTillHandlaggare)))
-                .addContainerGap(231, Short.MAX_VALUE))
+                        .addComponent(lblLaggTillHandlaggare)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(232, 232, 232))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

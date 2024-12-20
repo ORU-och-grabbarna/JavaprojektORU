@@ -36,19 +36,13 @@ public class MenyProjektChef extends javax.swing.JFrame {
     private void initComponents() {
 
         lblinloggadAnvandare = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         btnSeMinaProjekt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblinloggadAnvandare.setText("DU ÄR EN CHEF");
 
-        jButton1.setText("jButton1");
-
-        jButton2.setText("jButton2");
-
-        btnSeMinaProjekt.setText("Se mina projekt");
+        btnSeMinaProjekt.setText("Projektchef meny");
         btnSeMinaProjekt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeMinaProjektActionPerformed(evt);
@@ -62,11 +56,7 @@ public class MenyProjektChef extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(lblinloggadAnvandare)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(25, 25, 25))
+                .addGap(25, 302, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnSeMinaProjekt)
@@ -75,12 +65,9 @@ public class MenyProjektChef extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblinloggadAnvandare)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(34, 34, 34)
+                .addGap(30, 30, 30)
+                .addComponent(lblinloggadAnvandare)
+                .addGap(38, 38, 38)
                 .addComponent(btnSeMinaProjekt)
                 .addContainerGap(193, Short.MAX_VALUE))
         );
@@ -130,8 +117,6 @@ public class MenyProjektChef extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSeMinaProjekt;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel lblinloggadAnvandare;
     // End of variables declaration//GEN-END:variables
 }

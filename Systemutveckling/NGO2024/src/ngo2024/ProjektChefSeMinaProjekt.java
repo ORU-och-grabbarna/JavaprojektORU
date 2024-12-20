@@ -30,6 +30,8 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         fyllProjektTabell();
         fyllPartnerTabell();
         fyllHandlaggareTabell();
+        lblInloggadAnvandare.setText(inloggadAnvandare);
+    
     }
     
     
@@ -191,6 +193,11 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         btnLaggTillHandlaggare = new javax.swing.JButton();
         btnLaggTillPartner = new javax.swing.JButton();
         btnAndraProjekt = new javax.swing.JButton();
+        lblProjektInformation = new javax.swing.JLabel();
+        lblHandlaggare = new javax.swing.JLabel();
+        lblPartner = new javax.swing.JLabel();
+        lblInloggadAnvandare = new javax.swing.JLabel();
+        btnVisaProjektKostnad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -268,52 +275,92 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
             }
         });
 
+        lblProjektInformation.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblProjektInformation.setText("Projektinformation");
+
+        lblHandlaggare.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblHandlaggare.setText("Aktiva handläggare");
+
+        lblPartner.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblPartner.setText("Aktiva partners");
+
+        lblInloggadAnvandare.setText("jLabel1");
+
+        btnVisaProjektKostnad.setText("Visa projekt kostnad");
+        btnVisaProjektKostnad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisaProjektKostnadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLaggTillHandlaggare)
+                    .addComponent(btnTaBortHandlaggare))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnVisaProjektKostnad)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnLaggTillPartner)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAndraProjekt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUppdateraTabeller)
+                        .addGap(41, 41, 41))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblProjektInformation)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblInloggadAnvandare)
+                        .addGap(29, 29, 29)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLaggTillHandlaggare)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLaggTillPartner)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAndraProjekt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnUppdateraTabeller)
-                        .addGap(44, 44, 44))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTaBortHandlaggare)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(lblHandlaggare)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblPartner)
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProjektInformation)
+                    .addComponent(lblInloggadAnvandare))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(lblHandlaggare))
+                    .addComponent(lblPartner))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLaggTillHandlaggare)
+                    .addComponent(btnLaggTillPartner)
+                    .addComponent(btnAndraProjekt)
+                    .addComponent(btnUppdateraTabeller))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnUppdateraTabeller)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnLaggTillHandlaggare)
-                        .addComponent(btnLaggTillPartner)
-                        .addComponent(btnAndraProjekt)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnTaBortHandlaggare)
-                .addContainerGap(243, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTaBortHandlaggare)
+                    .addComponent(btnVisaProjektKostnad))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         pack();
@@ -356,6 +403,11 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         andraProjektFönster.setVisible(true);
     }//GEN-LAST:event_btnAndraProjektActionPerformed
 
+    private void btnVisaProjektKostnadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaProjektKostnadActionPerformed
+       ProjektKostnadFönster projektKostnadFönster = new ProjektKostnadFönster (idb, inloggadAnvandare);
+       projektKostnadFönster.setVisible(true);
+    }//GEN-LAST:event_btnVisaProjektKostnadActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -397,9 +449,14 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
     private javax.swing.JButton btnLaggTillPartner;
     private javax.swing.JButton btnTaBortHandlaggare;
     private javax.swing.JButton btnUppdateraTabeller;
+    private javax.swing.JButton btnVisaProjektKostnad;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lblHandlaggare;
+    private javax.swing.JLabel lblInloggadAnvandare;
+    private javax.swing.JLabel lblPartner;
+    private javax.swing.JLabel lblProjektInformation;
     private javax.swing.JTable tblHandlaggare;
     private javax.swing.JTable tblPartner;
     private javax.swing.JTable tblProjekt;
