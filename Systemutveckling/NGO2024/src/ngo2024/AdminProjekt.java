@@ -36,7 +36,6 @@ public class AdminProjekt extends javax.swing.JFrame {
         btnTaBort = new javax.swing.JButton();
         btnÄndra = new javax.swing.JButton();
 
-
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Land");
@@ -62,7 +61,6 @@ public class AdminProjekt extends javax.swing.JFrame {
             }
         });
 
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,8 +73,6 @@ public class AdminProjekt extends javax.swing.JFrame {
                     .addComponent(btnLäggTill)
                     .addComponent(jLabel1))
                 .addContainerGap(202, Short.MAX_VALUE))
-
-
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,14 +81,11 @@ public class AdminProjekt extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(43, 43, 43)
                 .addComponent(btnLäggTill)
-
                 .addGap(40, 40, 40)
                 .addComponent(btnTaBort)
                 .addGap(42, 42, 42)
                 .addComponent(btnÄndra)
-                .addContainerGap(70, Short.MAX_VALUE))
-
-
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,10 +145,8 @@ public class AdminProjekt extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLäggTill;
-
     private javax.swing.JButton btnTaBort;
     private javax.swing.JButton btnÄndra;
-
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -65,6 +65,7 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
         tfEfternamn = new javax.swing.JTextField();
         tfSlutDatum = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        lblHittar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,7 +144,10 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 430, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(356, Short.MAX_VALUE)
+                .addComponent(lblHittar)
+                .addGap(80, 80, 80))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -207,7 +211,10 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(lblHittar)
+                .addContainerGap(360, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -282,7 +289,7 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
         try{
             projektRows = idb.fetchRow(query);
             if(projektRows.isEmpty()){
-                javax.swing.JOptionPane.showMessageDialog ("Hittar inte projektet");
+                lblHittar.setText("Hittar inte projektet i databasen");
             }
         }catch(InfException e){
             lblHittar.setText("Error i databasen");
@@ -338,52 +345,52 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHämtaInfoActionPerformed
 
     private void btnÄndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÄndraActionPerformed
-        // TODO add your handling code here:
-        // uppdatera projektet med värden i textfields
-        String pid = lblPid.getText();
-        String projektNamn = tfProjektNamn.getText();
-        String beskrivning = tfBeskrivning.getText();
-        String startDatum = tfStartDatum.getText();
-        String slutDatum = tfSlutDatum.getText();
-        String kostnad = tfKostnad.getText();
-        String status = tfStatus.getText();
-        String prioritet = tfPrioritet.getText();
-        String förnamn = tfFörnamn.getText();
-        String efternamn = tfEfternamn.getText();
-        String land = tfLand.getText();
+      
+    String pid = lblPid.getText();
+    String projektNamn = tfProjektNamn.getText().trim();
+    String beskrivning = tfBeskrivning.getText().trim();
+    String startDatum = tfStartDatum.getText().trim();
+    String slutDatum = tfSlutDatum.getText().trim();
+    String kostnad = tfKostnad.getText().trim();
+    String status = tfStatus.getText().trim();
+    String prioritet = tfPrioritet.getText().trim();
+    String förnamn = tfFörnamn.getText().trim();
+    String efternamn = tfEfternamn.getText().trim();
+    String land = tfLand.getText().trim();
 
-        // hitta aid och lid för projektchef och land
-        // hitta aid
-        String hittaAidQuery = "SELECT aid FROM anstalld WHERE fornamn = '" + förnamn + "' AND efternamn = '" + efternamn +"'";
-        String aid = null;
-        try{
-            aid = idb.fetchSingle(hittaAidQuery);
-        }catch(InfException e){
-            lblHittar.setText("Fel i databasen med att hitta projektchefens anställnings id");
+    // Kontrollera att den inloggade användaren är projektchef för projektet
+    String kontrollQuery = "SELECT projektchef FROM projekt WHERE pid = '" + pid + "'";
+    try {
+        String projektChefId = idb.fetchSingle(kontrollQuery);
+
+        // Kontrollera om projektchefen matchar den inloggade användarens ID
+        String anvandarIdQuery = "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";
+        String anvandarId = idb.fetchSingle(anvandarIdQuery);
+
+        if (!projektChefId.equals(anvandarId)) {
+            lblHittar.setText("Du kan endast ändra projekt du är chef över.");
+            return;
         }
 
-        // Hitta lid
-        String hittaLidQuery = "SELECT lid FROM land WHERE namn = '" + land + "'";
-        String lid = null;
+        // Hitta aid och lid
+        String aidQuery = "SELECT aid FROM anstalld WHERE fornamn = '" + förnamn + "' AND efternamn = '" + efternamn + "'";
+        String aid = idb.fetchSingle(aidQuery);
 
-        try{
-            lid = idb.fetchSingle(hittaLidQuery);
-        }catch(InfException e){
-            lblHittar.setText("Fel i databasen med att hitta landets namn");
-        }
+        String lidQuery = "SELECT lid FROM land WHERE namn = '" + land + "'";
+        String lid = idb.fetchSingle(lidQuery);
 
-        // uppdatera projektet update - set - where;
-        String updateQuery = "UPDATE projekt SET projektnamn ='" + projektNamn + "', beskrivning = '" + beskrivning + "', startdatum = '" +
-        startDatum + "', slutDatum = '" + slutDatum + "', kostnad = '" + kostnad + "', status = '" + status + "', prioritet = '" +
-        prioritet + "', projektchef = '" + aid + "', land = '" + lid +"'"
-        + "WHERE pid = '" + pid + "'";
+        // Uppdatera projektet
+        String updateQuery = "UPDATE projekt SET projektnamn = '" + projektNamn + "', beskrivning = '" + beskrivning +
+                             "', startdatum = '" + startDatum + "', slutdatum = '" + slutDatum + "', kostnad = '" +
+                             kostnad + "', status = '" + status + "', prioritet = '" + prioritet +
+                             "', projektchef = '" + aid + "', land = '" + lid + "' WHERE pid = '" + pid + "'";
+        idb.update(updateQuery);
 
-        try{
-            idb.update(updateQuery);
-            lblHittar.setText("Projekt uppdaterad");
-        }catch(InfException e){
-            lblHittar.setText("Problem med att updatera projekt i databasen");
-        }
+        lblHittar.setText("Projektet har uppdaterats.");
+    } catch (InfException e) {
+        lblHittar.setText("Fel vid uppdatering: " + e.getMessage());
+    }
+
 
     }//GEN-LAST:event_btnÄndraActionPerformed
 
@@ -442,6 +449,7 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblHittar;
     private javax.swing.JLabel lblPid;
     private javax.swing.JLabel lblProjektNamn;
     private javax.swing.JTextField tfBeskrivning;

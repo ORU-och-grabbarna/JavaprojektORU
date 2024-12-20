@@ -60,6 +60,7 @@ public class Meny extends javax.swing.JFrame {
         });
 
         BtnPersonal.setText("Personal ");
+<<<<<<< HEAD
 
         lblInloggadAnvandare.setText("inloggadanvändare");
 
@@ -97,6 +98,56 @@ public class Meny extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnPersoninfoActionPerformed(java.awt.event.ActionEvent evt) {                                              
+       new Personinfo (idb, inloggadAnvandare).setVisible(true);
+    }                                             
+
+    private void BtnMinaprojektActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        new MinaProjekt (idb,inloggadAnvandare).setVisible(true);
+    }                                              
+
+        BtnPersonal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPersonalActionPerformed(evt);
+            }
+        });
+
+        lblInloggadAnvandare.setText("inloggadanvändare");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(BtnPersoninfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnMinaprojekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(BtnPersoninfo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(BtnMinaprojekt)
+                .addGap(18, 18, 18)
+                .addComponent(BtnPersonal)
+                .addContainerGap(168, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>                        
+
     private void BtnPersoninfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPersoninfoActionPerformed
        new Personinfo (idb, inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_BtnPersoninfoActionPerformed
@@ -104,6 +155,11 @@ public class Meny extends javax.swing.JFrame {
     private void BtnMinaprojektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMinaprojektActionPerformed
         new MinaProjekt (idb,inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_BtnMinaprojektActionPerformed
+
+    private void BtnPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPersonalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnPersonalActionPerformed
+>>>>>>> origin/main
 
     /**
      * @param args the command line arguments
@@ -146,4 +202,6 @@ public class Meny extends javax.swing.JFrame {
     private javax.swing.JButton BtnPersoninfo;
     private javax.swing.JLabel lblInloggadAnvandare;
     // End of variables declaration//GEN-END:variables
+
+
 }

@@ -39,9 +39,9 @@ public class MenyAdmin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnProjekt = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnAvdelning = new javax.swing.JButton();
+        btnPartner = new javax.swing.JButton();
+        btnLand = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,24 +63,24 @@ public class MenyAdmin extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Avdelning");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnAvdelning.setText("Avdelning");
+        btnAvdelning.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnAvdelningActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Partner");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnPartner.setText("Partner");
+        btnPartner.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnPartnerActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Land");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnLand.setText("Land");
+        btnLand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnLandActionPerformed(evt);
             }
         });
 
@@ -99,9 +99,9 @@ public class MenyAdmin extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnAvdelning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPartner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -116,11 +116,11 @@ public class MenyAdmin extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(btnProjekt)
                 .addGap(12, 12, 12)
-                .addComponent(jButton3)
+                .addComponent(btnAvdelning)
                 .addGap(12, 12, 12)
-                .addComponent(jButton4)
+                .addComponent(btnPartner)
                 .addGap(12, 12, 12)
-                .addComponent(jButton5)
+                .addComponent(btnLand)
                 .addContainerGap(87, Short.MAX_VALUE))
         );
 
@@ -134,17 +134,20 @@ public class MenyAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvdelningActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        new AdminAvdelning(idb).setVisible(true);
+    }//GEN-LAST:event_btnAvdelningActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btnPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartnerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+        new AdminPartner(idb).setVisible(true);
+    }//GEN-LAST:event_btnPartnerActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLandActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+        new AdminLand(idb).setVisible(true);
+    }//GEN-LAST:event_btnLandActionPerformed
 
     private void btnProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjektActionPerformed
         // TODO add your handling code here:
@@ -187,11 +190,11 @@ public class MenyAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAvdelning;
+    private javax.swing.JButton btnLand;
+    private javax.swing.JButton btnPartner;
     private javax.swing.JButton btnProjekt;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblinloggadAnvandare;
     // End of variables declaration//GEN-END:variables
