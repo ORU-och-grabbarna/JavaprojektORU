@@ -30,20 +30,15 @@
                   <Component id="btnTaBortHandlaggare" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="btnVisaProjektKostnad" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="btnLaggTillPartner" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnAndraProjekt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnUppdateraTabeller" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnLaggTillPartner" max="32767" attributes="0"/>
+                  <Component id="btnVisaProjektKostnad" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btnAndraProjekt" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnUppdateraTabeller" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">

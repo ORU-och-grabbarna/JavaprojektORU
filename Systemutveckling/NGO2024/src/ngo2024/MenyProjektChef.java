@@ -37,6 +37,7 @@ public class MenyProjektChef extends javax.swing.JFrame {
 
         lblinloggadAnvandare = new javax.swing.JLabel();
         btnSeMinaProjekt = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,18 +50,28 @@ public class MenyProjektChef extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Handläggar meny");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(lblinloggadAnvandare)
-                .addGap(25, 302, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnSeMinaProjekt)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(lblinloggadAnvandare))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(btnSeMinaProjekt)
+                        .addGap(58, 58, 58)
+                        .addComponent(jButton1)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,7 +79,9 @@ public class MenyProjektChef extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(lblinloggadAnvandare)
                 .addGap(38, 38, 38)
-                .addComponent(btnSeMinaProjekt)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSeMinaProjekt)
+                    .addComponent(jButton1))
                 .addContainerGap(193, Short.MAX_VALUE))
         );
 
@@ -79,6 +92,11 @@ public class MenyProjektChef extends javax.swing.JFrame {
     ProjektChefSeMinaProjekt projektFönster = new ProjektChefSeMinaProjekt(idb, inloggadAnvandare);
     projektFönster.setVisible(true);
     }//GEN-LAST:event_btnSeMinaProjektActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Meny menyfönster = new Meny (idb, inloggadAnvandare);
+        menyfönster.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,6 +135,7 @@ public class MenyProjektChef extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSeMinaProjekt;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblinloggadAnvandare;
     // End of variables declaration//GEN-END:variables
 }

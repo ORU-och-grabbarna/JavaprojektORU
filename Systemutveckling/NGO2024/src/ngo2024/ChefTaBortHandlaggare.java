@@ -39,6 +39,7 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
         lblAnstalldasNamn = new javax.swing.JLabel();
         txtAnstalldasNamn = new javax.swing.JTextField();
         btnRemovePerson = new javax.swing.JButton();
+        lblFornamn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -58,6 +59,9 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
             }
         });
 
+        lblFornamn.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblFornamn.setText("För in förnamn");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -71,19 +75,22 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
                         .addComponent(txtAnstalldasNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(btnRemovePerson)))
+                        .addComponent(btnRemovePerson))
+                    .addComponent(lblFornamn))
                 .addContainerGap(166, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(35, 35, 35)
+                .addComponent(lblFornamn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAnstalldasNamn)
                     .addComponent(txtAnstalldasNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+                .addGap(50, 50, 50)
                 .addComponent(btnRemovePerson)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         pack();
@@ -175,6 +182,7 @@ public class ChefTaBortHandlaggare extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRemovePerson;
     private javax.swing.JLabel lblAnstalldasNamn;
+    private javax.swing.JLabel lblFornamn;
     private javax.swing.JTextField txtAnstalldasNamn;
     // End of variables declaration//GEN-END:variables
 }
