@@ -30,6 +30,9 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
         fyllKoppladeHandlaggareTabell();
         fyllEjKoppladeHandlaggare();
         fyllTillgangligaProjektTabell();
+        tfFornamn.setText("");
+        tfEfternamn.setText("");
+        tfProjektnamn.setText("");
     }
     
     
@@ -143,6 +146,8 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
         tfProjektnamn = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblTillgangligaProjekt = new javax.swing.JTable();
+        btnLaggTillHandlaggare = new javax.swing.JButton();
+        btnTaBortHandlaggare = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -196,6 +201,20 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblTillgangligaProjekt);
 
+        btnLaggTillHandlaggare.setText("Lägg till handläggare");
+        btnLaggTillHandlaggare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaggTillHandlaggareActionPerformed(evt);
+            }
+        });
+
+        btnTaBortHandlaggare.setText("Ta bort handläggare");
+        btnTaBortHandlaggare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaBortHandlaggareActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -208,7 +227,7 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
-                        .addGap(527, 527, 527)
+                        .addGap(659, 659, 659)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfEfternamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfProjektnamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,6 +242,12 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(171, 171, 171))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(btnLaggTillHandlaggare)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTaBortHandlaggare)
+                .addGap(178, 178, 178))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +258,11 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLaggTillHandlaggare)
+                    .addComponent(btnTaBortHandlaggare))
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tfFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -253,6 +282,150 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLaggTillHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillHandlaggareActionPerformed
+        
+        try {
+            
+            String fornamn = tfFornamn.getText().trim();
+            String efternamn = tfEfternamn.getText().trim();
+            String projektnamn = tfProjektnamn.getText().trim();
+            
+            
+            
+            
+            if (fornamn.isEmpty() || efternamn.isEmpty() || projektnamn.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog (this, "Fyll i förnamn, efternamn och projektnamn");
+                return;
+            }
+            
+            
+            String sqlHittaHandlaggare = "SELECT aid FROM anstalld WHERE fornamn = '" + fornamn + "' AND efternamn = '" + efternamn + "'";
+            String handlaggareID = idb.fetchSingle(sqlHittaHandlaggare);
+            
+            if (handlaggareID == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ingen handläggare med namnet \"" + fornamn + " " + efternamn + "\" hittades.");
+                return;
+            }
+            
+            
+            String sqlHittaProjekt = "SELECT pid FROM projekt WHERE projektnamn = '" + projektnamn + "'";
+            String projektID = idb.fetchSingle(sqlHittaProjekt);
+            
+            if (projektID == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Inget projekt med namnet \"" + projektnamn + "\" hittades.");
+                return;
+            }
+            
+            
+            String sqlKollaKoppling = "SELECT * FROM ans_proj WHERE aid = '" + handlaggareID + "' AND pid = '" + projektID + "'";
+            HashMap<String, String> koppling = idb.fetchRow(sqlKollaKoppling);
+        
+        if (koppling != null) {
+             javax.swing.JOptionPane.showMessageDialog(this, "Handläggaren är redan kopplad till projektet.");
+            return;
+        }
+        
+        
+        
+        String sqlLaggTillKoppling =  "INSERT INTO ans_proj (aid, pid) VALUES ('" + handlaggareID + "', '" + projektID + "')";
+        idb.insert(sqlLaggTillKoppling);
+        
+        javax.swing.JOptionPane.showMessageDialog(this, "Handläggaren \"" + fornamn + " " + efternamn + "\" har lagts till i projektet \"" + projektnamn + "\".");
+        
+        tfFornamn.setText("");
+        tfEfternamn.setText("");
+        tfProjektnamn.setText("");
+        uppdateraTabeller();
+
+            
+        } catch (InfException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Fel vid lägg till: " + e.getMessage());
+        }      
+        
+        
+        
+    }//GEN-LAST:event_btnLaggTillHandlaggareActionPerformed
+
+    
+    
+    private void uppdateraTabeller() {
+      fyllKoppladeHandlaggareTabell();
+      fyllEjKoppladeHandlaggare();
+}
+    
+    
+    
+    
+    
+    
+    
+    private void btnTaBortHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortHandlaggareActionPerformed
+        
+        
+        try {
+            
+            String fornamn = tfFornamn.getText().trim();
+            String efternamn = tfEfternamn.getText().trim();
+            String projektnamn = tfProjektnamn.getText().trim();
+            
+            
+            if (fornamn.isEmpty() || efternamn.isEmpty() || projektnamn.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Fyll i förnamn, efternamn och projektnamn!");
+                return;
+            }
+            
+            
+            String sqlHittaHandlaggare = "SELECT aid FROM anstalld WHERE fornamn = '" + fornamn + "' AND efternamn = '" + efternamn + "'";
+            String handlaggarID = idb.fetchSingle(sqlHittaHandlaggare);
+            
+            if (handlaggarID == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Ingen handläggare med namnet \"" + fornamn + " " + efternamn + "\" hittades.");
+                return;
+            }
+            
+            
+            String sqlHittaProjekt = "SELECT pid FROM projekt WHERE projektnamn = '" + projektnamn + "'";
+            String projektID = idb.fetchSingle(sqlHittaProjekt);
+            
+            
+            if (projektID == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Inget projekt med namnet \"" + projektnamn + "\" hittades.");
+                return;
+            }
+            
+            
+            String sqlKollaKoppling = "SELECT * FROM ans_proj WHERE aid = '" + handlaggarID + "' AND pid = '" + projektID + "'";
+             HashMap<String, String> koppling = idb.fetchRow(sqlKollaKoppling);
+             
+             
+             if (koppling == null) {
+                 javax.swing.JOptionPane.showMessageDialog(this, "Handläggaren är inte kopplad till projektet.");
+                 return;
+             }
+             
+             
+             String sqlTaBortKoppling = "DELETE FROM ans_proj WHERE aid = '" + handlaggarID + "' AND pid = '" + projektID + "'";
+             idb.delete(sqlTaBortKoppling);
+             
+             javax.swing.JOptionPane.showMessageDialog(this, "Handläggaren \"" + fornamn + " " + efternamn + "\" har tagits bort från projektet \"" + projektnamn + "\".");
+             
+             tfFornamn.setText("");
+             tfEfternamn.setText("");
+             tfProjektnamn.setText("");
+             uppdateraTabeller();
+             
+             
+            
+            
+            
+        } catch (InfException e) {
+            javax.swing.JOptionPane.showMessageDialog (this, "Fel vid borttagning: " + e.getMessage());
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnTaBortHandlaggareActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,6 +463,8 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLaggTillHandlaggare;
+    private javax.swing.JButton btnTaBortHandlaggare;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
