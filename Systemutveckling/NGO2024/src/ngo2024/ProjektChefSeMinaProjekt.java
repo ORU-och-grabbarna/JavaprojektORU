@@ -190,6 +190,7 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         btnUppdateraTabeller = new javax.swing.JButton();
         btnLaggTillHandlaggare = new javax.swing.JButton();
         btnLaggTillPartner = new javax.swing.JButton();
+        btnAndraProjekt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -260,6 +261,13 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
             }
         });
 
+        btnAndraProjekt.setText("Ändra projekt information");
+        btnAndraProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAndraProjektActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -277,8 +285,10 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnLaggTillHandlaggare)
-                        .addGap(38, 38, 38)
+                        .addGap(18, 18, 18)
                         .addComponent(btnLaggTillPartner)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAndraProjekt)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnUppdateraTabeller)
                         .addGap(44, 44, 44))
@@ -297,8 +307,10 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnUppdateraTabeller)
-                    .addComponent(btnLaggTillPartner)
-                    .addComponent(btnLaggTillHandlaggare))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnLaggTillHandlaggare)
+                        .addComponent(btnLaggTillPartner)
+                        .addComponent(btnAndraProjekt)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTaBortHandlaggare)
                 .addContainerGap(243, Short.MAX_VALUE))
@@ -339,6 +351,11 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
        laggTillPartnerFönster.setVisible(true);
     }//GEN-LAST:event_btnLaggTillPartnerActionPerformed
 
+    private void btnAndraProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraProjektActionPerformed
+        ChefÄndraProjekt andraProjektFönster = new ChefÄndraProjekt (idb, inloggadAnvandare);
+        andraProjektFönster.setVisible(true);
+    }//GEN-LAST:event_btnAndraProjektActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -375,6 +392,7 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAndraProjekt;
     private javax.swing.JButton btnLaggTillHandlaggare;
     private javax.swing.JButton btnLaggTillPartner;
     private javax.swing.JButton btnTaBortHandlaggare;
