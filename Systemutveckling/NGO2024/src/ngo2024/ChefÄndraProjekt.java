@@ -296,7 +296,7 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog (this, "Error i databasen.");
         }
         
-        // uppdatera textfields
+        
         lblPid.setText(projektRows.get("pid"));
         
         tfProjektNamn.setText(projektRows.get("projektnamn"));
@@ -314,11 +314,11 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
         tfPrioritet.setText(projektRows.get("prioritet"));
         
         
-        // Behlver få ut aid för projektchef och land
+        
         String projektChefId = projektRows.get("projektchef");
         String landId = projektRows.get("land");
         
-        // få ut namnet för projektchefen
+       
         String projektChefNamnQuery = "SELECT fornamn, efternamn FROM anstalld WHERE aid = '" + projektChefId + "'";
         HashMap<String, String> projektChefNamn = new HashMap<String, String>();
         
@@ -330,7 +330,7 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
            javax.swing.JOptionPane.showMessageDialog (this, "Problem i databasen med att få fram chefens namn.");
         }
         
-        // få ut namnet av landet med lid till namn
+      
         String landNamn;
         String lid = projektRows.get("land");
         
@@ -359,12 +359,12 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
     String efternamn = tfEfternamn.getText().trim();
     String land = tfLand.getText().trim();
 
-    // Kontrollera att den inloggade användaren är projektchef för projektet
+    
     String kontrollQuery = "SELECT projektchef FROM projekt WHERE pid = '" + pid + "'";
     try {
         String projektChefId = idb.fetchSingle(kontrollQuery);
 
-        // Kontrollera om projektchefen matchar den inloggade användarens ID
+        
         String anvandarIdQuery = "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";
         String anvandarId = idb.fetchSingle(anvandarIdQuery);
 
@@ -373,14 +373,14 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
             return;
         }
 
-        // Hitta aid och lid
+      
         String aidQuery = "SELECT aid FROM anstalld WHERE fornamn = '" + förnamn + "' AND efternamn = '" + efternamn + "'";
         String aid = idb.fetchSingle(aidQuery);
 
         String lidQuery = "SELECT lid FROM land WHERE namn = '" + land + "'";
         String lid = idb.fetchSingle(lidQuery);
 
-        // Uppdatera projektet
+        
         String updateQuery = "UPDATE projekt SET projektnamn = '" + projektNamn + "', beskrivning = '" + beskrivning +
                              "', startdatum = '" + startDatum + "', slutdatum = '" + slutDatum + "', kostnad = '" +
                              kostnad + "', status = '" + status + "', prioritet = '" + prioritet +

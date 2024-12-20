@@ -39,7 +39,7 @@ public class ProjektKostnadFönster extends javax.swing.JFrame {
     public void fyllProjektTabellOchTotalKostnad() {
         
     try {
-        // SQL-fråga för att endast hämta projekt där användaren är projektchef
+        
         String sql = "SELECT projektnamn, kostnad " +
                      "FROM projekt " +
                      "WHERE projektchef IN (SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "')";
@@ -51,13 +51,13 @@ public class ProjektKostnadFönster extends javax.swing.JFrame {
             return;
         }
 
-        // Ställ in kolumnnamn
+        
         DefaultTableModel model = new DefaultTableModel(new String[]{"Projektnamn", "Kostnad"}, 0);
         tblProjektKostnad.setModel(model);
 
         double totalKostnad = 0;
 
-        // Lägg till data i tabellen
+        
         for (HashMap<String, String> rad : resultat) {
             String projektnamn = rad.get("projektnamn");
             double kostnad = Double.parseDouble(rad.get("kostnad"));
@@ -66,7 +66,7 @@ public class ProjektKostnadFönster extends javax.swing.JFrame {
             model.addRow(new Object[]{projektnamn, kostnad});
         }
 
-        // Uppdatera total kostnad
+        
         lblTotalKostnad.setText("Total kostnad: " + totalKostnad + " SEK");
 
     } catch (InfException e) {
