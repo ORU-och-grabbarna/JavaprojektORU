@@ -43,7 +43,7 @@ public class Meny extends javax.swing.JFrame {
         BtnPersonal = new javax.swing.JButton();
         lblInloggadAnvandare = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         BtnPersoninfo.setText("Personinfo");
         BtnPersoninfo.addActionListener(new java.awt.event.ActionListener() {

@@ -55,7 +55,7 @@ public class Personinfo extends javax.swing.JFrame {
         Btnandra5 = new javax.swing.JButton();
         Btnandra7 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Txtfornamn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
