@@ -289,7 +289,7 @@ public class ChefLäggTillPartner extends javax.swing.JFrame {
     private void btnLaggTillPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillPartnerActionPerformed
         
         try {
-        // Hämta partnerns namn från textfältet
+        
         String partnerNamn = txtPartnerNamn.getText().trim();
 
         if (partnerNamn.isEmpty()) {
@@ -297,7 +297,7 @@ public class ChefLäggTillPartner extends javax.swing.JFrame {
             return;
         }
 
-        // Hämta partnerns PID från partner-tabellen
+        
         String sqlHittaPartnerPID = "SELECT pid FROM partner WHERE namn = '" + partnerNamn + "'";
         String partnerPID = idb.fetchSingle(sqlHittaPartnerPID);
 
@@ -306,7 +306,7 @@ public class ChefLäggTillPartner extends javax.swing.JFrame {
             return;
         }
 
-        // Hämta projektets PID baserat på den inloggade användaren
+        
         String sqlHittaProjektPID = "SELECT pid FROM projekt WHERE projektchef IN (SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "')";
         String projektPID = idb.fetchSingle(sqlHittaProjektPID);
 
@@ -315,13 +315,13 @@ public class ChefLäggTillPartner extends javax.swing.JFrame {
             return;
         }
 
-        // Kontrollera om partnern redan är kopplad till projektet
+       
         String sqlKontrolleraKoppling = "SELECT partner_pid FROM projekt_partner " +
                                         "WHERE partner_pid = '" + partnerPID + "' " +
                                         "AND pid = '" + projektPID + "'";
         String redanKopplad = idb.fetchSingle(sqlKontrolleraKoppling);
 
-        // Debug-utskrift
+        
         System.out.println("Kontrollerar koppling för partner_pid: " + partnerPID + ", projekt_pid: " + projektPID);
         System.out.println("Resultat från SQL-frågan: " + redanKopplad);
 
@@ -330,14 +330,14 @@ public class ChefLäggTillPartner extends javax.swing.JFrame {
             return;
         }
 
-        // Lägg till koppling mellan partner och projekt
+        
         String sqlLaggTillKoppling = "INSERT INTO projekt_partner (partner_pid, pid) VALUES ('" + partnerPID + "', '" + projektPID + "')";
         idb.insert(sqlLaggTillKoppling);
 
         javax.swing.JOptionPane.showMessageDialog(this, "Partnern \"" + partnerNamn + "\" har lagts till i projektet.");
-        txtPartnerNamn.setText(""); // Rensa textfältet
-        fyllKoppladeTabell(); // Uppdatera kopplade tabellen
-        fyllEjKoppladeTabell(); // Uppdatera ej kopplade tabellen
+        txtPartnerNamn.setText("");
+        fyllKoppladeTabell();
+        fyllEjKoppladeTabell();
 
     } catch (InfException e) {
         javax.swing.JOptionPane.showMessageDialog(this, "Fel vid lägg till: " + e.getMessage());
