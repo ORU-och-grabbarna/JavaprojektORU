@@ -67,7 +67,7 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblHittar = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tfKostnad.setColumns(10);
 
@@ -289,10 +289,11 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
         try{
             projektRows = idb.fetchRow(query);
             if(projektRows.isEmpty()){
-                lblHittar.setText("Hittar inte projektet i databasen");
+                javax.swing.JOptionPane.showMessageDialog (this, "Hittar inte projektet i databasen.");
+                
             }
         }catch(InfException e){
-            lblHittar.setText("Error i databasen");
+            javax.swing.JOptionPane.showMessageDialog (this, "Error i databasen.");
         }
         
         // uppdatera textfields
@@ -326,7 +327,7 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
             tfFörnamn.setText(projektChefNamn.get("fornamn"));
             tfEfternamn.setText(projektChefNamn.get("efternamn"));
         }catch(InfException e){
-            lblHittar.setText("Problem i databasen med att få projekt chefens namn");
+           javax.swing.JOptionPane.showMessageDialog (this, "Problem i databasen med att få fram chefens namn.");
         }
         
         // få ut namnet av landet med lid till namn
@@ -339,7 +340,7 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
             landNamn = idb.fetchSingle(fåLandNamnQuery);
             tfLand.setText(landNamn);
         }catch(InfException e){
-            lblHittar.setText("Problem i databasen med att hitta landets namn");
+            javax.swing.JOptionPane.showMessageDialog (this, "Problem i databasen att hitta landets namn.");
         }
 
     }//GEN-LAST:event_btnHämtaInfoActionPerformed
@@ -368,7 +369,7 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
         String anvandarId = idb.fetchSingle(anvandarIdQuery);
 
         if (!projektChefId.equals(anvandarId)) {
-            lblHittar.setText("Du kan endast ändra projekt du är chef över.");
+            javax.swing.JOptionPane.showMessageDialog (this, "Du kan endast ändra projekt du är chef över!");
             return;
         }
 
@@ -386,9 +387,9 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
                              "', projektchef = '" + aid + "', land = '" + lid + "' WHERE pid = '" + pid + "'";
         idb.update(updateQuery);
 
-        lblHittar.setText("Projektet har uppdaterats.");
+        javax.swing.JOptionPane.showMessageDialog (this, "Projektet har uppdaterats!");
     } catch (InfException e) {
-        lblHittar.setText("Fel vid uppdatering: " + e.getMessage());
+        javax.swing.JOptionPane.showMessageDialog (this, "Fel vid uppdatering: " + e.getMessage());
     }
 
 
