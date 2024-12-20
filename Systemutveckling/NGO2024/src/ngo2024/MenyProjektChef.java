@@ -36,43 +36,67 @@ public class MenyProjektChef extends javax.swing.JFrame {
     private void initComponents() {
 
         lblinloggadAnvandare = new javax.swing.JLabel();
+        btnSeMinaProjekt = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblinloggadAnvandare.setText("jLabel1");
+        lblinloggadAnvandare.setText("DU ÄR EN CHEF");
 
-        jButton1.setText("jButton1");
+        btnSeMinaProjekt.setText("Projektchef meny");
+        btnSeMinaProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeMinaProjektActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        jButton1.setText("Handläggar meny");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(lblinloggadAnvandare)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(25, 25, 25))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(lblinloggadAnvandare))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(btnSeMinaProjekt)
+                        .addGap(58, 58, 58)
+                        .addComponent(jButton1)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(30, 30, 30)
+                .addComponent(lblinloggadAnvandare)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblinloggadAnvandare)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(250, Short.MAX_VALUE))
+                    .addComponent(btnSeMinaProjekt)
+                    .addComponent(jButton1))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSeMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeMinaProjektActionPerformed
+    ProjektChefSeMinaProjekt projektFönster = new ProjektChefSeMinaProjekt(idb, inloggadAnvandare);
+    projektFönster.setVisible(true);
+    }//GEN-LAST:event_btnSeMinaProjektActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Meny menyfönster = new Meny (idb, inloggadAnvandare);
+        menyfönster.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,8 +134,8 @@ public class MenyProjektChef extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSeMinaProjekt;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel lblinloggadAnvandare;
     // End of variables declaration//GEN-END:variables
 }
