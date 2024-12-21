@@ -188,7 +188,6 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         tblHandlaggare = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblPartner = new javax.swing.JTable();
-        btnTaBortHandlaggare = new javax.swing.JButton();
         btnUppdateraTabeller = new javax.swing.JButton();
         btnLaggTillHandlaggare = new javax.swing.JButton();
         btnLaggTillPartner = new javax.swing.JButton();
@@ -240,13 +239,6 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         ));
         jScrollPane4.setViewportView(tblPartner);
 
-        btnTaBortHandlaggare.setText("Ta bort handläggare");
-        btnTaBortHandlaggare.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTaBortHandlaggareActionPerformed(evt);
-            }
-        });
-
         btnUppdateraTabeller.setText("Uppdatera tabellerna");
         btnUppdateraTabeller.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,7 +246,7 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
             }
         });
 
-        btnLaggTillHandlaggare.setText("Lägg till handläggare");
+        btnLaggTillHandlaggare.setText("Ändra projekt handläggare");
         btnLaggTillHandlaggare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLaggTillHandlaggareActionPerformed(evt);
@@ -298,20 +290,6 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLaggTillHandlaggare)
-                    .addComponent(btnTaBortHandlaggare))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnLaggTillPartner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVisaProjektKostnad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(btnAndraProjekt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnUppdateraTabeller)
-                .addGap(41, 41, 41))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
@@ -329,13 +307,25 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblPartner)
                 .addGap(14, 14, 14))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnVisaProjektKostnad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLaggTillHandlaggare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnLaggTillPartner)
+                .addGap(18, 18, 18)
+                .addComponent(btnAndraProjekt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnUppdateraTabeller)
+                .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblProjektInformation)
-                    .addComponent(lblInloggadAnvandare))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblProjektInformation))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -354,20 +344,12 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
                     .addComponent(btnAndraProjekt)
                     .addComponent(btnUppdateraTabeller))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTaBortHandlaggare)
-                    .addComponent(btnVisaProjektKostnad))
+                .addComponent(btnVisaProjektKostnad)
                 .addContainerGap(195, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnTaBortHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortHandlaggareActionPerformed
-        ChefTaBortHandlaggare taborthandlaggareWindow = new ChefTaBortHandlaggare(idb, inloggadAnvandare);
-        taborthandlaggareWindow.setVisible(true);
-        
-    }//GEN-LAST:event_btnTaBortHandlaggareActionPerformed
 
     private void btnUppdateraTabellerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUppdateraTabellerActionPerformed
         
@@ -444,7 +426,6 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
     private javax.swing.JButton btnAndraProjekt;
     private javax.swing.JButton btnLaggTillHandlaggare;
     private javax.swing.JButton btnLaggTillPartner;
-    private javax.swing.JButton btnTaBortHandlaggare;
     private javax.swing.JButton btnUppdateraTabeller;
     private javax.swing.JButton btnVisaProjektKostnad;
     private javax.swing.JScrollPane jScrollPane1;

@@ -291,12 +291,14 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
             if(projektRows.isEmpty()){
                 javax.swing.JOptionPane.showMessageDialog (this, "Hittar inte projektet i databasen.");
                 
+                
+                
             }
         }catch(InfException e){
             javax.swing.JOptionPane.showMessageDialog (this, "Error i databasen.");
         }
         
-        // uppdatera textfields
+        
         lblPid.setText(projektRows.get("pid"));
         
         tfProjektNamn.setText(projektRows.get("projektnamn"));
@@ -314,11 +316,11 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
         tfPrioritet.setText(projektRows.get("prioritet"));
         
         
-        // Behlver få ut aid för projektchef och land
+        
         String projektChefId = projektRows.get("projektchef");
         String landId = projektRows.get("land");
         
-        // få ut namnet för projektchefen
+       
         String projektChefNamnQuery = "SELECT fornamn, efternamn FROM anstalld WHERE aid = '" + projektChefId + "'";
         HashMap<String, String> projektChefNamn = new HashMap<String, String>();
         
@@ -330,7 +332,7 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
            javax.swing.JOptionPane.showMessageDialog (this, "Problem i databasen med att få fram chefens namn.");
         }
         
-        // få ut namnet av landet med lid till namn
+      
         String landNamn;
         String lid = projektRows.get("land");
         
@@ -358,13 +360,86 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
     String förnamn = tfFörnamn.getText().trim();
     String efternamn = tfEfternamn.getText().trim();
     String land = tfLand.getText().trim();
+    
+    
+    
+    
+    if (!Validator.isValidProjektName(projektNamn)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltigt projektnamn! Endast bokstäver, siffror och mellanslag är tillåtna.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    if (!Validator.isValidDate(startDatum)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltigt startdatum! Ange ett datum i formatet YYYY-MM-DD.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    if (!Validator.isValidDate(slutDatum)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltigt slutdatum! Ange ett datum i formatet YYYY-MM-DD.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    if (!Validator.isPositiveNumber(kostnad)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltig kostnad! Ange ett positivt numeriskt värde.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    
+    
+    if (!Validator.isValidName(förnamn)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltigt förnamn! Endast bokstäver och mellanslag är tillåtna.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    
+    if (!Validator.isValidName(efternamn)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltigt efternamn! Endast bokstäver och mellanslag är tillåtna.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    
+    
+    if (!Validator.isValidCountryName(land)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltigt land! Endast bokstäver och mellanslag är tillåtna.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    
 
-    // Kontrollera att den inloggade användaren är projektchef för projektet
+    
     String kontrollQuery = "SELECT projektchef FROM projekt WHERE pid = '" + pid + "'";
     try {
         String projektChefId = idb.fetchSingle(kontrollQuery);
 
-        // Kontrollera om projektchefen matchar den inloggade användarens ID
+        
         String anvandarIdQuery = "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";
         String anvandarId = idb.fetchSingle(anvandarIdQuery);
 
@@ -373,14 +448,14 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
             return;
         }
 
-        // Hitta aid och lid
+      
         String aidQuery = "SELECT aid FROM anstalld WHERE fornamn = '" + förnamn + "' AND efternamn = '" + efternamn + "'";
         String aid = idb.fetchSingle(aidQuery);
 
         String lidQuery = "SELECT lid FROM land WHERE namn = '" + land + "'";
         String lid = idb.fetchSingle(lidQuery);
 
-        // Uppdatera projektet
+        
         String updateQuery = "UPDATE projekt SET projektnamn = '" + projektNamn + "', beskrivning = '" + beskrivning +
                              "', startdatum = '" + startDatum + "', slutdatum = '" + slutDatum + "', kostnad = '" +
                              kostnad + "', status = '" + status + "', prioritet = '" + prioritet +
