@@ -291,6 +291,8 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
             if(projektRows.isEmpty()){
                 javax.swing.JOptionPane.showMessageDialog (this, "Hittar inte projektet i databasen.");
                 
+                
+                
             }
         }catch(InfException e){
             javax.swing.JOptionPane.showMessageDialog (this, "Error i databasen.");
@@ -358,6 +360,79 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
     String förnamn = tfFörnamn.getText().trim();
     String efternamn = tfEfternamn.getText().trim();
     String land = tfLand.getText().trim();
+    
+    
+    
+    
+    if (!Validator.isValidProjektName(projektNamn)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltigt projektnamn! Endast bokstäver, siffror och mellanslag är tillåtna.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    if (!Validator.isValidDate(startDatum)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltigt startdatum! Ange ett datum i formatet YYYY-MM-DD.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    if (!Validator.isValidDate(slutDatum)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltigt slutdatum! Ange ett datum i formatet YYYY-MM-DD.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    if (!Validator.isPositiveNumber(kostnad)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltig kostnad! Ange ett positivt numeriskt värde.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    
+    
+    if (!Validator.isValidName(förnamn)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltigt förnamn! Endast bokstäver och mellanslag är tillåtna.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    
+    if (!Validator.isValidName(efternamn)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltigt efternamn! Endast bokstäver och mellanslag är tillåtna.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    
+    
+    if (!Validator.isValidCountryName(land)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Ogiltigt land! Endast bokstäver och mellanslag är tillåtna.",
+            "Valideringsfel",
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    
+    
 
     
     String kontrollQuery = "SELECT projektchef FROM projekt WHERE pid = '" + pid + "'";
