@@ -296,6 +296,16 @@ public class ChefLäggTillPartner extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Ange ett partnernamn!");
             return;
         }
+        
+        if (!Validator.isValidName(partnerNamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+    "Ogiltigt namn! Endast bokstäver och mellanslag är tillåtna.", 
+    "Valideringsfel", 
+    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
 
         
         String sqlHittaPartnerPID = "SELECT pid FROM partner WHERE namn = '" + partnerNamn + "'";
@@ -359,6 +369,15 @@ public class ChefLäggTillPartner extends javax.swing.JFrame {
                 javax.swing.JOptionPane.showMessageDialog(this, "Ange ett partnernamn!");
                 return;
             }
+            
+            
+            
+            if (!Validator.isValidName (partnerNamn)) {
+                javax.swing.JOptionPane.showMessageDialog (this, "Ogiltigt namn! Endast bokstäver och mellanslag är tillåtna.",
+                        "Valideringsfel", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+            
+            
             
             
             

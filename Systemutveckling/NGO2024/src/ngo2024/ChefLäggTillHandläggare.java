@@ -287,11 +287,15 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTillgangliga)
-                    .addComponent(lblAktiva))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTillgangliga)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(lblAktiva)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,6 +333,24 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Fyll i förnamn, efternamn och projektnamn!");
             return;
         }
+        
+        if (!Validator.isValidName(fornamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+    "Ogiltigt namn! Endast bokstäver och mellanslag är tillåtna.", 
+    "Valideringsfel", 
+    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!Validator.isValidName(efternamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+    "Ogiltigt namn! Endast bokstäver och mellanslag är tillåtna.", 
+    "Valideringsfel", 
+    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
 
         
         if (kontrolleraOmKopplingFinns(fornamn, efternamn, projektnamn)) {
@@ -382,6 +404,22 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
 
         if (fornamn.isEmpty() || efternamn.isEmpty() || projektnamn.isEmpty()) {
             javax.swing.JOptionPane.showMessageDialog(this, "Fyll i förnamn, efternamn och projektnamn!");
+            return;
+        }
+        
+        if (!Validator.isValidName(fornamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+    "Ogiltigt namn! Endast bokstäver och mellanslag är tillåtna.", 
+    "Valideringsfel", 
+    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (!Validator.isValidName(efternamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+    "Ogiltigt namn! Endast bokstäver och mellanslag är tillåtna.", 
+    "Valideringsfel", 
+    javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
 
