@@ -9,7 +9,6 @@ import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 import oru.inf.InfException;
 import oru.inf.InfDB;
-import javax.swing.JTable;
 
 /**
  *
@@ -43,6 +42,7 @@ model.addColumn("Prioritet");
         model.addRow(new Object[]{rad.get("Namn"), rad.get("Målnummer"), rad.get("Prioritet")});
     }
     jTable1.setModel(model);
+    
     } catch (InfException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "något fick fel" + e.getMessage());
 
