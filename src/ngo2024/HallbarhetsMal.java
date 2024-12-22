@@ -42,7 +42,7 @@ model.addColumn("Prioritet");
         model.addRow(new Object[]{rad.get("Namn"), rad.get("Målnummer"), rad.get("Prioritet")});
     }
     jTable1.setModel(model);
-    ass
+    
     } catch (InfException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "något fick fel" + e.getMessage());
 
