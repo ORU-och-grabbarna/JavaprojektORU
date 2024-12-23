@@ -44,6 +44,7 @@ public class Meny extends javax.swing.JFrame {
         lblInloggadAnvandare = new javax.swing.JLabel();
         btnHallbarhetsmal = new javax.swing.JButton();
         btnPersonalPaAvdelning = new javax.swing.JButton();
+        btnHandlaggare = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -84,6 +85,13 @@ public class Meny extends javax.swing.JFrame {
             }
         });
 
+        btnHandlaggare.setText("Sök efter handläggare");
+        btnHandlaggare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHandlaggareActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,9 +104,15 @@ public class Meny extends javax.swing.JFrame {
                             .addComponent(BtnPersoninfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BtnMinaprojekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BtnPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
-                        .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                                .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(btnHandlaggare)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnHallbarhetsmal)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -117,7 +131,9 @@ public class Meny extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(BtnMinaprojekt)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnMinaprojekt)
+                    .addComponent(btnHandlaggare))
                 .addGap(18, 18, 18)
                 .addComponent(BtnPersonal)
                 .addGap(18, 18, 18)
@@ -151,6 +167,11 @@ public class Meny extends javax.swing.JFrame {
         ListaPaPersonal personalfönster = new ListaPaPersonal (idb, inloggadAnvandare);
         personalfönster.setVisible(true);
     }//GEN-LAST:event_btnPersonalPaAvdelningActionPerformed
+
+    private void btnHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHandlaggareActionPerformed
+        SökEfterHandläggare handläggarfönster = new SökEfterHandläggare (idb, inloggadAnvandare);
+        handläggarfönster.setVisible(true);
+    }//GEN-LAST:event_btnHandlaggareActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,6 +213,7 @@ public class Meny extends javax.swing.JFrame {
     private javax.swing.JButton BtnPersonal;
     private javax.swing.JButton BtnPersoninfo;
     private javax.swing.JButton btnHallbarhetsmal;
+    private javax.swing.JButton btnHandlaggare;
     private javax.swing.JButton btnPersonalPaAvdelning;
     private javax.swing.JLabel lblInloggadAnvandare;
     // End of variables declaration//GEN-END:variables
