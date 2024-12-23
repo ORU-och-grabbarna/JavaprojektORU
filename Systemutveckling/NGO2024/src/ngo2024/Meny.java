@@ -42,6 +42,8 @@ public class Meny extends javax.swing.JFrame {
         BtnMinaprojekt = new javax.swing.JButton();
         BtnPersonal = new javax.swing.JButton();
         lblInloggadAnvandare = new javax.swing.JLabel();
+        btnHallbarhetsmal = new javax.swing.JButton();
+        btnPersonalPaAvdelning = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -68,19 +70,41 @@ public class Meny extends javax.swing.JFrame {
 
         lblInloggadAnvandare.setText("inloggadanvändare");
 
+        btnHallbarhetsmal.setText("Hållbarhetsmål");
+        btnHallbarhetsmal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHallbarhetsmalActionPerformed(evt);
+            }
+        });
+
+        btnPersonalPaAvdelning.setText("Personalen på min avdelning");
+        btnPersonalPaAvdelning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPersonalPaAvdelningActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BtnPersoninfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnMinaprojekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BtnPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
-                .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BtnPersoninfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnMinaprojekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                        .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnHallbarhetsmal)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnPersonalPaAvdelning)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,7 +120,11 @@ public class Meny extends javax.swing.JFrame {
                 .addComponent(BtnMinaprojekt)
                 .addGap(18, 18, 18)
                 .addComponent(BtnPersonal)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnHallbarhetsmal)
+                .addGap(27, 27, 27)
+                .addComponent(btnPersonalPaAvdelning)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,6 +141,16 @@ public class Meny extends javax.swing.JFrame {
     private void BtnPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPersonalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnPersonalActionPerformed
+
+    private void btnHallbarhetsmalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHallbarhetsmalActionPerformed
+        Hållbarhetsmål målfönster = new Hållbarhetsmål (idb, inloggadAnvandare);
+        målfönster.setVisible(true);
+    }//GEN-LAST:event_btnHallbarhetsmalActionPerformed
+
+    private void btnPersonalPaAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPersonalPaAvdelningActionPerformed
+        ListaPaPersonal personalfönster = new ListaPaPersonal (idb, inloggadAnvandare);
+        personalfönster.setVisible(true);
+    }//GEN-LAST:event_btnPersonalPaAvdelningActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,6 +191,8 @@ public class Meny extends javax.swing.JFrame {
     private javax.swing.JButton BtnMinaprojekt;
     private javax.swing.JButton BtnPersonal;
     private javax.swing.JButton BtnPersoninfo;
+    private javax.swing.JButton btnHallbarhetsmal;
+    private javax.swing.JButton btnPersonalPaAvdelning;
     private javax.swing.JLabel lblInloggadAnvandare;
     // End of variables declaration//GEN-END:variables
 }
