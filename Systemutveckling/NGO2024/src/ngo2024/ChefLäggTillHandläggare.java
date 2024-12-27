@@ -36,6 +36,17 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
     }
     
     
+    
+    
+    
+    
+    /**
+     * Populates the table with handlers currently connected to the logged-in user's projects.
+     * <p>
+     * Retrieves handler data such as first name, last name, responsibility area, and project name
+     * and displays it in the "Kopplade Handläggare" table.
+     * </p>
+     */
     private void fyllKoppladeHandlaggareTabell() {
     try {
         String sql = "SELECT anstalld.fornamn, anstalld.efternamn, handlaggare.ansvarighetsomrade, projekt.projektnamn " +
@@ -60,7 +71,14 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
 }
     
     
-    
+    /**
+     * Checks whether a specified handler is already connected to a specified project.
+     *
+     * @param fornamn    the first name of the handler.
+     * @param efternamn  the last name of the handler.
+     * @param projektnamn the name of the project.
+     * @return {@code true} if the handler is already connected to the project; {@code false} otherwise.
+     */
     private boolean kontrolleraOmKopplingFinns(String fornamn, String efternamn, String projektnamn) {
     try {
         String sqlKollaKoppling = "SELECT COUNT(*) FROM ans_proj " +
@@ -79,7 +97,13 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
 }
 
 
-    
+    /**
+     * Populates the table with handlers not connected to any of the logged-in user's projects.
+     * <p>
+     * Retrieves handler data such as first name, last name, and responsibility area
+     * and displays it in the "Ej Kopplade Handläggare" table.
+     * </p>
+     */
     private void fyllEjKoppladeHandlaggare() {
     try {
         String sql = "SELECT anstalld.fornamn, anstalld.efternamn, handlaggare.ansvarighetsomrade " +
@@ -111,7 +135,9 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
     
     
     
-    
+    /**
+     * Populates the table with the names of projects managed by the logged-in user.
+     */
     private void fyllTillgangligaProjektTabell() {
     try {
         String sql = "SELECT projektnamn FROM projekt " +
@@ -317,7 +343,15 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+     /**
+     * Adds a handler to a specified project.
+     * <p>
+     * Validates user input, checks if the handler is already connected to the project,
+     * and then inserts the connection into the database.
+     * </p>
+     *
+     * @param evt the event triggered by clicking the "Lägg till handläggare" button.
+     */
     private void btnLaggTillHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillHandlaggareActionPerformed
         
     try {
@@ -379,6 +413,9 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLaggTillHandlaggareActionPerformed
 
     
+    /**
+     * Updates both the "Kopplade Handläggare" and "Ej Kopplade Handläggare" tables with fresh data.
+     */
     
     private void uppdateraTabeller() {
       fyllKoppladeHandlaggareTabell();
@@ -390,7 +427,15 @@ public class ChefLäggTillHandläggare extends javax.swing.JFrame {
     
     
     
-    
+     /**
+     * Removes a handler from a specified project.
+     * <p>
+     * Validates user input, checks if the handler is connected to the project,
+     * and then removes the connection from the database.
+     * </p>
+     *
+     * @param evt the event triggered by clicking the "Ta bort handläggare" button.
+     */
     private void btnTaBortHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortHandlaggareActionPerformed
         
     try {

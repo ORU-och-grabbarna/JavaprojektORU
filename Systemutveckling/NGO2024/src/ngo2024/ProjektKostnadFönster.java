@@ -35,7 +35,16 @@ public class ProjektKostnadFönster extends javax.swing.JFrame {
     
     
     
-    
+    /**
+ * Populates a table with project names and costs and calculates the total cost of all projects managed by the logged-in user.
+ * <p>
+ * The method retrieves project data from the database and adds rows to a table model.
+ * It also calculates the total cost of the projects and displays it in a label.
+ * </p>
+ * 
+ * @throws InfException if there is an issue fetching data from the database.
+ * @throws NumberFormatException if the cost value from the database cannot be parsed to a double.
+ */
     public void fyllProjektTabellOchTotalKostnad() {
         
     try {

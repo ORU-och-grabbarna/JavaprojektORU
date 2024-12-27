@@ -38,7 +38,10 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
     
     
     
-    
+     /**
+     * Fills the project table with data from the database.
+     * Retrieves project details such as name, description, start and end dates, cost, status, and priority.
+     */
     public void fyllProjektTabell() {
         try {
             
@@ -79,7 +82,10 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
     
     
     
-    
+     /**
+     * Fills the handler table with data from the database.
+     * Retrieves active handlers related to the logged-in user's projects.
+     */
     public void fyllHandlaggareTabell () {
         
         try {
@@ -129,7 +135,10 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
     
     
     
-    
+    /**
+     * Fills the partner table with data from the database.
+     * Retrieves active partners associated with the logged-in user's projects.
+     */
     public void fyllPartnerTabell () {
         
         try {
@@ -350,7 +359,11 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * Updates all tables (projects, handlers, and partners) with the latest data from the database.
+     *
+     * @param evt the event triggered by clicking the update button.
+     */
     private void btnUppdateraTabellerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUppdateraTabellerActionPerformed
         
         try {
@@ -366,22 +379,38 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnUppdateraTabellerActionPerformed
-
+/**
+     * Opens the window to modify project handlers.
+     *
+     * @param evt the event triggered by clicking the "Ändra projekt handläggare" button.
+     */
     private void btnLaggTillHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillHandlaggareActionPerformed
         ChefLäggTillHandläggare laggTillWindow = new ChefLäggTillHandläggare (idb, inloggadAnvandare);
         laggTillWindow.setVisible(true);
     }//GEN-LAST:event_btnLaggTillHandlaggareActionPerformed
-
+/**
+     * Opens the window to modify project partners.
+     *
+     * @param evt the event triggered by clicking the "Ändra projekt partners" button.
+     */
     private void btnLaggTillPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillPartnerActionPerformed
        ChefLäggTillPartner laggTillPartnerFönster = new ChefLäggTillPartner (idb, inloggadAnvandare);
        laggTillPartnerFönster.setVisible(true);
     }//GEN-LAST:event_btnLaggTillPartnerActionPerformed
-
+/**
+     * Opens the window to modify project information.
+     *
+     * @param evt the event triggered by clicking the "Ändra projekt information" button.
+     */
     private void btnAndraProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraProjektActionPerformed
         ChefÄndraProjekt andraProjektFönster = new ChefÄndraProjekt (idb, inloggadAnvandare);
         andraProjektFönster.setVisible(true);
     }//GEN-LAST:event_btnAndraProjektActionPerformed
-
+/**
+     * Opens the window to view project costs.
+     *
+     * @param evt the event triggered by clicking the "Visa projekt kostnad" button.
+     */
     private void btnVisaProjektKostnadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaProjektKostnadActionPerformed
        ProjektKostnadFönster projektKostnadFönster = new ProjektKostnadFönster (idb, inloggadAnvandare);
        projektKostnadFönster.setVisible(true);

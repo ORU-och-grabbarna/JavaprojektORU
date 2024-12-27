@@ -34,6 +34,15 @@ public class ChefLäggTillPartner extends javax.swing.JFrame {
     
     
     
+    
+    
+    /**
+ * Populates the table of associated (connected) partners for projects managed by the logged-in user.
+ * <p>
+ * The method retrieves data about partners connected to the logged-in user's projects from the database
+ * and displays the information in the "Kopplade" table. It includes the partner's name, phone, contact person, and branch.
+ * </p>
+ */
     private void fyllKoppladeTabell() {
         
         try {
@@ -96,8 +105,13 @@ public class ChefLäggTillPartner extends javax.swing.JFrame {
     
     
     
-    
-    
+    /**
+ * Populates the table of unassociated (not connected) partners for projects managed by the logged-in user.
+ * <p>
+ * The method retrieves data about partners not connected to the logged-in user's projects from the database
+ * and displays the information in the "Ej Kopplade" table. It includes the partner's name, phone, contact person, and branch.
+ * </p>
+ */
     private void fyllEjKoppladeTabell() {
         
         try {
@@ -285,7 +299,15 @@ public class ChefLäggTillPartner extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+ * Adds a partner to the logged-in user's project.
+ * <p>
+ * The method validates the partner's name, checks if the partner exists in the database, and ensures
+ * that the partner is not already connected to the project. If all conditions are met, the partner is added to the project.
+ * </p>
+ *
+ * @param evt the event triggered by clicking the "Lägg till" button.
+ */
     private void btnLaggTillPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillPartnerActionPerformed
         
         try {
@@ -357,7 +379,15 @@ public class ChefLäggTillPartner extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnLaggTillPartnerActionPerformed
-
+    /**
+ * Removes a partner from the logged-in user's project.
+ * <p>
+ * The method validates the partner's name, checks if the partner exists in the database, and ensures
+ * that the partner is connected to the project. If all conditions are met, the partner is removed from the project.
+ * </p>
+ *
+ * @param evt the event triggered by clicking the "Ta bort" button.
+ */
     private void btnTaBortPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortPartnerActionPerformed
         
         
