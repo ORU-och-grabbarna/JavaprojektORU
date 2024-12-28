@@ -7,6 +7,8 @@ package ngo2024;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
+
+// Kommentar
 /**
  *
  * @author Mohammed
