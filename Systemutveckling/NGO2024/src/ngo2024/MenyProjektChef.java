@@ -7,10 +7,14 @@ package ngo2024;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
+
+
 /**
- *
- * @author jamie
- */
+     * Creates new form MenyProjektChef.
+     *
+     * @param idb the InfDB instance for database interaction.
+     * @param inloggadAnvandare the username of the logged-in user.
+     */
 public class MenyProjektChef extends javax.swing.JFrame {
     
     private InfDB idb;
@@ -87,12 +91,20 @@ public class MenyProjektChef extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * Opens the "Projektchef meny" window when the corresponding button is clicked.
+     *
+     * @param evt the event triggered by the button click.
+     */
     private void btnSeMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeMinaProjektActionPerformed
     ProjektChefSeMinaProjekt projektFönster = new ProjektChefSeMinaProjekt(idb, inloggadAnvandare);
     projektFönster.setVisible(true);
     }//GEN-LAST:event_btnSeMinaProjektActionPerformed
-
+    /**
+     * Opens the "Handläggar meny" window when the corresponding button is clicked.
+     *
+     * @param evt the event triggered by the button click.
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Meny menyfönster = new Meny (idb, inloggadAnvandare);
         menyfönster.setVisible(true);

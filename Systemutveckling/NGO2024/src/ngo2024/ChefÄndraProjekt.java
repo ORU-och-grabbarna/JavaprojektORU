@@ -277,7 +277,12 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * Fetches project details from the database based on the entered project name
+     * and populates the relevant input fields with the retrieved information.
+     *
+     * @param evt the event triggered by the "Hämta" button.
+     */
     private void btnHämtaInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaInfoActionPerformed
      
         String projektNamn = tfInputNamn.getText();
@@ -346,7 +351,15 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnHämtaInfoActionPerformed
-
+/**
+     * Updates the project information in the database based on the input fields.
+     * <p>
+     * The method validates all inputs and ensures that the logged-in user has authorization to modify the project.
+     * If the validation fails, appropriate error messages are displayed.
+     * </p>
+     *
+     * @param evt the event triggered by the "Ändra" button.
+     */
     private void btnÄndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÄndraActionPerformed
       
     String pid = lblPid.getText();
@@ -469,7 +482,11 @@ public class ChefÄndraProjekt extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnÄndraActionPerformed
-
+ /**
+     * Handles the event for the input field of the project end date.
+     *
+     * @param evt the event triggered when an action occurs in the input field.
+     */
     private void tfSlutDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSlutDatumActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfSlutDatumActionPerformed
