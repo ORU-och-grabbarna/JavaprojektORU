@@ -32,7 +32,7 @@
                           <Component id="BtnMinaprojekt" max="32767" attributes="0"/>
                           <Component id="BtnPersonal" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="163" max="32767" attributes="0"/>
+                      <EmptySpace pref="110" max="32767" attributes="0"/>
                       <Component id="lblInloggadAnvandare" min="-2" pref="116" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   </Group>
@@ -93,7 +93,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="BtnPersonal">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Personal "/>
+        <Property name="text" type="java.lang.String" value="Min Avdelnings Projekt"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPersonalActionPerformed"/>
