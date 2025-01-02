@@ -44,6 +44,8 @@ public class Meny extends javax.swing.JFrame {
         lblInloggadAnvandare = new javax.swing.JLabel();
         btnHallbarhetsmal = new javax.swing.JButton();
         btnPersonalPaAvdelning = new javax.swing.JButton();
+        btnSökPåProjekt = new javax.swing.JButton();
+        btnSökHandläggare = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -61,7 +63,7 @@ public class Meny extends javax.swing.JFrame {
             }
         });
 
-        BtnPersonal.setText("Personal ");
+        BtnPersonal.setText("Min Avdelnings Projekt");
         BtnPersonal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPersonalActionPerformed(evt);
@@ -84,6 +86,20 @@ public class Meny extends javax.swing.JFrame {
             }
         });
 
+        btnSökPåProjekt.setText("Sök på Projekt");
+        btnSökPåProjekt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSökPåProjektActionPerformed(evt);
+            }
+        });
+
+        btnSökHandläggare.setText("Sök Handläggare");
+        btnSökHandläggare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSökHandläggareActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,18 +108,25 @@ public class Meny extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BtnPersoninfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnMinaprojekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
-                        .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnHallbarhetsmal)
+                        .addComponent(btnPersonalPaAvdelning)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnPersonalPaAvdelning)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnHallbarhetsmal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnPersoninfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnMinaprojekt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnPersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                                .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(68, 68, 68)
+                                .addComponent(btnSökHandläggare)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnSökPåProjekt)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -117,14 +140,18 @@ public class Meny extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(BtnMinaprojekt)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnMinaprojekt)
+                    .addComponent(btnSökHandläggare))
                 .addGap(18, 18, 18)
                 .addComponent(BtnPersonal)
                 .addGap(18, 18, 18)
                 .addComponent(btnHallbarhetsmal)
                 .addGap(27, 27, 27)
                 .addComponent(btnPersonalPaAvdelning)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnSökPåProjekt)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,11 +162,11 @@ public class Meny extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnPersoninfoActionPerformed
 
     private void BtnMinaprojektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMinaprojektActionPerformed
-        new MinaProjekt (idb,inloggadAnvandare).setVisible(true);
+        new MinaprojektNy (idb,inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_BtnMinaprojektActionPerformed
 
     private void BtnPersonalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPersonalActionPerformed
-        // TODO add your handling code here:
+        new MinAvdelningsprojekt (idb,inloggadAnvandare).setVisible(true);
     }//GEN-LAST:event_BtnPersonalActionPerformed
 
     private void btnHallbarhetsmalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHallbarhetsmalActionPerformed
@@ -151,6 +178,16 @@ public class Meny extends javax.swing.JFrame {
         ListaPaPersonal personalfönster = new ListaPaPersonal (idb, inloggadAnvandare);
         personalfönster.setVisible(true);
     }//GEN-LAST:event_btnPersonalPaAvdelningActionPerformed
+
+    private void btnSökPåProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSökPåProjektActionPerformed
+        SökProjektPåDatum projektfönster = new SökProjektPåDatum (idb, inloggadAnvandare);
+        projektfönster.setVisible(true);
+    }//GEN-LAST:event_btnSökPåProjektActionPerformed
+
+    private void btnSökHandläggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSökHandläggareActionPerformed
+    SökPåHandläggare handläggaresök = new SökPåHandläggare (idb, inloggadAnvandare);
+    handläggaresök.setVisible(true);
+    }//GEN-LAST:event_btnSökHandläggareActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,6 +230,8 @@ public class Meny extends javax.swing.JFrame {
     private javax.swing.JButton BtnPersoninfo;
     private javax.swing.JButton btnHallbarhetsmal;
     private javax.swing.JButton btnPersonalPaAvdelning;
+    private javax.swing.JButton btnSökHandläggare;
+    private javax.swing.JButton btnSökPåProjekt;
     private javax.swing.JLabel lblInloggadAnvandare;
     // End of variables declaration//GEN-END:variables
 }

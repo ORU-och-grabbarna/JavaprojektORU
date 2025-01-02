@@ -206,6 +206,9 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
         lblPartner = new javax.swing.JLabel();
         lblInloggadAnvandare = new javax.swing.JLabel();
         btnVisaProjektKostnad = new javax.swing.JButton();
+        btnStatistikLand = new javax.swing.JButton();
+        btnStatistikPartner = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -294,6 +297,27 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
             }
         });
 
+        btnStatistikLand.setText("Statistik över länder");
+        btnStatistikLand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStatistikLandActionPerformed(evt);
+            }
+        });
+
+        btnStatistikPartner.setText("Statistik över partners");
+        btnStatistikPartner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStatistikPartnerActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Statistik kostnad per land");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -322,12 +346,22 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
                     .addComponent(btnVisaProjektKostnad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnLaggTillHandlaggare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(btnLaggTillPartner)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnLaggTillPartner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnStatistikLand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(btnAndraProjekt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnUppdateraTabeller)
-                .addGap(41, 41, 41))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAndraProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnStatistikPartner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUppdateraTabeller)
+                        .addGap(41, 41, 41))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,7 +387,11 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
                     .addComponent(btnAndraProjekt)
                     .addComponent(btnUppdateraTabeller))
                 .addGap(18, 18, 18)
-                .addComponent(btnVisaProjektKostnad)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVisaProjektKostnad)
+                    .addComponent(btnStatistikLand)
+                    .addComponent(btnStatistikPartner)
+                    .addComponent(jButton1))
                 .addContainerGap(195, Short.MAX_VALUE))
         );
 
@@ -416,6 +454,21 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
        projektKostnadFönster.setVisible(true);
     }//GEN-LAST:event_btnVisaProjektKostnadActionPerformed
 
+    private void btnStatistikLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatistikLandActionPerformed
+        ChefStatistikLänder landFönster = new ChefStatistikLänder (idb, inloggadAnvandare);
+        landFönster.setVisible(true);
+    }//GEN-LAST:event_btnStatistikLandActionPerformed
+
+    private void btnStatistikPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatistikPartnerActionPerformed
+        ChefStatistikPartners partnerFönster = new ChefStatistikPartners (idb, inloggadAnvandare);
+        partnerFönster.setVisible(true);
+    }//GEN-LAST:event_btnStatistikPartnerActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ChefStatistikKostnad kostnadFönster = new ChefStatistikKostnad (idb, inloggadAnvandare);
+        kostnadFönster.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -455,8 +508,11 @@ public class ProjektChefSeMinaProjekt extends javax.swing.JFrame {
     private javax.swing.JButton btnAndraProjekt;
     private javax.swing.JButton btnLaggTillHandlaggare;
     private javax.swing.JButton btnLaggTillPartner;
+    private javax.swing.JButton btnStatistikLand;
+    private javax.swing.JButton btnStatistikPartner;
     private javax.swing.JButton btnUppdateraTabeller;
     private javax.swing.JButton btnVisaProjektKostnad;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;

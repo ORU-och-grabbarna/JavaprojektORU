@@ -11,19 +11,27 @@ import oru.inf.InfException;
 import oru.inf.InfDB;
 
 /**
- *
+ * This class represents the GUI for searching and displaying information about case handlers.
+ * It allows users to search for case handlers by their full name or email.
+ * 
  * @author budimir
  */
 public class SökPåHandläggare extends javax.swing.JFrame {
     
     private InfDB idb;
+    private String inloggadAnvandare;
 
     /**
-     * Creates new form
+     * Creates new form SökPåHandläggare.
+     * Initializes the components and sets up the table model.
+     *
+     * @param idb The database connection object
+     * @param inloggadAnvandare The logged-in user's username
      */
-    public SökPåHandläggare(InfDB idb) {
+    public SökPåHandläggare(InfDB idb, String inloggadAnvandare) {
         initComponents();
         this.idb = idb;
+        this.inloggadAnvandare = inloggadAnvandare;
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
         new Object[][] {},
             new String[] {
@@ -142,7 +150,14 @@ public class SökPåHandläggare extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ /**
+     * Handles the search button click event.
+     * Searches for case handlers based on the input in the search field (name or email).
+     * If a match is found, it populates the second table with the results.
+     * If no results are found, it displays a message.
+     *
+     * @param evt The action event triggered by the search button click
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String searchInput = jTextField1.getText();
@@ -190,7 +205,9 @@ public class SökPåHandläggare extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
-     * @param args the command line arguments
+     * The main method that launches the application.
+     * 
+     * @param args Command-line arguments (not used)
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
