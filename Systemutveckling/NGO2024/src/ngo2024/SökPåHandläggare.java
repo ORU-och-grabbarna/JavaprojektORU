@@ -165,7 +165,11 @@ public class SökPåHandläggare extends javax.swing.JFrame {
                 (searchInput.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Ange en ny e-post eller namn att söka med.");
             return;    
-        } try { 
+        } if (!Validator.isValidName(searchInput) && !searchInput.contains("@")){
+            JOptionPane.showMessageDialog(this, "Ange ett giltigt namn eller epost.");
+            return;
+        }
+        try { 
         String sql = "SELECT anstalld.aid, anstalld.fornamn, anstalld.efternamn, anstalld.adress, anstalld.epost, anstalld.telefon, anstalld.anstallningsdatum, anstalld.avdelning " +
                      "FROM handlaggare " +
                      "JOIN anstalld ON handlaggare.aid = anstalld.aid " +

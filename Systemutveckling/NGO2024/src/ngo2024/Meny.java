@@ -180,7 +180,7 @@ public class Meny extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPersonalPaAvdelningActionPerformed
 
     private void btnSökPåProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSökPåProjektActionPerformed
-        SökProjektPåDatum projektfönster = new SökProjektPåDatum (idb, inloggadAnvandare);
+           SökProjektPåDatum projektfönster = new SökProjektPåDatum (idb, inloggadAnvandare);
         projektfönster.setVisible(true);
     }//GEN-LAST:event_btnSökPåProjektActionPerformed
 
