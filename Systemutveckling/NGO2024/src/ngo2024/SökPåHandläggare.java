@@ -97,11 +97,7 @@ public class SökPåHandläggare extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
+        jTextField1.setActionCommand("<Not Set>");
 
         jLabel3.setText("Sök på handläggare i fältet nedan med fullständigt namn eller epost.");
 
@@ -190,28 +186,8 @@ public class SökPåHandläggare extends javax.swing.JFrame {
         }
         } catch (InfException ex) {
             JOptionPane.showMessageDialog(this, "Ett fel inträffade vid sökning: " + ex.getMessage());
-        }
-    
-    }                                        
-
-    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {                                        
-        // TODO add your handling code here:
-        if (jTextField1.getText().equals("Ange namn eller epost...")) {
-    jTextField1.setText("");
-}
-    }                                       
-
-    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {                                      
-        // TODO add your handling code here:
-        if (jTextField1.getText().isEmpty()) {
-    jTextField1.setText("Ange namn eller epost...");
-
-    }    
+        }      
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,6 +214,7 @@ public class SökPåHandläggare extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(SökPåHandläggare.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
