@@ -14,7 +14,9 @@ import oru.inf.InfException;
 
 
 /**
- *
+ * This class represents a JFrame for displaying sustainability goals.
+ * It retrieves data about sustainability goals from the database and displays it in a table.
+ * 
  * @author jamie
  */
 public class Hållbarhetsmål extends javax.swing.JFrame {
@@ -25,7 +27,11 @@ public class Hållbarhetsmål extends javax.swing.JFrame {
     private String inloggadAnvandare;
 
     /**
-     * Creates new form Hållbarhetsmål
+     * Creates new form Hållbarhetsmål.
+     * Initializes the components and fills the table with sustainability goals data.
+     *
+     * @param idb The database connection object
+     * @param inloggadAnvandare The logged-in user's username
      */
     public Hållbarhetsmål(InfDB idb, String inloggadAnvandare) {
         this.idb = idb;
@@ -35,12 +41,12 @@ public class Hållbarhetsmål extends javax.swing.JFrame {
     }
     
     
-    
+    /**
+     * Fills the table with sustainability goals data retrieved from the database.
+     * Executes a SQL query to fetch the goals and their details and displays them in the table.
+     */
     public void fyllHallbarhetsmalTabell() {
-        
-        
-        try {
-            
+        try {    
             String sql = "SELECT namn, malnummer, beskrivning, prioritet from hallbarhetsmal";
             
             ArrayList<HashMap<String, String>> hallbarhetsmal = idb.fetchRows(sql);
