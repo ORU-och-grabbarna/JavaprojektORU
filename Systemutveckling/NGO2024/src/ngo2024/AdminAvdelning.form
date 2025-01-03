@@ -276,6 +276,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="L&#xe4;gg till Avdelning"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnL&#xe4;ggTillActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMeddellandeBottom">
     </Component>
