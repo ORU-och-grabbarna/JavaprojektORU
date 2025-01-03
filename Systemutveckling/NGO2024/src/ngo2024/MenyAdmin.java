@@ -42,6 +42,7 @@ public class MenyAdmin extends javax.swing.JFrame {
         btnAvdelning = new javax.swing.JButton();
         btnPartner = new javax.swing.JButton();
         btnLand = new javax.swing.JButton();
+        btnHållbarhet = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +85,13 @@ public class MenyAdmin extends javax.swing.JFrame {
             }
         });
 
+        btnHållbarhet.setText("Hållbarhetsmål");
+        btnHållbarhet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHållbarhetActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,7 +109,8 @@ public class MenyAdmin extends javax.swing.JFrame {
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAvdelning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPartner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnLand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHållbarhet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -121,7 +130,9 @@ public class MenyAdmin extends javax.swing.JFrame {
                 .addComponent(btnPartner)
                 .addGap(12, 12, 12)
                 .addComponent(btnLand)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnHållbarhet)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,6 +164,11 @@ public class MenyAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         new AdminProjekt(idb).setVisible(true);
     }//GEN-LAST:event_btnProjektActionPerformed
+
+    private void btnHållbarhetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHållbarhetActionPerformed
+        // TODO add your handling code here:
+        new AdminHållbarhetsmål(idb).setVisible(true);
+    }//GEN-LAST:event_btnHållbarhetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,6 +207,7 @@ public class MenyAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvdelning;
+    private javax.swing.JButton btnHållbarhet;
     private javax.swing.JButton btnLand;
     private javax.swing.JButton btnPartner;
     private javax.swing.JButton btnProjekt;
