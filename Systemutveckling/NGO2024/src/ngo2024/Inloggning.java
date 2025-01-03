@@ -39,6 +39,7 @@ public class Inloggning extends javax.swing.JFrame {
         tfLosenord = new javax.swing.JTextField();
         lblFelmeddelande = new javax.swing.JLabel();
         btnLoggaIn = new javax.swing.JButton();
+        btnÅterställ = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +54,13 @@ public class Inloggning extends javax.swing.JFrame {
         btnLoggaIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoggaInActionPerformed(evt);
+            }
+        });
+
+        btnÅterställ.setText("Återställ Lösenord");
+        btnÅterställ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnÅterställActionPerformed(evt);
             }
         });
 
@@ -74,9 +82,11 @@ public class Inloggning extends javax.swing.JFrame {
                             .addGap(42, 42, 42)
                             .addComponent(tfEPost)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(btnLoggaIn)))
-                .addContainerGap(190, Short.MAX_VALUE))
+                        .addGap(133, 133, 133)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnÅterställ)
+                            .addComponent(btnLoggaIn))))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +103,9 @@ public class Inloggning extends javax.swing.JFrame {
                 .addComponent(lblFelmeddelande)
                 .addGap(18, 18, 18)
                 .addComponent(btnLoggaIn)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnÅterställ)
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,6 +155,11 @@ public class Inloggning extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnLoggaInActionPerformed
 
+    private void btnÅterställActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÅterställActionPerformed
+        // TODO add your handling code here:
+        new ÅterställLösenord(idb).setVisible(true);
+    }//GEN-LAST:event_btnÅterställActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -180,6 +197,7 @@ public class Inloggning extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoggaIn;
+    private javax.swing.JButton btnÅterställ;
     private javax.swing.JLabel lblEpost;
     private javax.swing.JLabel lblFelmeddelande;
     private javax.swing.JLabel lblLosenord;

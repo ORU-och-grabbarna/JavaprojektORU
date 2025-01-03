@@ -199,8 +199,7 @@ public class AdminPartner extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(69, 69, 69)
-                                        .addComponent(lblPid)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(lblPid))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(tfNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -252,10 +251,11 @@ public class AdminPartner extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(tfEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(tfTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnÄndra, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnÄndra, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(tfTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLäggTill)
@@ -334,6 +334,25 @@ public class AdminPartner extends javax.swing.JFrame {
         String branch = tfBranch.getText();
         String stadNamn = tfStad.getText();
         
+        if(!Validator.isValidName(namn)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Namn får endast bestå av bokstäver och mellanslag.");
+            return;
+        }
+        if(!Validator.isValidName(kontaktPerson)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Kontakt person får endast innehålla bokstäver och mellanslag.");
+            return;
+        }
+        if(Validator.isValidPhoneNumber(telefon)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Telefon numret måste vara mellan 7-15 siffror.");
+            return;
+        }
+        if(!Validator.isValidName(stadNamn)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Stadens namn får endast innehålla bokstäver och mellanslag.");
+            return;
+        }
+        
+        
+        
         // få ut stad id
         String sid = null;
         
@@ -396,6 +415,23 @@ public class AdminPartner extends javax.swing.JFrame {
         String adress = tfAdress.getText();
         String branch = tfBranch.getText();
         String stadNamn = tfStad.getText();
+        
+         if(!Validator.isValidName(namn)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Namn får endast bestå av bokstäver och mellanslag.");
+            return;
+        }
+        if(!Validator.isValidName(kontaktPerson)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Kontakt person får endast innehålla bokstäver och mellanslag.");
+            return;
+        }
+        if(Validator.isValidPhoneNumber(telefon)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Telefon numret måste vara mellan 7-15 siffror.");
+            return;
+        }
+        if(!Validator.isValidName(stadNamn)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Stadens namn får endast innehålla bokstäver och mellanslag.");
+            return;
+        }
         
         // Få stadens sid
         String sid = null;

@@ -361,6 +361,18 @@ public class ÄndraProjekt extends javax.swing.JFrame {
         String efternamn = tfEfternamn.getText();
         String land = tfLand.getText();
         
+        if(!Validator.isValidName(projektNamn)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Projekt namn får endast bestå av bokstäver och mellanslag.");
+        }
+        if(!Validator.isValidDate(startDatum)|| !Validator.isValidDate(slutDatum)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Start och slut datum måste vara på formatet YYYY-MM-DD");
+            return;
+        }
+        if(!Validator.isValidName(förnamn) || !Validator.isValidName(efternamn)){
+            javax.swing.JOptionPane.showMessageDialog (this, "För- och efternamn får endast innehålla bokstäver och mellanslag");
+            return;
+        }
+        
         // hitta aid och lid för projektchef och land
         // hitta aid
         String hittaAidQuery = "SELECT aid FROM anstalld WHERE fornamn = '" + förnamn + "' AND efternamn = '" + efternamn +"'";
@@ -372,7 +384,7 @@ public class ÄndraProjekt extends javax.swing.JFrame {
         }
         
         // Hitta lid
-        String hittaLidQuery = "SELECT sid FROM land WHERE namn = '" + land + "'";
+        String hittaLidQuery = "SELECT lid FROM land WHERE namn = '" + land + "'";
         String lid = null;
         
         try{

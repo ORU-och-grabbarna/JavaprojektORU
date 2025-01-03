@@ -235,6 +235,18 @@ public class LäggTillProjekt extends javax.swing.JFrame {
         String efternamn = tfEfternamn.getText().toLowerCase();
         String land = tfLand.getText();
         
+        if(!Validator.isValidName(projektnamn)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Projekt namn får endast bestå av bokstäver och mellanslag.");
+        }
+        if(!Validator.isValidDate(startdatum)|| !Validator.isValidDate(slutdatum)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Start och slut datum måste vara på formatet YYYY-MM-DD");
+            return;
+        }
+        if(!Validator.isValidName(förnamn) || !Validator.isValidName(efternamn)){
+            javax.swing.JOptionPane.showMessageDialog (this, "För- och efternamn får endast innehålla bokstäver och mellanslag");
+            return;
+        }
+        
         // hitta aid till projektchefen
         String hittaAid = "SELECT aid FROM anstalld WHERE fornamn = '" + förnamn + "' " + "AND efternamn = '" +efternamn + "'";
         

@@ -280,41 +280,52 @@ public class LäggTillAnställd extends javax.swing.JFrame {
 
         
         // Har svårt att få det att bli null programmet vägrar acceptera det
+        try{
+             this.aid = idb.getAutoIncrement("anstalld", "aid");
+        }catch(InfException e){
+            javax.swing.JOptionPane.showMessageDialog(this, "Problem med att autoinkrementera aid.");
+        }
         
-            try {
-                // TODO add your handling code here:
+        String förnamn = tfFörnamnOrNivå.getText();
+        String efternamn = tfEfternamnOrMentor.getText();
+        String adress = tfAdress.getText();
+        String epost = tfEpost.getText();
+        String telefon = tfTelefon.getText();
+        String ansDatum = tfAnsDatum.getText();
+        String lösen = tfLösen.getText();
+        String avdelning = tfAvdelning.getText();
 
-                this.aid = idb.getAutoIncrement("anstalld", "aid");
-                String förnamn = tfFörnamnOrNivå.getText();
-                String efternamn = tfEfternamnOrMentor.getText();
-                String adress = tfAdress.getText();
-                String epost = tfEpost.getText();
-                String telefon = tfTelefon.getText();
-                String ansDatum = tfAnsDatum.getText();
-                String lösen = tfLösen.getText();
-                String avdelning = tfAvdelning.getText();
+        if (!Validator.isValidName(förnamn) || !Validator.isValidName(efternamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "För- och efternamn får endast bestå av bokstäver och mellanslag.");
+            return;
+        }
+        if (!Validator.isValidPhoneNumber(telefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror.");
+            return;
+        }
+        if (!Validator.isValidDate(ansDatum)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Anställningsdatum behöver vara i formatet YYYY-MM-DD.");
+            return;
+        }
 
-                try {
+        try {
 
-                    String query = "INSERT INTO anstalld VALUES(" + this.aid + ",'" + förnamn + "','" + efternamn + "','" + adress + "','" + epost + "','"
-                            + telefon + "','" + ansDatum + "','" + lösen + "','" + avdelning + "')";
+            String query = "INSERT INTO anstalld VALUES(" + this.aid + ",'" + förnamn + "','" + efternamn + "','" + adress + "','" + epost + "','"
+                    + telefon + "','" + ansDatum + "','" + lösen + "','" + avdelning + "')";
 
-                    idb.insert(query);
+            idb.insert(query);
 
-                    lblSuccess.setText("Operationen slutfördes");
+            lblSuccess.setText("Operationen slutfördes");
 
-                    btnAdmin.setVisible(true);
-                    btnHandläggare.setVisible(true);
-                    slumpaLösenord.setVisible(false);
+            btnAdmin.setVisible(true);
+            btnHandläggare.setVisible(true);
+            slumpaLösenord.setVisible(false);
 
-                } catch (InfException ex) {
-                    lblSuccess.setText("Operationen misslyckades");
-                }
+        } catch (InfException ex) {
+            lblSuccess.setText("Operationen misslyckades");
+        }
 
-            } catch (InfException ex) {
-                Logger.getLogger(LäggTillAnställd.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
+
 
         
     }//GEN-LAST:event_läggTillAnställdOKActionPerformed

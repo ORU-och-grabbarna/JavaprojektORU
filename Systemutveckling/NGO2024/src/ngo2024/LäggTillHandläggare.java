@@ -287,55 +287,58 @@ public class LäggTillHandläggare extends javax.swing.JFrame {
 
         
         // Har svårt att få det att bli null programmet vägrar acceptera det
-        
-            try {
-                // TODO add your handling code here:
+        try{
+             this.aid = idb.getAutoIncrement("anstalld", "aid");
+        }catch(InfException e){
+            javax.swing.JOptionPane.showMessageDialog(this, "Problem med att autoinkrementera aid.");
+        }
+        String förnamn = tfFörnamnOrNivå.getText();
+        String efternamn = tfEfternamnOrMentor.getText();
+        String adress = tfAdress.getText();
+        String epost = tfEpost.getText();
+        String telefon = tfTelefon.getText();
+        String ansDatum = tfAnsDatum.getText();
+        String lösen = tfLösen.getText();
+        String avdelning = tfAvdelning.getText();
+        String mentor = tfMentor.getText();
+        String ansOmråde = taAnsOmråde.getText();
 
-                this.aid = idb.getAutoIncrement("anstalld", "aid");
-                String förnamn = tfFörnamnOrNivå.getText();
-                String efternamn = tfEfternamnOrMentor.getText();
-                String adress = tfAdress.getText();
-                String epost = tfEpost.getText();
-                String telefon = tfTelefon.getText();
-                String ansDatum = tfAnsDatum.getText();
-                String lösen = tfLösen.getText();
-                String avdelning = tfAvdelning.getText();
-                String mentor = tfMentor.getText();
-                String ansOmråde = taAnsOmråde.getText();
-                
+        if (!Validator.isValidName(förnamn) || !Validator.isValidName(efternamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "För- och efternamn får endast bestå av bokstäver och mellanslag.");
+            return;
+        }
+        if (!Validator.isValidPhoneNumber(telefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror.");
+            return;
+        }
+        if (!Validator.isValidDate(ansDatum)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Anställningsdatum behöver vara i formatet YYYY-MM-DD.");
+            return;
+        }
 
-                try {
-                    
+        try {
 
-                    String query = "INSERT INTO anstalld VALUES(" + this.aid + ",'" + förnamn + "','" + efternamn + "','" + adress + "','" + epost + "','"
-                            + telefon + "','" + ansDatum + "','" + lösen + "','" + avdelning + "')";
-                    
-                    String queryHand;
-                    
-                    if(mentor.isEmpty()){
-                        queryHand = "INSERT INTO handlaggare (aid, ansvarighetsomrade) VALUES (" + this.aid + ",'" + ansOmråde + "')";
-                    }
-                    else{
-                        queryHand = "INSERT INTO handlaggare VALUES (" + this.aid + ",'" + ansOmråde + "','" + mentor + "')";
-                    }
-                   
+            String query = "INSERT INTO anstalld VALUES(" + this.aid + ",'" + förnamn + "','" + efternamn + "','" + adress + "','" + epost + "','"
+                    + telefon + "','" + ansDatum + "','" + lösen + "','" + avdelning + "')";
 
-                    idb.insert(query);
-                    
-                    idb.insert(queryHand);
-                    
-                    
+            String queryHand;
 
-                    lblSuccess.setText("Operationen slutfördes");
-
-                } catch (InfException ex) {
-                    lblSuccess.setText("Operationen misslyckades");
-                }
-
-            } catch (InfException ex) {
-                Logger.getLogger(LäggTillHandläggare.class.getName()).log(Level.SEVERE, null, ex);
+            if (mentor.isEmpty()) {
+                queryHand = "INSERT INTO handlaggare (aid, ansvarighetsomrade) VALUES (" + this.aid + ",'" + ansOmråde + "')";
+            } else {
+                queryHand = "INSERT INTO handlaggare VALUES (" + this.aid + ",'" + ansOmråde + "','" + mentor + "')";
             }
-        
+
+            idb.insert(query);
+
+            idb.insert(queryHand);
+
+            lblSuccess.setText("Operationen slutfördes");
+
+        } catch (InfException ex) {
+            lblSuccess.setText("Operationen misslyckades");
+        }
+
 
         
     }//GEN-LAST:event_läggTillAnställdOKActionPerformed

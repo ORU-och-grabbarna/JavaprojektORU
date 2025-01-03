@@ -279,6 +279,15 @@ public class AdminLand extends javax.swing.JFrame {
         String politisk_struktur = tfPolitisk_struktur.getText();
         String ekonomi = tfEkonomi.getText();
         
+        if(!Validator.isValidName(namn)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Namn får endast bestå av bokstäver och mellanslag.");
+            return;
+        }
+        if(!Validator.isPositiveNumber(valuta)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Valuta måste vara ett positivt nummer.");
+            return;
+        }
+        
         // update set where med värderna
         String updateLandQuery = "UPDATE land SET namn = '" + namn + "', sprak = '" + sprak + "', valuta = '" + valuta +"', tidszon = '" + tidszon + "', "+
                 "politisk_struktur = '" + politisk_struktur + "', ekonomi = '" + ekonomi + "' WHERE lid = '" + lid + "'";
@@ -309,6 +318,16 @@ public class AdminLand extends javax.swing.JFrame {
         String tidszon = tfTidszon.getText();
         String politisk_struktur = tfPolitisk_struktur.getText();
         String ekonomi = tfEkonomi.getText();
+        
+        if(!Validator.isValidName(namn)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Namn får endast bestå av bokstäver och mellanslag.");
+            return;
+        }
+        if(!Validator.isPositiveNumber(valuta)){
+            javax.swing.JOptionPane.showMessageDialog (this, "Valuta måste vara ett positivt nummer.");
+            return;
+        }
+        
         
         
         

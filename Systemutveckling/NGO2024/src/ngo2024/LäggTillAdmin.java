@@ -268,41 +268,58 @@ public class LäggTillAdmin extends javax.swing.JFrame {
 
         
         // Har svårt att få det att bli null programmet vägrar acceptera det
-        
-            try {
-                // TODO add your handling code here:
+        // TODO add your handling code here:
+        try{
+             this.aid = idb.getAutoIncrement("anstalld", "aid");
+        }catch(InfException e){
+            javax.swing.JOptionPane.showMessageDialog(this, "Problem med att autoinkrementera aid.");
+        }
+       
+        String förnamn = tfFörnamnOrNivå.getText();
+        String efternamn = tfEfternamnOrMentor.getText();
+        String adress = tfAdress.getText();
+        String epost = tfEpost.getText();
+        String telefon = tfTelefon.getText();
+        String ansDatum = tfAnsDatum.getText();
+        String lösen = tfLösen.getText();
+        String avdelning = tfAvdelning.getText();
+        String nivå = tfNivå.getText();
 
-                this.aid = idb.getAutoIncrement("anstalld", "aid");
-                String förnamn = tfFörnamnOrNivå.getText();
-                String efternamn = tfEfternamnOrMentor.getText();
-                String adress = tfAdress.getText();
-                String epost = tfEpost.getText();
-                String telefon = tfTelefon.getText();
-                String ansDatum = tfAnsDatum.getText();
-                String lösen = tfLösen.getText();
-                String avdelning = tfAvdelning.getText();
-                String nivå = tfNivå.getText();
+        // Validering
+        if (!Validator.isValidName(förnamn) || !Validator.isValidName(efternamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "För- och efternamn får endast bestå av bokstäver och mellanslag.");
+            return;
+        }
+        if (!Validator.isValidPhoneNumber(telefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror.");
+            return;
+        }
+        if (!Validator.isValidDate(ansDatum)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Anställningsdatum behöver vara i formatet YYYY-MM-DD.");
+            return;
+        }
+        if(!Validator.isPositiveNumber(nivå)){
+            javax.swing.JOptionPane.showMessageDialog(this, "Behörighetsnivå måste vara ett positivt nummer");
+            return;
+        }
 
-                try {
+        try {
 
-                    String query = "INSERT INTO anstalld VALUES(" + this.aid + ",'" + förnamn + "','" + efternamn + "','" + adress + "','" + epost + "','"
-                            + telefon + "','" + ansDatum + "','" + lösen + "','" + avdelning + "')";
-                    
-                    String queryAdmin = "INSERT INTO admin VALUES(" + this.aid + ",'" + nivå + "')";
+            String query = "INSERT INTO anstalld VALUES(" + this.aid + ",'" + förnamn + "','" + efternamn + "','" + adress + "','" + epost + "','"
+                    + telefon + "','" + ansDatum + "','" + lösen + "','" + avdelning + "')";
 
-                    idb.insert(query);
-                    idb.insert(queryAdmin);
+            String queryAdmin = "INSERT INTO admin VALUES(" + this.aid + ",'" + nivå + "')";
 
-                    lblSuccess.setText("Operationen slutfördes");
+            idb.insert(query);
+            idb.insert(queryAdmin);
+
+            lblSuccess.setText("Operationen slutfördes");
+
+        } catch (InfException ex) {
+            lblSuccess.setText("Operationen misslyckades");
+        }
 
 
-                } catch (InfException ex) {
-                    lblSuccess.setText("Operationen misslyckades");
-                }
-
-            } catch (InfException ex) {
-                Logger.getLogger(LäggTillAdmin.class.getName()).log(Level.SEVERE, null, ex);
-            }
         
 
         
