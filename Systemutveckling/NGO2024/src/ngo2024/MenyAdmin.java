@@ -8,16 +8,30 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * This class represents the Admin Menu, a graphical user interface that allows
+ * an administrator to navigate through different functionalities such as
+ * managing employees, projects, departments, partners, countries, and
+ * sustainability goals. The user is shown their logged-in username on the top
+ * of the screen.
+ *
+ * The menu contains various buttons that open respective admin interfaces for
+ * managing the various aspects of the system. This class is the main entry
+ * point for an admin user.
  *
  * @author jamie
  */
 public class MenyAdmin extends javax.swing.JFrame {
-    
+
     private InfDB idb;
     private String inloggadAnvandare;
 
     /**
-     * Creates new form MenyAdmin
+     * Creates a new MenyAdmin frame. Initializes the components and displays
+     * the logged-in administrator's username.
+     *
+     * @param idb The InfDB instance to be used for database operations.
+     * @param inloggadAnvandare The username of the currently logged-in
+     * administrator.
      */
     public MenyAdmin(InfDB idb, String inloggadAnvandare) {
         this.idb = idb;
@@ -137,36 +151,65 @@ public class MenyAdmin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * Event handler for when the Anställda button is clicked. Opens the
+     * "AdminAnställda" window to manage employees.
+     *
+     * @param evt The event that triggered this action (button click).
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
         // hoppa till nya anställda Jframe klassen
         new AdminAnställda(idb).setVisible(true);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
 
+    }//GEN-LAST:event_jButton1ActionPerformed
+    /**
+     * Event handler for when the Avdelning button is clicked. Opens the
+     * "AdminAvdelning" window to manage departments.
+     *
+     * @param evt The event that triggered this action (button click).
+     */
     private void btnAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvdelningActionPerformed
-        // TODO add your handling code here:
+
         new AdminAvdelning(idb).setVisible(true);
     }//GEN-LAST:event_btnAvdelningActionPerformed
-
+    /**
+     * Event handler for when the Partner button is clicked. Opens the
+     * "AdminPartner" window to manage partners.
+     *
+     * @param evt The event that triggered this action (button click).
+     */
     private void btnPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartnerActionPerformed
-        // TODO add your handling code here:
-        new AdminPartner(idb).setVisible(true);
+        // TODO add your handling code here:        new AdminPartner(idb).setVisible(true);
     }//GEN-LAST:event_btnPartnerActionPerformed
-
+    /**
+     * Event handler for when the Land button is clicked. Opens the "AdminLand"
+     * window to manage countries.
+     *
+     * @param evt The event that triggered this action (button click).
+     */
     private void btnLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLandActionPerformed
-        // TODO add your handling code here:
+
         new AdminLand(idb).setVisible(true);
     }//GEN-LAST:event_btnLandActionPerformed
-
+    /**
+     * Event handler for when the Projekt button is clicked. Opens the
+     * "AdminProjekt" window to manage projects.
+     *
+     * @param evt The event that triggered this action (button click).
+     */
     private void btnProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProjektActionPerformed
-        // TODO add your handling code here:
+
         new AdminProjekt(idb).setVisible(true);
     }//GEN-LAST:event_btnProjektActionPerformed
-
+    /**
+     * Event handler for when the Hållbarhetsmål button is clicked. Opens the
+     * "AdminHållbarhetsmål" window to manage sustainability goals.
+     *
+     * @param evt The event that triggered this action (button click).
+     */
     private void btnHållbarhetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHållbarhetActionPerformed
-        // TODO add your handling code here:
+
         new AdminHållbarhetsmål(idb).setVisible(true);
     }//GEN-LAST:event_btnHållbarhetActionPerformed
 
