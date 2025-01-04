@@ -14,6 +14,7 @@ import oru.inf.InfException;
 public class AdminAnställda extends javax.swing.JFrame {
 
     private InfDB idb;
+
     /**
      * Creates new form AdminAnställda
      */
@@ -93,18 +94,28 @@ public class AdminAnställda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Opens the "TaBortAnställd" window to remove an employee.
+     *
+     * @param evt the action event triggered by the user interaction.
+     */
     private void taBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taBortActionPerformed
-        // TODO add your handling code here:
         new TaBortAnställd(idb).setVisible(true);
     }//GEN-LAST:event_taBortActionPerformed
-
+    /**
+     * Opens the "LäggTillAdmin" window to add a new admin.
+     *
+     * @param evt the action event triggered by the user interaction.
+     */
     private void läggTillAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_läggTillAdminActionPerformed
-        // TODO add your handling code here:
         new LäggTillAdmin(idb).setVisible(true);
     }//GEN-LAST:event_läggTillAdminActionPerformed
-
+    /**
+     * Opens the "LäggTillHandläggare" window to add a new case officer.
+     *
+     * @param evt the action event triggered by the user interaction.
+     */
     private void läggTillHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_läggTillHandActionPerformed
-        // TODO add your handling code here:
         new LäggTillHandläggare(idb).setVisible(true);
     }//GEN-LAST:event_läggTillHandActionPerformed
 
