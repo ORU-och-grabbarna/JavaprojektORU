@@ -10,16 +10,25 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * The AdminPartner class provides a graphical interface for managing partner
+ * information in the database. This class extends javax.swing.JFrame and allows
+ * users to perform CRUD (Create, Read, Update, Delete) operations on partner
+ * data. It interacts with an instance of the InfDB class for database
+ * operations.
+ */
+/**
  *
  * @author Mohammed
  */
 public class AdminPartner extends javax.swing.JFrame {
-    
+
     private InfDB idb;
-    
 
     /**
-     * Creates new form AdminPartner
+     * Constructs a new AdminPartner frame.
+     *
+     * @param idb an instance of the InfDB class used to interact with the
+     * database.
      */
     public AdminPartner(InfDB idb) {
         initComponents();
@@ -280,36 +289,46 @@ public class AdminPartner extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event handler for the Hämta button. Retrieves partner information from
+     * the database based on the name entered in the input text field.
+     *
+     * Steps: - Fetches the partner's details from the database using a query. -
+     * Fetches the associated city's name. - Populates the relevant fields in
+     * the UI with the retrieved information.
+     *
+     * @param evt the ActionEvent triggered when the button is clicked.
+     */
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
         // TODO add your handling code here:
         // ta in string från tffield input och få info från databasen sedan skriv ut detta i textfields
         String inputNamn = tfInputNamn.getText();
-        
+
         // få info från databasen
         String getPartnerQuery = "SELECT * FROM partner WHERE namn LIKE '%" + inputNamn + "%'";
-        HashMap<String,String> partnerRow = new HashMap<String, String>();
-        
-        try{
+        HashMap<String, String> partnerRow = new HashMap<String, String>();
+
+        try {
             partnerRow = idb.fetchRow(getPartnerQuery);
-        }catch(InfException e){
+        } catch (InfException e) {
             lblMsgTop.setText("Problem med att hämta partner från databasen");
         }
-        
+
         // få ut stadens namn
         String sid = partnerRow.get("stad");
-        
+
         String getStadNamnQuery = "SELECT namn FROM stad WHERE sid = '" + sid + "'";
         String stadNamn = null;
-        
-        try{
+
+        try {
             stadNamn = idb.fetchSingle(getStadNamnQuery);
-        }catch (InfException e){
+        } catch (InfException e) {
             lblMsgTop.setText("Problem med att hämta stadens namn");
         }
-        
+
         // skirv ut infon i textfield
         lblPid.setText(partnerRow.get("pid"));
-        
+
         tfNamn.setText(partnerRow.get("namn"));
         tfKontaktPerson.setText(partnerRow.get("kontaktperson"));
         tfEpost.setText(partnerRow.get("kontaktepost"));
@@ -317,11 +336,20 @@ public class AdminPartner extends javax.swing.JFrame {
         tfAdress.setText(partnerRow.get("adress"));
         tfBranch.setText(partnerRow.get("branch"));
         tfStad.setText(stadNamn);
-        
-        
-        
-    }//GEN-LAST:event_btnHämtaActionPerformed
 
+
+    }//GEN-LAST:event_btnHämtaActionPerformed
+    /**
+     * Event handler for the Ändra button. Updates the selected partner's
+     * details in the database based on the values entered in the form fields.
+     *
+     * Steps: - Validates the input data for correctness (e.g., name, phone
+     * number). - Retrieves the city's ID based on the entered city name. -
+     * Updates the partner's details in the database. - Displays appropriate
+     * messages for success or failure.
+     *
+     * @param evt the ActionEvent triggered when the button is clicked.
+     */
     private void btnÄndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÄndraActionPerformed
         // TODO add your handling code here:
         // ta in info från textfield
@@ -333,79 +361,94 @@ public class AdminPartner extends javax.swing.JFrame {
         String adress = tfAdress.getText();
         String branch = tfBranch.getText();
         String stadNamn = tfStad.getText();
-        
-        if(!Validator.isValidName(namn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Namn får endast bestå av bokstäver och mellanslag.");
+
+        if (!Validator.isValidName(namn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Namn får endast bestå av bokstäver och mellanslag.");
             return;
         }
-        if(!Validator.isValidName(kontaktPerson)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Kontakt person får endast innehålla bokstäver och mellanslag.");
+        if (!Validator.isValidName(kontaktPerson)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Kontakt person får endast innehålla bokstäver och mellanslag.");
             return;
         }
-        if(Validator.isValidPhoneNumber(telefon)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Telefon numret måste vara mellan 7-15 siffror.");
+        if (Validator.isValidPhoneNumber(telefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste vara mellan 7-15 siffror.");
             return;
         }
-        if(!Validator.isValidName(stadNamn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Stadens namn får endast innehålla bokstäver och mellanslag.");
+        if (!Validator.isValidName(stadNamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Stadens namn får endast innehålla bokstäver och mellanslag.");
             return;
         }
-        
-        
-        
+
         // få ut stad id
         String sid = null;
-        
+
         String getSidQuery = "SELECT sid FROM stad WHERE namn = '" + stadNamn + "'";
-        
-        try{
+
+        try {
             sid = idb.fetchSingle(getSidQuery);
-        }catch (InfException e){
+        } catch (InfException e) {
             lblMsgBottom.setText("Error: databasen har problem med att hitta stadens id");
         }
         // update set where alla uppgifter
-        
+
         String updateQuery = "UPDATE partner SET namn = '" + namn + "', kontaktperson = '" + kontaktPerson + "', "
                 + "kontaktepost = '" + epost + "', telefon = '" + telefon + "', adress = '" + adress + "',"
-                + "branch = '" + branch + "', stad = '" +  sid + "' WHERE pid = '" + pid + "'";
-        
-        try{
+                + "branch = '" + branch + "', stad = '" + sid + "' WHERE pid = '" + pid + "'";
+
+        try {
             idb.update(updateQuery);
             lblMsgBottom.setText("Partnern har uppdaterats");
-        } catch (InfException e){
+        } catch (InfException e) {
             lblMsgBottom.setText("Problem med att uppdatera partner i databasen");
         }
-        
-        
+
+
     }//GEN-LAST:event_btnÄndraActionPerformed
 
+    /**
+     * Deletes a partner from the database. This method removes the partner from
+     * the `projekt_partner` table and then from the `partner` table based on
+     * the `pid` displayed in the UI. Displays an appropriate message in the UI.
+     *
+     * @param evt the action event triggered when the "Ta Bort" button is
+     * clicked.
+     */
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
-        // TODO add your handling code here:
+
         String pid = lblPid.getText();
-        
+
         String deleteProjektPartnerQuery = "DELETE FROM projekt_partner WHERE partner_pid = '" + pid + "'";
-        
+
         String deletePartnerQuery = "DELETE FROM partner WHERE pid = '" + pid + "'";
-        
-        try{
+
+        try {
             idb.delete(deleteProjektPartnerQuery);
             idb.delete(deletePartnerQuery);
             lblMsgBottom.setText("Partner: " + pid + " Har tagits bort");
-        } catch (InfException e){
+        } catch (InfException e) {
             lblMsgBottom.setText("Kunde inte ta bort partner " + pid);
         }
-        
+
     }//GEN-LAST:event_btnTaBortActionPerformed
 
+    /**
+     * Adds a new partner to the database. This method collects data from input
+     * fields, validates the input, retrieves the city ID (sid), and inserts a
+     * new partner into the database. Displays an appropriate success or error
+     * message.
+     *
+     * @param evt the action event triggered when the "Lägg Till" button is
+     * clicked.
+     */
     private void btnLäggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLäggTillActionPerformed
         // TODO add your handling code here:
         // ta in info från textfield
         // omvandla stadens namn till sid
         String pid = null;
-        
-        try{
+
+        try {
             pid = idb.getAutoIncrement("partner", "pid");
-        } catch(InfException e){
+        } catch (InfException e) {
             lblMsgBottom.setText("Problem med att incrementera partner id");
         }
         String namn = tfNamn.getText();
@@ -415,48 +458,47 @@ public class AdminPartner extends javax.swing.JFrame {
         String adress = tfAdress.getText();
         String branch = tfBranch.getText();
         String stadNamn = tfStad.getText();
-        
-         if(!Validator.isValidName(namn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Namn får endast bestå av bokstäver och mellanslag.");
+
+        if (!Validator.isValidName(namn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Namn får endast bestå av bokstäver och mellanslag.");
             return;
         }
-        if(!Validator.isValidName(kontaktPerson)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Kontakt person får endast innehålla bokstäver och mellanslag.");
+        if (!Validator.isValidName(kontaktPerson)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Kontakt person får endast innehålla bokstäver och mellanslag.");
             return;
         }
-        if(Validator.isValidPhoneNumber(telefon)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Telefon numret måste vara mellan 7-15 siffror.");
+        if (Validator.isValidPhoneNumber(telefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste vara mellan 7-15 siffror.");
             return;
         }
-        if(!Validator.isValidName(stadNamn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Stadens namn får endast innehålla bokstäver och mellanslag.");
+        if (!Validator.isValidName(stadNamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Stadens namn får endast innehålla bokstäver och mellanslag.");
             return;
         }
-        
+
         // Få stadens sid
         String sid = null;
-        
+
         String getSidQuery = "SELECT sid FROM stad WHERE namn = '" + stadNamn + "'";
-        
-        try{
+
+        try {
             sid = idb.fetchSingle(getSidQuery);
-        } catch (InfException e){
+        } catch (InfException e) {
             lblMsgBottom.setText("Problem med att få stadens id");
         }
-        
+
         // gör insert query och ge meddelanden
-        String insertQuery = "INSERT INTO partner VALUES(" + pid + ",'" + namn + "','" + kontaktPerson + "','" +
-                epost + "','" + telefon + "','" + adress + "','" + branch + "','" + sid +"')";
-        
-        try{
+        String insertQuery = "INSERT INTO partner VALUES(" + pid + ",'" + namn + "','" + kontaktPerson + "','"
+                + epost + "','" + telefon + "','" + adress + "','" + branch + "','" + sid + "')";
+
+        try {
             idb.insert(insertQuery);
             lblMsgBottom.setText("Partnern har tillagts");
-        } catch (InfException e){
+        } catch (InfException e) {
             lblMsgBottom.setText("Problem med databasen att lägga till partnern");
         }
     }//GEN-LAST:event_btnLäggTillActionPerformed
 
-  
     /**
      * @param args the command line arguments
      */
