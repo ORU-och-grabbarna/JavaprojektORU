@@ -7,15 +7,23 @@ package ngo2024;
 import oru.inf.InfDB;
 
 /**
+ * This class represents the main interface for the admin project management. It
+ * extends javax.swing.JFrame to create a graphical user interface (GUI) for the
+ * admin. The interface allows the admin to add, remove, or update project
+ * information.
+ *
+ * The class interacts with an InfDB instance to manage the data.
  *
  * @author Mohammed
  */
 public class AdminProjekt extends javax.swing.JFrame {
-    
+
     private InfDB idb;
 
     /**
-     * Creates new form AdminProjekt
+     * Constructor to create the form and initialize the InfDB connection.
+     *
+     * @param idb The InfDB instance that connects to the database.
      */
     public AdminProjekt(InfDB idb) {
         initComponents();
@@ -91,22 +99,35 @@ public class AdminProjekt extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Opens the Lägg till window when the corresponding button is clicked.
+     *
+     * @param evt The event that triggers the action.
+     */
     private void btnLäggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLäggTillActionPerformed
         // TODO add your handling code here:
         new LäggTillProjekt(idb).setVisible(true);
     }//GEN-LAST:event_btnLäggTillActionPerformed
 
-
+    /**
+     * Opens the Ta bort window when the corresponding button is clicked.
+     *
+     * @param evt The event that triggers the action.
+     */
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
         // TODO add your handling code here:
         new TaBortProjekt(idb).setVisible(true);
     }//GEN-LAST:event_btnTaBortActionPerformed
 
+    /**
+     * Opens the Ändra window when the corresponding button is clicked.
+     *
+     * @param evt The event that triggers the action.
+     */
     private void btnÄndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÄndraActionPerformed
         // TODO add your handling code here:
         new ÄndraProjekt(idb).setVisible(true);
     }//GEN-LAST:event_btnÄndraActionPerformed
-
 
     /**
      * @param args the command line arguments
