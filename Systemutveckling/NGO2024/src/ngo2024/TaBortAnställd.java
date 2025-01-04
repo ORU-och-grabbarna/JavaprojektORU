@@ -10,7 +10,15 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- *
+ * This class represents the user interface for deleting an employee from the system.
+ * The form allows an administrator to input the first name and last name of an employee,
+ * and upon clicking the "OK" button, the employee's record will be deleted from the database.
+ * If the employee is an admin, their record will be removed from both the "admin" and "anstalld" tables.
+ * If the employee is a handläggare , their record will be removed from both the "handlaggare" 
+ * and "anstalld" tables.
+ * 
+ * The class interacts with a database (InfDB) to perform the necessary delete operations.
+ * 
  * @author Mohammed
  */
 public class TaBortAnställd extends javax.swing.JFrame {
@@ -18,7 +26,10 @@ public class TaBortAnställd extends javax.swing.JFrame {
     private InfDB idb;
 
     /**
-     * Creates new form TaBortAnställd
+     * Creates a new TaBortAnställd frame.
+     * Initializes the components and sets up the database connection.
+     *
+     * @param idb The InfDB instance to be used for database operations.
      */
     public TaBortAnställd(InfDB idb) {
         initComponents();
@@ -47,11 +58,6 @@ public class TaBortAnställd extends javax.swing.JFrame {
         jLabel1.setText("Ta bort anställd");
 
         tfFörnamn.setColumns(20);
-        tfFörnamn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfFörnamnActionPerformed(evt);
-            }
-        });
 
         btnOK.setText("OK");
         btnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -65,11 +71,6 @@ public class TaBortAnställd extends javax.swing.JFrame {
         jLabel2.setText("Efternamn");
 
         tfEfternamn.setColumns(20);
-        tfEfternamn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfEfternamnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,7 +117,17 @@ public class TaBortAnställd extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+  /**
+     * Event handler for when the OK button is clicked.
+     * It retrieves the first name and last name from the text fields and attempts to delete the employee
+     * from the database. The method also checks if the employee is an admin or a handläggare 
+     * and deletes the appropriate records.
+     *
+     * If the deletion is successful, a success message is displayed. If there is an error, 
+     * a failure message is shown instead.
+     * 
+     * @param evt The event that triggered this action (button click).
+     */
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
         
@@ -162,14 +173,6 @@ public class TaBortAnställd extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnOKActionPerformed
-
-    private void tfFörnamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfFörnamnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfFörnamnActionPerformed
-
-    private void tfEfternamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEfternamnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfEfternamnActionPerformed
 
     /**
      * @param args the command line arguments
