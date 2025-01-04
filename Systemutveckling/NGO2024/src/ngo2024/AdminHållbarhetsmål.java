@@ -16,12 +16,22 @@ import oru.inf.InfException;
  *
  * @author Mohammed
  */
+/**
+ * AdminHållbarhetsmål is a Java Swing-based GUI application for managing Hållbarhetsmål.
+ * It allows users to fetch, update, and add sustainability goal records stored in a database.
+ * 
+ * This application interacts with a database through the InfDB library.
+ * 
+ * @author Mohammed
+ */
 public class AdminHållbarhetsmål extends javax.swing.JFrame {
     
     private InfDB idb;
 
     /**
-     * Creates new form AdminAvdelning
+     * Creates a new AdminHållbarhetsmål form.
+     *
+     * @param idb An instance of the InfDB class for database interactions.
      */
     public AdminHållbarhetsmål(InfDB idb) {
         initComponents();
@@ -68,11 +78,6 @@ public class AdminHållbarhetsmål extends javax.swing.JFrame {
         jLabel2.setText("Hållbarhetsmål");
 
         tfInputHållbarhet.setColumns(10);
-        tfInputHållbarhet.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfInputHållbarhetActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Hid");
 
@@ -211,6 +216,13 @@ public class AdminHållbarhetsmål extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+      /**
+     * Event handler for the Hämta button.
+     * Fetches sustainability goal details from the database based on the name entered in tfInputHållbarhet.
+     * Populates the relevant fields in the form with the retrieved data.
+     * 
+     * @param evt The ActionEvent triggered by clicking the button.
+     */
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
         // TODO add your handling code here:
         // få ut info om hållbarhetsmål med namnet
@@ -236,6 +248,13 @@ public class AdminHållbarhetsmål extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnHämtaActionPerformed
 
+    /**
+     * Event handler for the Ändra button.
+     * Updates the sustainability goal information in the database using the data provided in the form.
+     * Validates input fields to ensure correctness before updating.
+     * 
+     * @param evt The ActionEvent triggered by clicking the button.
+     */
     private void btnÄndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÄndraActionPerformed
         // TODO add your handling code here:
         // ta in data från textfields
@@ -276,11 +295,13 @@ public class AdminHållbarhetsmål extends javax.swing.JFrame {
 
 
     
-    
-    private void tfInputHållbarhetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfInputHållbarhetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfInputHållbarhetActionPerformed
-
+    /**
+     * Event handler for the Lägg till Hållbarhetsmål button.
+     * Adds a new sustainability goal to the database using the data provided in the form.
+     * Performs input validation and checks for duplicate goal numbers.
+     * 
+     * @param evt The ActionEvent triggered by clicking the button.
+     */
     private void btnLäggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLäggTillActionPerformed
         // TODO add your handling code here:
         String hid = null;
