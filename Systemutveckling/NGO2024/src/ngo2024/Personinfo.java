@@ -25,7 +25,7 @@ public class Personinfo extends javax.swing.JFrame {
         this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
       /**
-     * Hämtar och visar personuppgifter för den inloggade användaren i formuläret.
+     * Hämtar och visar personuppgifter för den inloggade användaren i Formuläret.
      */
         visainfo();
     }
