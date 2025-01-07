@@ -12,14 +12,24 @@ import oru.inf.InfException;
 
 /**
  *
+ *
+ * @author Mohammed
+ */
+/**
+ * AdminAvdelning is a Java Swing-based GUI application for managing department
+ * (avdelning) data. It allows users to fetch, update, and add department
+ * information stored in a database.
+ *
  * @author Mohammed
  */
 public class AdminAvdelning extends javax.swing.JFrame {
-    
+
     private InfDB idb;
 
     /**
-     * Creates new form AdminAvdelning
+     * Constructor to initialize the AdminAvdelning frame.
+     *
+     * @param idb An instance of the InfDB class for database interactions.
      */
     public AdminAvdelning(InfDB idb) {
         initComponents();
@@ -72,11 +82,6 @@ public class AdminAvdelning extends javax.swing.JFrame {
         jLabel2.setText("Avdelningsnamn");
 
         tfInputAvdelning.setColumns(10);
-        tfInputAvdelning.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfInputAvdelningActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Avdid");
 
@@ -245,21 +250,28 @@ public class AdminAvdelning extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event handler for the Hämta button. Fetches department information from
+     * the database based on the name entered in tfInputAvdelning. Populates the
+     * relevant text fields with the fetched data.
+     *
+     * @param evt The ActionEvent triggered by clicking the button.
+     */
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
-        // TODO add your handling code here:
+
         // få ut info om avdelningen med namnet
-     
+
         String InputAvdelningsnamn = tfInputAvdelning.getText();
-        
+
         String QueryAvdelning = "SELECT * FROM avdelning WHERE namn LIKE '%" + InputAvdelningsnamn + "%'";
-        HashMap<String, String> AvdelningsRow = new HashMap<String,String>();
-        
+        HashMap<String, String> AvdelningsRow = new HashMap<String, String>();
+
         try {
             AvdelningsRow = idb.fetchRow(QueryAvdelning);
         } catch (InfException ex) {
             lblMeddelandeTop.setText("Problem med att hitta info om avdelningen");
         }
-        
+
         // mata in värdena i textfields
         lblAvdid.setText(AvdelningsRow.get("avdid"));
         tfNamn.setText(AvdelningsRow.get("namn"));
@@ -267,39 +279,42 @@ public class AdminAvdelning extends javax.swing.JFrame {
         tfAdress.setText(AvdelningsRow.get("adress"));
         tfEpost.setText(AvdelningsRow.get("epost"));
         tfTelefon.setText(AvdelningsRow.get("telefon"));
-        
+
         // få ut stadnamn och chef namn from sid(stad) och aid(chef)
-        
         String fåStadNamnQuery = "SELECT namn FROM stad WHERE sid = " + AvdelningsRow.get("stad");
         String stadNamn = "";
-        
-        try{
+
+        try {
             stadNamn = idb.fetchSingle(fåStadNamnQuery);
             tfStad.setText(stadNamn);
-        }catch (InfException e){
+        } catch (InfException e) {
             lblMeddelandeTop.setText("Problem med att hitta stadens namn");
         }
-        
+
         // chef namn
-        
         String fåChefensNamn = "SELECT fornamn, efternamn FROM anstalld WHERE aid = " + AvdelningsRow.get("chef");
         HashMap<String, String> chefensNamn = new HashMap<String, String>();
-        
-        try{
+
+        try {
             chefensNamn = idb.fetchRow(fåChefensNamn);
             tfChefFörnamn.setText(chefensNamn.get("fornamn"));
             tfChefEfternamn.setText(chefensNamn.get("efternamn"));
-        } catch (InfException e){
+        } catch (InfException e) {
             lblMeddelandeTop.setText("Problem med att hitta chefens namn");
         }
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_btnHämtaActionPerformed
 
+    /**
+     * Event handler for the Ändra button. Updates the department information in
+     * the database using the values from the text fields. Validates inputs and
+     * ensures correct mapping of city and manager details.
+     *
+     * @param evt The ActionEvent triggered by clicking the button.
+     */
     private void btnÄndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÄndraActionPerformed
-        // TODO add your handling code here:
+
         // ta in data från textfields
         String avdid = lblAvdid.getText();
         String namn = tfNamn.getText();
@@ -310,85 +325,83 @@ public class AdminAvdelning extends javax.swing.JFrame {
         String stadNamn = tfStad.getText();
         String chefFörnamn = tfChefFörnamn.getText();
         String chefEfternamn = tfChefEfternamn.getText();
-        
-         // Validering
-        if(!Validator.isValidName(namn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Avdelninges namn kan endast bestå av bokstäver och mellanslag.");
+
+        // Validering
+        if (!Validator.isValidName(namn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Avdelninges namn kan endast bestå av bokstäver och mellanslag.");
             return;
         }
-        if(!Validator.isValidPhoneNumber(telefon)){
-             javax.swing.JOptionPane.showMessageDialog (this, "Telefon numret måste bestå av 7-15 siffror!");
-             return;
-        }
-        if(!Validator.isValidName(stadNamn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Stadens namn kan endast bestå av bokstäver och mellanslag.");
+        if (!Validator.isValidPhoneNumber(telefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror!");
             return;
         }
-        if(!Validator.isValidName(chefFörnamn) || !Validator.isValidName(chefEfternamn)){
-             javax.swing.JOptionPane.showMessageDialog (this, "För- och efternamn får endast bestå av bokstäver och mellanslag.");
-             return;
+        if (!Validator.isValidName(stadNamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Stadens namn kan endast bestå av bokstäver och mellanslag.");
+            return;
         }
-        
+        if (!Validator.isValidName(chefFörnamn) || !Validator.isValidName(chefEfternamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "För- och efternamn får endast bestå av bokstäver och mellanslag.");
+            return;
+        }
+
         // omvandla namn och stad till aid och sid
         // stad
-        
         String hittaSid = "SELECT sid FROM stad WHERE namn = '" + stadNamn + "'";
         String sid = "";
-        try{
+        try {
             sid = idb.fetchSingle(hittaSid);
-        }catch (InfException e){
+        } catch (InfException e) {
             lblMeddelandeTop.setText("Problem med att hitta stadens id");
         }
-        
+
         // Chef
-        String hittaAid = "SELECT aid FROM anstalld WHERE fornamn = '"+ chefFörnamn +"' AND efternamn = '" + chefEfternamn + "'";
+        String hittaAid = "SELECT aid FROM anstalld WHERE fornamn = '" + chefFörnamn + "' AND efternamn = '" + chefEfternamn + "'";
         String aid = "";
-        
-        try{
+
+        try {
             aid = idb.fetchSingle(hittaAid);
-        } catch (InfException e){
+        } catch (InfException e) {
             lblMeddelandeTop.setText("Problem med att hitta chefens anställnings id");
         }
-        
+
         // Uppdatera set where ändringarna
         String uppdateraAvdelning;
-        
-        if(aid == null || aid.isEmpty()){
-        uppdateraAvdelning = "UPDATE avdelning SET namn = '" + namn + "', beskrivning = '" + beskrivning + "', adress = '" 
-                + adress + "', epost = '" + epost + "', telefon = '" + telefon + "', stad = '" + sid + "'" + "WHERE avdid = '" + avdid + "'" ;
-        }else{
-            uppdateraAvdelning = "UPDATE avdelning SET namn = '" + namn + "', beskrivning = '" + beskrivning + "', adress = '" 
-                + adress + "', epost = '" + epost + "', telefon = '" + telefon + "', stad = '" + sid + "', chef = '" + aid + "'" +  "WHERE avdid = '" + avdid + "'";
+
+        if (aid == null || aid.isEmpty()) {
+            uppdateraAvdelning = "UPDATE avdelning SET namn = '" + namn + "', beskrivning = '" + beskrivning + "', adress = '"
+                    + adress + "', epost = '" + epost + "', telefon = '" + telefon + "', stad = '" + sid + "'" + "WHERE avdid = '" + avdid + "'";
+        } else {
+            uppdateraAvdelning = "UPDATE avdelning SET namn = '" + namn + "', beskrivning = '" + beskrivning + "', adress = '"
+                    + adress + "', epost = '" + epost + "', telefon = '" + telefon + "', stad = '" + sid + "', chef = '" + aid + "'" + "WHERE avdid = '" + avdid + "'";
         }
-        
-        
-        try{
+
+        try {
             idb.update(uppdateraAvdelning);
             lblMeddelandeTop.setText("Avdelning uppdateras");
-        } catch (InfException e){
+        } catch (InfException e) {
             lblMeddelandeTop.setText("Problem med att uppdatera avdelning i databasen");
         }
-        
-       
+
+
     }//GEN-LAST:event_btnÄndraActionPerformed
 
-
-    
-    
-    private void tfInputAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfInputAvdelningActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfInputAvdelningActionPerformed
-
+    /**
+     * Event handler for the "Lägg till Avdelning" (Add Department) button. Adds
+     * a new department to the database using the values from the text fields.
+     * Validates inputs and ensures correct mapping of city and manager details.
+     *
+     * @param evt The ActionEvent triggered by clicking the button.
+     */
     private void btnLäggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLäggTillActionPerformed
-        // TODO add your handling code here:
+
         String avdid = null;
-        
-        try{
+
+        try {
             avdid = idb.getAutoIncrement("avdelning", "avdid");
-        } catch(InfException e){
+        } catch (InfException e) {
             lblMeddelandeTop.setText("Problem med att autoinkrementera avdid");
         }
-        
+
         // få värden från textfields
         String namn = tfNamn.getText();
         String beskrivning = tfBeskrivning.getText();
@@ -398,61 +411,58 @@ public class AdminAvdelning extends javax.swing.JFrame {
         String stadNamn = tfStad.getText();
         String förnamn = tfChefFörnamn.getText();
         String efternamn = tfChefEfternamn.getText();
-        
+
         // Validering
-        if(!Validator.isValidName(namn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Avdelninges namn kan endast bestå av bokstäver och mellanslag.");
+        if (!Validator.isValidName(namn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Avdelninges namn kan endast bestå av bokstäver och mellanslag.");
             return;
         }
-        if(!Validator.isValidPhoneNumber(telefon)){
-             javax.swing.JOptionPane.showMessageDialog (this, "Telefon numret måste bestå av 7-15 siffror!");
-             return;
-        }
-        if(!Validator.isValidName(stadNamn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Stadens namn kan endast bestå av bokstäver och mellanslag.");
+        if (!Validator.isValidPhoneNumber(telefon)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror!");
             return;
         }
-        if(!Validator.isValidName(förnamn) || !Validator.isValidName(efternamn)){
-             javax.swing.JOptionPane.showMessageDialog (this, "För- och efternamn får endast bestå av bokstäver och mellanslag.");
-             return;
+        if (!Validator.isValidName(stadNamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Stadens namn kan endast bestå av bokstäver och mellanslag.");
+            return;
         }
-        
+        if (!Validator.isValidName(förnamn) || !Validator.isValidName(efternamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "För- och efternamn får endast bestå av bokstäver och mellanslag.");
+            return;
+        }
+
         // få sid från stadNamn
         String sid = null;
-        String getSidQuery = "SELECT sid FROM stad WHERE namn = '" + stadNamn +"'";
-        
-        try{
+        String getSidQuery = "SELECT sid FROM stad WHERE namn = '" + stadNamn + "'";
+
+        try {
             sid = idb.fetchSingle(getSidQuery);
-        }catch(InfException e){
-            javax.swing.JOptionPane.showMessageDialog (this, "Hittar inte stadens sid i databasen.\n kontrollera att staden finns i databasen.");
+        } catch (InfException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Hittar inte stadens sid i databasen.\n kontrollera att staden finns i databasen.");
         }
-        
+
         // få ut aid från chefens för- och efternamn
         String aid = null;
         String getAidQuery = "SELECT aid FROM anstalld WHERE fornamn ='" + förnamn + "' AND efternamn = '" + efternamn + "'";
-        
-        try{
+
+        try {
             aid = idb.fetchSingle(getAidQuery);
-        }catch(InfException e){
-            javax.swing.JOptionPane.showMessageDialog (this, "Hittar inte chefens aid i databasen. Kontrollera för- och efternamnet i databasen.");
+        } catch (InfException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Hittar inte chefens aid i databasen. Kontrollera för- och efternamnet i databasen.");
         }
-        
-        
-        
+
         // Inserta värden i databasen
-        String InsertAvdelningQuery = "INSERT INTO avdelning VALUES('" + avdid + "','" +
-                namn + "','" + beskrivning + "','" + adress + "','" + epost + "','" + telefon + "','" +
-                sid + "','" + aid + "')";
-        
-        try{
+        String InsertAvdelningQuery = "INSERT INTO avdelning VALUES('" + avdid + "','"
+                + namn + "','" + beskrivning + "','" + adress + "','" + epost + "','" + telefon + "','"
+                + sid + "','" + aid + "')";
+
+        try {
             idb.insert(InsertAvdelningQuery);
             lblMeddelandeTop.setText("Avdelning tillagd.");
-        }catch(InfException e){
-            javax.swing.JOptionPane.showMessageDialog (this, "Kan inte lägga till avdelningen, fel i query.");
+        } catch (InfException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Kan inte lägga till avdelningen, fel i query.");
         }
     }//GEN-LAST:event_btnLäggTillActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */

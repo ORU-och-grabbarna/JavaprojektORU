@@ -84,9 +84,6 @@
       <Properties>
         <Property name="columns" type="int" value="20"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfF&#xf6;rnamnActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnOK">
       <Properties>
@@ -110,9 +107,6 @@
       <Properties>
         <Property name="columns" type="int" value="20"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfEfternamnActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblSuccess">
     </Component>

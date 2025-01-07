@@ -1,11 +1,7 @@
-
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 package ngo2024;
 
 import java.util.Random;
@@ -15,16 +11,24 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * This class represents a GUI for adding a new handläggare to the system. The
+ * user can input handler details such as personal information and
+ * responsibilities, and the system will validate the inputs before inserting
+ * the data into the database. The user can also generate a random password for
+ * the new handler.
  *
  * @author Mohammed
  */
 public class LäggTillHandläggare extends javax.swing.JFrame {
-    
+
     private InfDB idb;
     private String aid;
 
     /**
-     * Creates new form LäggTillAnställd
+     * Constructs a new LäggTillHandläggare JFrame. Initializes the form
+     * components and sets the database connection.
+     *
+     * @param idb The InfDB instance to interact with the database.
      */
     public LäggTillHandläggare(InfDB idb) {
         initComponents();
@@ -91,27 +95,12 @@ public class LäggTillHandläggare extends javax.swing.JFrame {
         tfAdress.setColumns(10);
 
         tfEpost.setColumns(10);
-        tfEpost.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfEpostActionPerformed(evt);
-            }
-        });
 
         tfTelefon.setColumns(10);
 
         tfAnsDatum.setColumns(10);
-        tfAnsDatum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfAnsDatumActionPerformed(evt);
-            }
-        });
 
         tfLösen.setColumns(10);
-        tfLösen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfLösenActionPerformed(evt);
-            }
-        });
 
         slumpaLösenord.setText("Slumpa Lösenord");
         slumpaLösenord.addActionListener(new java.awt.event.ActionListener() {
@@ -254,11 +243,13 @@ public class LäggTillHandläggare extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tfLösenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLösenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfLösenActionPerformed
-
+/**
+     * ActionListener for the Slumpa Lösenord button. When clicked, it generates
+     * a random password and sets it in the Lösenord text field.
+     *
+     * @param evt The ActionEvent triggered by clicking the "Slumpa Lösenord"
+     * button.
+     */
     private void slumpaLösenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_slumpaLösenordActionPerformed
         // TODO add your handling code here:
         int length = 10;
@@ -270,26 +261,24 @@ public class LäggTillHandläggare extends javax.swing.JFrame {
             int index = random.nextInt(characters.length());
             password.append(characters.charAt(index));
         }
-        
+
         tfLösen.setText(password.toString());
-        
+
     }//GEN-LAST:event_slumpaLösenordActionPerformed
-
-    private void tfAnsDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAnsDatumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfAnsDatumActionPerformed
-
-    private void tfEpostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEpostActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfEpostActionPerformed
-
+    /**
+     * ActionListener for the OK button to add a new handler. It collects the
+     * data from the form, validates it, and attempts to insert it into the
+     * database. If successful, it displays a success message, otherwise, it
+     * shows an error message.
+     *
+     * @param evt The ActionEvent triggered by clicking the "OK" button.
+     */
     private void läggTillAnställdOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_läggTillAnställdOKActionPerformed
 
-        
         // Har svårt att få det att bli null programmet vägrar acceptera det
-        try{
-             this.aid = idb.getAutoIncrement("anstalld", "aid");
-        }catch(InfException e){
+        try {
+            this.aid = idb.getAutoIncrement("anstalld", "aid");
+        } catch (InfException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Problem med att autoinkrementera aid.");
         }
         String förnamn = tfFörnamnOrNivå.getText();
@@ -340,7 +329,6 @@ public class LäggTillHandläggare extends javax.swing.JFrame {
         }
 
 
-        
     }//GEN-LAST:event_läggTillAnställdOKActionPerformed
 
     /**

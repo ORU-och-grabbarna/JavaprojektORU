@@ -9,15 +9,22 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * The ÄndraProjekt class represents a GUI for editing project details in a
+ * database. It allows users to retrieve information about a project, edit it,
+ * and update the project details in the database. The class extends
+ * javax.swing.JFrame and is primarily used for project management in a system.
  *
  * @author Mohammed
  */
 public class ÄndraProjekt extends javax.swing.JFrame {
-    
+
     private InfDB idb;
 
     /**
-     * Creates new form ÄndraProjekt
+     * Constructor for the ÄndraProjekt class. Initializes the GUI and sets the
+     * database interface.
+     *
+     * @param idb The InfDB object used to interact with the database.
      */
     public ÄndraProjekt(InfDB idb) {
         initComponents();
@@ -106,11 +113,6 @@ public class ÄndraProjekt extends javax.swing.JFrame {
         tfEfternamn.setColumns(10);
 
         tfSlutDatum.setColumns(10);
-        tfSlutDatum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfSlutDatumActionPerformed(evt);
-            }
-        });
 
         tfKostnad.setColumns(10);
 
@@ -271,81 +273,88 @@ public class ÄndraProjekt extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tfSlutDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSlutDatumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfSlutDatumActionPerformed
-
+/**
+     * Handles the action when the user enters a project name and clicks the
+     * Hämta button. Fetches the project's information from the database and
+     * populates the corresponding fields. Displays the project details,
+     * including project name, description, dates, cost, status, priority,
+     * project manager's name, and country.
+     *
+     * @param evt The action event triggered by the Hämta button.
+     */
     private void btnHämtaInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaInfoActionPerformed
         // TODO add your handling code here:
         // hämta all info från projektet med select och fetchrow
         String projektNamn = tfInputNamn.getText();
         lblProjektNamn.setText(projektNamn);
         String query = "SELECT * FROM projekt WHERE projektnamn LIKE '%" + projektNamn + "%'";
-        
+
         HashMap<String, String> projektRows = new HashMap<String, String>();
-        
-        try{
+
+        try {
             projektRows = idb.fetchRow(query);
-            if(projektRows.isEmpty()){
+            if (projektRows.isEmpty()) {
                 lblHittar.setText("Hittar inte projektet.");
             }
-        }catch(InfException e){
+        } catch (InfException e) {
             lblHittar.setText("Error i databasen");
         }
-        
+
         // uppdatera textfields
         lblPid.setText(projektRows.get("pid"));
-        
+
         tfProjektNamn.setText(projektRows.get("projektnamn"));
-        
+
         tfBeskrivning.setText(projektRows.get("beskrivning"));
-        
+
         tfStartDatum.setText(projektRows.get("startdatum"));
-        
+
         tfSlutDatum.setText(projektRows.get("slutdatum"));
-        
+
         tfKostnad.setText(projektRows.get("kostnad"));
-        
+
         tfStatus.setText(projektRows.get("status"));
-        
+
         tfPrioritet.setText(projektRows.get("prioritet"));
-        
-        
+
         // Behlver få ut aid för projektchef och land
         String projektChefId = projektRows.get("projektchef");
         String landId = projektRows.get("land");
-        
+
         // få ut namnet för projektchefen
         String projektChefNamnQuery = "SELECT fornamn, efternamn FROM anstalld WHERE aid = '" + projektChefId + "'";
         HashMap<String, String> projektChefNamn = new HashMap<String, String>();
-        
-        try{
+
+        try {
             projektChefNamn = idb.fetchRow(projektChefNamnQuery);
             tfFörnamn.setText(projektChefNamn.get("fornamn"));
             tfEfternamn.setText(projektChefNamn.get("efternamn"));
-        }catch(InfException e){
+        } catch (InfException e) {
             lblHittar.setText("Problem i databasen med att få projekt chefens namn");
         }
-        
+
         // få ut namnet av landet med lid till namn
         String landNamn;
         String lid = projektRows.get("land");
-        
+
         String fåLandNamnQuery = "SELECT namn FROM land WHERE lid = '" + lid + "'";
-        
-        try{
+
+        try {
             landNamn = idb.fetchSingle(fåLandNamnQuery);
             tfLand.setText(landNamn);
-        }catch(InfException e){
+        } catch (InfException e) {
             lblHittar.setText("Problem i databasen med att hitta landets namn");
         }
-        
-        
-        
-        
-    }//GEN-LAST:event_btnHämtaInfoActionPerformed
 
+
+    }//GEN-LAST:event_btnHämtaInfoActionPerformed
+    /**
+     * Handles the action when the user clicks the Ändra button to update
+     * project details. Validates the input values and updates the project in
+     * the database.
+     *
+     * @param evt The action event triggered by the "Ändra" button.
+     */
     private void btnÄndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÄndraActionPerformed
         // TODO add your handling code here:
         // uppdatera projektet med värden i textfields
@@ -360,52 +369,52 @@ public class ÄndraProjekt extends javax.swing.JFrame {
         String förnamn = tfFörnamn.getText();
         String efternamn = tfEfternamn.getText();
         String land = tfLand.getText();
-        
-        if(!Validator.isValidName(projektNamn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Projekt namn får endast bestå av bokstäver och mellanslag.");
+
+        if (!Validator.isValidName(projektNamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Projekt namn får endast bestå av bokstäver och mellanslag.");
         }
-        if(!Validator.isValidDate(startDatum)|| !Validator.isValidDate(slutDatum)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Start och slut datum måste vara på formatet YYYY-MM-DD");
+        if (!Validator.isValidDate(startDatum) || !Validator.isValidDate(slutDatum)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Start och slut datum måste vara på formatet YYYY-MM-DD");
             return;
         }
-        if(!Validator.isValidName(förnamn) || !Validator.isValidName(efternamn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "För- och efternamn får endast innehålla bokstäver och mellanslag");
+        if (!Validator.isValidName(förnamn) || !Validator.isValidName(efternamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "För- och efternamn får endast innehålla bokstäver och mellanslag");
             return;
         }
-        
+
         // hitta aid och lid för projektchef och land
         // hitta aid
-        String hittaAidQuery = "SELECT aid FROM anstalld WHERE fornamn = '" + förnamn + "' AND efternamn = '" + efternamn +"'";
+        String hittaAidQuery = "SELECT aid FROM anstalld WHERE fornamn = '" + förnamn + "' AND efternamn = '" + efternamn + "'";
         String aid = null;
-        try{
+        try {
             aid = idb.fetchSingle(hittaAidQuery);
-        }catch(InfException e){
-           lblHittar.setText("Fel i databasen med att hitta projektchefens anställnings id"); 
+        } catch (InfException e) {
+            lblHittar.setText("Fel i databasen med att hitta projektchefens anställnings id");
         }
-        
+
         // Hitta lid
         String hittaLidQuery = "SELECT lid FROM land WHERE namn = '" + land + "'";
         String lid = null;
-        
-        try{
+
+        try {
             lid = idb.fetchSingle(hittaLidQuery);
-        }catch(InfException e){
+        } catch (InfException e) {
             lblHittar.setText("Fel i databasen med att hitta landets namn");
         }
-        
+
         // uppdatera projektet update - set - where;
-        String updateQuery = "UPDATE projekt SET projektnamn ='" + projektNamn + "', beskrivning = '" + beskrivning + "', startdatum = '" + 
-                startDatum + "', slutDatum = '" + slutDatum + "', kostnad = '" + kostnad + "', status = '" + status + "', prioritet = '" +
-                prioritet + "', projektchef = '" + aid + "', land = '" + lid +"'"
+        String updateQuery = "UPDATE projekt SET projektnamn ='" + projektNamn + "', beskrivning = '" + beskrivning + "', startdatum = '"
+                + startDatum + "', slutDatum = '" + slutDatum + "', kostnad = '" + kostnad + "', status = '" + status + "', prioritet = '"
+                + prioritet + "', projektchef = '" + aid + "', land = '" + lid + "'"
                 + "WHERE pid = '" + pid + "'";
-        
-        try{
+
+        try {
             idb.update(updateQuery);
             lblHittar.setText("Projekt uppdaterad");
-        }catch(InfException e){
+        } catch (InfException e) {
             lblHittar.setText("Problem med att updatera projekt i databasen");
         }
-     
+
     }//GEN-LAST:event_btnÄndraActionPerformed
 
     /**

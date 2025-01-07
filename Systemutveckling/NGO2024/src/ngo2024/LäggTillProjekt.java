@@ -10,18 +10,25 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * This class represents a GUI for adding a new project to the system. It allows
+ * the user to input details for the project, such as name, description, dates,
+ * cost, status, priority, and the project manager's information. The data is
+ * then validated and added to the database.
  *
  * @author Mohammed
  */
 public class LäggTillProjekt extends javax.swing.JFrame {
-    
+
     private InfDB idb;
     String lid;
     String aid;
     String projektIncrement;
 
     /**
-     * Creates new form LäggTillProjekt
+     * Constructor for LäggTillProjekt class. Initializes the form and sets the
+     * database connection.
+     *
+     * @param idb The InfDB instance used for database operations.
      */
     public LäggTillProjekt(InfDB idb) {
         initComponents();
@@ -215,10 +222,18 @@ public class LäggTillProjekt extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+  /**
+     * Action listener for the OK button. This method is triggered when the user
+     * clicks the "OK" button to submit the form. It performs validation on the
+     * inputs, fetches necessary IDs from the database, and inserts the project
+     * data into the database if all validation checks pass.
+     *
+     * @param evt The event that triggered this method (clicking the "OK"
+     * button).
+     */
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
-      
+
         try {
             projektIncrement = idb.getAutoIncrement("projekt", "pid");
         } catch (InfException ex) {
@@ -234,41 +249,40 @@ public class LäggTillProjekt extends javax.swing.JFrame {
         String förnamn = tfFörnamn.getText().toLowerCase();
         String efternamn = tfEfternamn.getText().toLowerCase();
         String land = tfLand.getText();
-        
-        if(!Validator.isValidName(projektnamn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Projekt namn får endast bestå av bokstäver och mellanslag.");
-        }
-        if(!Validator.isValidDate(startdatum)|| !Validator.isValidDate(slutdatum)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Start och slut datum måste vara på formatet YYYY-MM-DD");
-            return;
-        }
-        if(!Validator.isValidName(förnamn) || !Validator.isValidName(efternamn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "För- och efternamn får endast innehålla bokstäver och mellanslag");
-            return;
-        }
-        
-        // hitta aid till projektchefen
-        String hittaAid = "SELECT aid FROM anstalld WHERE fornamn = '" + förnamn + "' " + "AND efternamn = '" +efternamn + "'";
-        
-        // kontrollera om det är en handläggare
-        String controlHandläggare = "SELECT aid FROM handlaggare WHERE aid = '" + aid +"'";
-        String handläggare = null;
-        
-        try {
-                aid = idb.fetchSingle(hittaAid);
 
-            } catch (InfException ex) {
-                lblSuccess.setText("Kunde inte hitta personens anställnings id.");
-            }
-        
+        if (!Validator.isValidName(projektnamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Projekt namn får endast bestå av bokstäver och mellanslag.");
+        }
+        if (!Validator.isValidDate(startdatum) || !Validator.isValidDate(slutdatum)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Start och slut datum måste vara på formatet YYYY-MM-DD");
+            return;
+        }
+        if (!Validator.isValidName(förnamn) || !Validator.isValidName(efternamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "För- och efternamn får endast innehålla bokstäver och mellanslag");
+            return;
+        }
+
+        // hitta aid till projektchefen
+        String hittaAid = "SELECT aid FROM anstalld WHERE fornamn = '" + förnamn + "' " + "AND efternamn = '" + efternamn + "'";
+
+        // kontrollera om det är en handläggare
+        String controlHandläggare = "SELECT aid FROM handlaggare WHERE aid = '" + aid + "'";
+        String handläggare = null;
+
+        try {
+            aid = idb.fetchSingle(hittaAid);
+
+        } catch (InfException ex) {
+            lblSuccess.setText("Kunde inte hitta personens anställnings id.");
+        }
+
         try {
             handläggare = idb.fetchSingle(controlHandläggare);
         } catch (InfException ex) {
             Logger.getLogger(LäggTillProjekt.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         if (handläggare != null) {
-            
 
             String hittaLid = "SELECT lid FROM land WHERE namn = '" + land + "'";
 
@@ -288,15 +302,11 @@ public class LäggTillProjekt extends javax.swing.JFrame {
             } catch (InfException e) {
                 lblSuccess.setText("Error");
             }
-        }
-        else{
+        } else {
             lblSuccess.setText("Handläggare kunde inte hittas");
         }
-        
- 
-      
-                
-        
+
+
     }//GEN-LAST:event_btnOKActionPerformed
 
     /**

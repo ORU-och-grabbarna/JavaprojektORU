@@ -8,14 +8,26 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * This class represents the user interface for deleting a project from the
+ * system. The form allows an administrator to input the project name, and upon
+ * clicking the "OK" button, the project will be deleted from the database.
+ *
+ * The class interacts with a database (InfDB) to perform the deletion
+ * operation. If the project name matches an existing project in the database,
+ * it will be removed. The system provides feedback to the user on the success
+ * or failure of the deletion operation.
  *
  * @author Mohammed
  */
 public class TaBortProjekt extends javax.swing.JFrame {
 
     private InfDB idb;
+
     /**
-     * Creates new form TaBortProjekt
+     * Creates a new TaBortProjekt frame. Initializes the components and sets up
+     * the database connection.
+     *
+     * @param idb The InfDB instance to be used for database operations.
      */
     public TaBortProjekt(InfDB idb) {
         initComponents();
@@ -92,19 +104,27 @@ public class TaBortProjekt extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * Event handler for when the OK button is clicked. It retrieves the project
+     * name from the text field and attempts to delete the project from the
+     * database. If the project is successfully deleted, a success message is
+     * shown. If there is an error with the database operation, a failure
+     * message is displayed instead.
+     *
+     * @param evt The event that triggered this action (button click).
+     */
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
         String projektNamn = tfProjektNamn.getText();
-        
+
         String query = "DELETE FROM projekt WHERE projektnamn = '" + projektNamn + "'";
-        
-        try{
+
+        try {
             idb.delete(query);
             lblSuccess.setText("Successfully deleted");
-        }catch (InfException e){
+        } catch (InfException e) {
             lblSuccess.setText("There was an error with the database");
-    }
+        }
     }//GEN-LAST:event_btnOKActionPerformed
 
     /**

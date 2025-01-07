@@ -1,11 +1,7 @@
-
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 package ngo2024;
 
 import java.util.Random;
@@ -15,17 +11,30 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * This class represents the user interface for adding a new admin to the
+ * system. It extends javax.swing.JFrame to create a GUI where the admin details
+ * are inputted and saved to the database.
+ *
+ * The form contains fields for entering the admin's first name, last name,
+ * address, email, phone number, hiring date, department, password, and
+ * permission level. The user can also generate a random password using the
+ * "Slumpa Lösenord" button.
+ *
+ * Once the form is completed, the admin details are validated and inserted into
+ * the database using the InfDB instance.
  *
  * @author Mohammed
  */
 public class LäggTillAdmin extends javax.swing.JFrame {
-    
+
     private InfDB idb;
     private String aid;
     private String process;
 
     /**
-     * Creates new form LäggTillAnställd
+     * Constructor that initializes the form and sets the database connection.
+     *
+     * @param idb The InfDB instance that connects to the database.
      */
     public LäggTillAdmin(InfDB idb) {
         initComponents();
@@ -90,27 +99,12 @@ public class LäggTillAdmin extends javax.swing.JFrame {
         tfAdress.setColumns(10);
 
         tfEpost.setColumns(10);
-        tfEpost.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfEpostActionPerformed(evt);
-            }
-        });
 
         tfTelefon.setColumns(10);
 
         tfAnsDatum.setColumns(10);
-        tfAnsDatum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfAnsDatumActionPerformed(evt);
-            }
-        });
 
         tfLösen.setColumns(10);
-        tfLösen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfLösenActionPerformed(evt);
-            }
-        });
 
         slumpaLösenord.setText("Slumpa Lösenord");
         slumpaLösenord.addActionListener(new java.awt.event.ActionListener() {
@@ -133,11 +127,6 @@ public class LäggTillAdmin extends javax.swing.JFrame {
         jLabel10.setText("Behörighetsnivå");
 
         tfNivå.setColumns(3);
-        tfNivå.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNivåActionPerformed(evt);
-            }
-        });
 
         lblSuccess.setText("Status");
 
@@ -235,13 +224,18 @@ public class LäggTillAdmin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tfLösenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLösenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfLösenActionPerformed
-
+/**
+     * Generates a random password when the Slumpa Lösenord button is clicked.
+     *
+     * The password is a combination of uppercase letters, lowercase letters,
+     * numbers, and special characters. The length of the generated password is
+     * 10 characters. The generated password is then displayed in the password
+     * text field.
+     *
+     * @param evt The event triggered when the button is clicked.
+     */
     private void slumpaLösenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_slumpaLösenordActionPerformed
-        // TODO add your handling code here:
+
         int length = 10;
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@";
         StringBuilder password = new StringBuilder();
@@ -251,30 +245,30 @@ public class LäggTillAdmin extends javax.swing.JFrame {
             int index = random.nextInt(characters.length());
             password.append(characters.charAt(index));
         }
-        
+
         tfLösen.setText(password.toString());
-        
+
     }//GEN-LAST:event_slumpaLösenordActionPerformed
-
-    private void tfAnsDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAnsDatumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfAnsDatumActionPerformed
-
-    private void tfEpostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEpostActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfEpostActionPerformed
-
+    /**
+     * Handles the event when the OK button is clicked to add the new admin to
+     * the system.
+     *
+     * This method retrieves the input data, validates it, and inserts it into
+     * the database. If any validation fails, a corresponding error message is
+     * shown to the user. If the data is valid, the admin's information is added
+     * to the "anstalld" and "admin" tables in the database. A success or
+     * failure message is displayed based on the operation result.
+     *
+     * @param evt The event triggered when the "OK" button is clicked.
+     */
     private void läggTillAnställdOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_läggTillAnställdOKActionPerformed
 
-        
-        // Har svårt att få det att bli null programmet vägrar acceptera det
-        // TODO add your handling code here:
-        try{
-             this.aid = idb.getAutoIncrement("anstalld", "aid");
-        }catch(InfException e){
+        try {
+            this.aid = idb.getAutoIncrement("anstalld", "aid");
+        } catch (InfException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Problem med att autoinkrementera aid.");
         }
-       
+
         String förnamn = tfFörnamnOrNivå.getText();
         String efternamn = tfEfternamnOrMentor.getText();
         String adress = tfAdress.getText();
@@ -298,7 +292,7 @@ public class LäggTillAdmin extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Anställningsdatum behöver vara i formatet YYYY-MM-DD.");
             return;
         }
-        if(!Validator.isPositiveNumber(nivå)){
+        if (!Validator.isPositiveNumber(nivå)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Behörighetsnivå måste vara ett positivt nummer");
             return;
         }
@@ -320,14 +314,7 @@ public class LäggTillAdmin extends javax.swing.JFrame {
         }
 
 
-        
-
-        
     }//GEN-LAST:event_läggTillAnställdOKActionPerformed
-
-    private void tfNivåActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNivåActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfNivåActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,31 +1,32 @@
-
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 package ngo2024;
 
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * This class represents a GUI for adding a new anställd to the system. The user
+ * can input employee details, and the system will validate the inputs before
+ * inserting the data into the database. Additionally, the user can generate a
+ * random password for the new employee.
  *
  * @author Mohammed
  */
 public class LäggTillAnställd extends javax.swing.JFrame {
-    
+
     private InfDB idb;
     private String aid;
     private String process;
 
     /**
-     * Creates new form LäggTillAnställd
+     * Constructs a new LäggTillAnställd JFrame. Initializes the form components
+     * and sets the database connection.
+     *
+     * @param idb The InfDB instance to interact with the database.
      */
     public LäggTillAnställd(InfDB idb) {
         initComponents();
@@ -61,8 +62,6 @@ public class LäggTillAnställd extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         tfAvdelning = new javax.swing.JTextField();
         lblSuccess = new javax.swing.JLabel();
-        btnAdmin = new javax.swing.JButton();
-        btnHandläggare = new javax.swing.JButton();
         lblSuccess2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -90,27 +89,12 @@ public class LäggTillAnställd extends javax.swing.JFrame {
         tfAdress.setColumns(10);
 
         tfEpost.setColumns(10);
-        tfEpost.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfEpostActionPerformed(evt);
-            }
-        });
 
         tfTelefon.setColumns(10);
 
         tfAnsDatum.setColumns(10);
-        tfAnsDatum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfAnsDatumActionPerformed(evt);
-            }
-        });
 
         tfLösen.setColumns(10);
-        tfLösen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfLösenActionPerformed(evt);
-            }
-        });
 
         slumpaLösenord.setText("Slumpa Lösenord");
         slumpaLösenord.addActionListener(new java.awt.event.ActionListener() {
@@ -129,20 +113,6 @@ public class LäggTillAnställd extends javax.swing.JFrame {
         jLabel2.setText("Avdelning");
 
         tfAvdelning.setColumns(10);
-
-        btnAdmin.setText("Administratör");
-        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdminActionPerformed(evt);
-            }
-        });
-
-        btnHandläggare.setText("Handläggare");
-        btnHandläggare.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHandläggareActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,10 +153,6 @@ public class LäggTillAnställd extends javax.swing.JFrame {
                             .addComponent(läggTillAnställdOK))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAdmin)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnHandläggare))
                             .addComponent(tfAnsDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -238,20 +204,19 @@ public class LäggTillAnställd extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(tfAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(läggTillAnställdOK)
-                    .addComponent(btnAdmin)
-                    .addComponent(btnHandläggare))
+                .addComponent(läggTillAnställdOK)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tfLösenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLösenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfLösenActionPerformed
-
+/**
+     * ActionListener for the Slumpa Lösenord button. When clicked, it generates
+     * a random password and sets it in the Lösenord text field.
+     *
+     * @param evt The ActionEvent triggered by clicking the "Slumpa Lösenord"
+     * button.
+     */
     private void slumpaLösenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_slumpaLösenordActionPerformed
         // TODO add your handling code here:
         int length = 10;
@@ -263,29 +228,27 @@ public class LäggTillAnställd extends javax.swing.JFrame {
             int index = random.nextInt(characters.length());
             password.append(characters.charAt(index));
         }
-        
+
         tfLösen.setText(password.toString());
-        
+
     }//GEN-LAST:event_slumpaLösenordActionPerformed
-
-    private void tfAnsDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAnsDatumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfAnsDatumActionPerformed
-
-    private void tfEpostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEpostActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfEpostActionPerformed
-
+    /**
+     * ActionListener for the OK button to add a new employee. It collects the
+     * data from the form, validates it, and attempts to insert it into the
+     * database. If successful, it displays a success message, otherwise, it
+     * shows an error message.
+     *
+     * @param evt The ActionEvent triggered by clicking the "OK" button.
+     */
     private void läggTillAnställdOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_läggTillAnställdOKActionPerformed
 
-        
         // Har svårt att få det att bli null programmet vägrar acceptera det
-        try{
-             this.aid = idb.getAutoIncrement("anstalld", "aid");
-        }catch(InfException e){
+        try {
+            this.aid = idb.getAutoIncrement("anstalld", "aid");
+        } catch (InfException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Problem med att autoinkrementera aid.");
         }
-        
+
         String förnamn = tfFörnamnOrNivå.getText();
         String efternamn = tfEfternamnOrMentor.getText();
         String adress = tfAdress.getText();
@@ -317,8 +280,7 @@ public class LäggTillAnställd extends javax.swing.JFrame {
 
             lblSuccess.setText("Operationen slutfördes");
 
-            btnAdmin.setVisible(true);
-            btnHandläggare.setVisible(true);
+          
             slumpaLösenord.setVisible(false);
 
         } catch (InfException ex) {
@@ -326,21 +288,7 @@ public class LäggTillAnställd extends javax.swing.JFrame {
         }
 
 
-
-        
     }//GEN-LAST:event_läggTillAnställdOKActionPerformed
-
-    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
-        // TODO add your handling code here:
-        
-        
-        
-    }//GEN-LAST:event_btnAdminActionPerformed
-
-    private void btnHandläggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHandläggareActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_btnHandläggareActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,8 +327,6 @@ public class LäggTillAnställd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdmin;
-    private javax.swing.JButton btnHandläggare;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

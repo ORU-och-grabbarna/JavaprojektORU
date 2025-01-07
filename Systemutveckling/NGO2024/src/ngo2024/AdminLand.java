@@ -9,15 +9,26 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
+ * AdminLand is a Java Swing-based GUI application for managing country (Land)
+ * records. It interacts with a database to fetch, update, and add information
+ * about countries. The application uses the InfDB library for database
+ * operations.
+ *
+ * Features: - Retrieve country information based on a name query. - Update
+ * existing country details. - Add new countries to the database.
+ *
+ * Validators are used to ensure data integrity before database operations.
  *
  * @author Mohammed
  */
 public class AdminLand extends javax.swing.JFrame {
-    
+
     private InfDB idb;
 
     /**
-     * Creates new form AdminLand
+     * Creates a new AdminLand form.
+     *
+     * @param idb An instance of the InfDB class for database operations.
      */
     public AdminLand(InfDB idb) {
         initComponents();
@@ -238,39 +249,49 @@ public class AdminLand extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ /**
+     * Event handler for the Hämta button. Retrieves country information from
+     * the database based on the name entered in tfInputNamn. Populates the form
+     * fields with the retrieved data.
+     *
+     * @param evt The ActionEvent triggered by clicking the button.
+     */
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
-        // TODO add your handling code here:
+
         String namn = tfInputNamn.getText();
-        
+
         String getLandInfoQuery = "SELECT * FROM land WHERE namn LIKE '%" + namn + "%'";
-        HashMap<String,String> landRow = new HashMap<String, String>();
-        
-        try{
+        HashMap<String, String> landRow = new HashMap<String, String>();
+
+        try {
             landRow = idb.fetchRow(getLandInfoQuery);
-        }catch (InfException e){
+        } catch (InfException e) {
             lblMsgTop.setText("Problem med att hämta info om landet");
         }
-        
+
         // sätt tf till värderna
-        
         lblLid.setText(landRow.get("lid"));
-        
+
         tfNamn.setText(landRow.get("namn"));
         tfSprak.setText(landRow.get("sprak"));
         tfValuta.setText(landRow.get("valuta"));
         tfTidszon.setText(landRow.get("tidszon"));
         tfPolitisk_struktur.setText(landRow.get("politisk_struktur"));
         tfEkonomi.setText(landRow.get("ekonomi"));
-        
-        
-        
+
+
     }//GEN-LAST:event_btnHämtaActionPerformed
 
+    /**
+     * Event handler for the Ändra button. Updates the country information in
+     * the database with the data provided in the form fields. Validates the
+     * input fields to ensure correctness before performing the update.
+     *
+     * @param evt The ActionEvent triggered by clicking the button.
+     */
     private void btnÄndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÄndraActionPerformed
-        // TODO add your handling code here:
+
         // get info från textfields
-        
         String lid = lblLid.getText();
         String namn = tfNamn.getText();
         String sprak = tfSprak.getText();
@@ -278,71 +299,75 @@ public class AdminLand extends javax.swing.JFrame {
         String tidszon = tfTidszon.getText();
         String politisk_struktur = tfPolitisk_struktur.getText();
         String ekonomi = tfEkonomi.getText();
-        
-        if(!Validator.isValidName(namn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Namn får endast bestå av bokstäver och mellanslag.");
+
+        if (!Validator.isValidName(namn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Namn får endast bestå av bokstäver och mellanslag.");
             return;
         }
-        if(!Validator.isPositiveNumber(valuta)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Valuta måste vara ett positivt nummer.");
+        if (!Validator.isPositiveNumber(valuta)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Valuta måste vara ett positivt nummer.");
             return;
         }
-        
+
         // update set where med värderna
-        String updateLandQuery = "UPDATE land SET namn = '" + namn + "', sprak = '" + sprak + "', valuta = '" + valuta +"', tidszon = '" + tidszon + "', "+
-                "politisk_struktur = '" + politisk_struktur + "', ekonomi = '" + ekonomi + "' WHERE lid = '" + lid + "'";
-        
-        try{
+        String updateLandQuery = "UPDATE land SET namn = '" + namn + "', sprak = '" + sprak + "', valuta = '" + valuta + "', tidszon = '" + tidszon + "', "
+                + "politisk_struktur = '" + politisk_struktur + "', ekonomi = '" + ekonomi + "' WHERE lid = '" + lid + "'";
+
+        try {
             idb.update(updateLandQuery);
             taMsgBottom.setText("Landet har uppdaterats!");
-        } catch(InfException e){
+        } catch (InfException e) {
             taMsgBottom.setText("Landet kunde inte uppdateras");
         }
-        
+
     }//GEN-LAST:event_btnÄndraActionPerformed
 
+    /**
+     * Event handler for the "Lägg Till" (Add) button. Adds a new country record
+     * to the database using the data provided in the form fields. Validates the
+     * input fields and ensures data integrity.
+     *
+     * @param evt The ActionEvent triggered by clicking the button.
+     */
     private void btnLäggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLäggTillActionPerformed
         // TODO add your handling code here:
         // hämta info från textfields
         String lid = null;
-        
-        try{
+
+        try {
             lid = idb.getAutoIncrement("land", "lid");
-        }catch (InfException e){
+        } catch (InfException e) {
             taMsgBottom.setText("Kunde inte inkrementera landets id");
         }
-        
+
         String namn = tfNamn.getText();
         String sprak = tfSprak.getText();
         String valuta = tfValuta.getText();
         String tidszon = tfTidszon.getText();
         String politisk_struktur = tfPolitisk_struktur.getText();
         String ekonomi = tfEkonomi.getText();
-        
-        if(!Validator.isValidName(namn)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Namn får endast bestå av bokstäver och mellanslag.");
+
+        if (!Validator.isValidName(namn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Namn får endast bestå av bokstäver och mellanslag.");
             return;
         }
-        if(!Validator.isPositiveNumber(valuta)){
-            javax.swing.JOptionPane.showMessageDialog (this, "Valuta måste vara ett positivt nummer.");
+        if (!Validator.isPositiveNumber(valuta)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Valuta måste vara ett positivt nummer.");
             return;
         }
-        
-        
-        
-        
+
         // använd insert in i databasen
-        String insertLandQuery = "INSERT INTO land VALUES('" + lid + "','" + namn + "','"+
-                sprak + "','" + valuta + "','" + tidszon + "','" + politisk_struktur + "','" +
-                ekonomi + "')";
-        
-        try{
+        String insertLandQuery = "INSERT INTO land VALUES('" + lid + "','" + namn + "','"
+                + sprak + "','" + valuta + "','" + tidszon + "','" + politisk_struktur + "','"
+                + ekonomi + "')";
+
+        try {
             idb.insert(insertLandQuery);
             taMsgBottom.setText("Landet har lagts till i databasen");
-        }catch(InfException e){
+        } catch (InfException e) {
             taMsgBottom.setText("Landet kunde inte läggas till");
         }
-        
+
     }//GEN-LAST:event_btnLäggTillActionPerformed
 
     /**
