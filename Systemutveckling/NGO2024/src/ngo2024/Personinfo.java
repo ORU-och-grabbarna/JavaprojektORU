@@ -14,13 +14,19 @@ public class Personinfo extends javax.swing.JFrame {
     private InfDB idb;
     private String inloggadAnvandare;
     
-    /**
-     * Creates new form Personinfo
+     /**
+     * Konstruktor för att initiera Personinfo-fönstret.
+     *
+     * @param idb              Databasobjekt för att utföra frågor.
+     * @param inloggadAnvandare Den inloggade användarens e-postadress.
      */
     public Personinfo(InfDB idb,String inloggadAnvandare) {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
         initComponents();
+      /**
+     * Hämtar och visar personuppgifter för den inloggade användaren i Formuläret.
+     */
         visainfo();
     }
     
@@ -203,6 +209,13 @@ public class Personinfo extends javax.swing.JFrame {
     String epost = Txtepost.getText().trim();
     String telefon = Txttelefon.getText().trim();
     String avdelning = Txtavdelning.getText().trim();
+    /**
+     * Hanterar klick på knappen "Ändra". Uppdaterar användarens information i databasen.
+     *
+     * @param evt Event som triggas vid knapptryck.
+     */
+    
+    //Validering
     if (!Validator.isValidName(fornamn)) {
         javax.swing.JOptionPane.showMessageDialog(this, 
             "Ogiltigt förnamn! Endast bokstäver och mellanslag är tillåtna.",
@@ -216,7 +229,19 @@ public class Personinfo extends javax.swing.JFrame {
             "Valideringsfel",
             javax.swing.JOptionPane.ERROR_MESSAGE);
         return;
-    }
+     }
+    if (!Validator.isValidPhoneNumber(telefon)){
+             javax.swing.JOptionPane.showMessageDialog (this, "Telefon numret måste bestå av 7-15 siffror!");
+             return;
+        }
+    if (!Validator.isValidEmail(epost)) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+        "Ogiltig e-postadress! Vänligen kontrollera fältet igen",
+        "Felmeddelande", // Titel på dialogen
+        javax.swing.JOptionPane.ERROR_MESSAGE);
+    return;
+}
+
 try {
      String updateQuery = "UPDATE anstalld SET "
                    + "fornamn = '" + fornamn + "', "
@@ -245,6 +270,7 @@ catch (InfException e) {
 
         
         try{
+               // Hämtar värden från databasen
             String fornamnsql  = "SELECT fornamn FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";
             String efternamnsql = "SELECT efternamn FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";
             String adresssql = "SELECT adress FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";        
@@ -252,6 +278,7 @@ catch (InfException e) {
             String avdelningsql = "SELECT avdelning FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";
             String anstallningsdatumsql = "SELECT anstallningsdatum FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";
             String epostsql = "SELECT epost FROM anstalld WHERE epost = '" + inloggadAnvandare + "'";
+            // Hämtar värden från databasen
             
             String fornamn = idb.fetchSingle(fornamnsql);
             String adress = idb.fetchSingle(adresssql);
@@ -261,7 +288,7 @@ catch (InfException e) {
             String epost = idb.fetchSingle(epostsql);
             String anstallningsdatum = idb.fetchSingle(anstallningsdatumsql);
 
-              
+               // Sätter värden i formuläret  
               Txtfornamn.setText(fornamn);
               Txtefternamn.setText(efternamn);
               Txtadress.setText(adress);
