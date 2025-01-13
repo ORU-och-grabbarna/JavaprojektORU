@@ -21,6 +21,14 @@ public class Inloggning extends javax.swing.JFrame {
     public Inloggning(InfDB idb) {
         this.idb = idb;
         initComponents();
+        getRootPane().setDefaultButton(btnLoggaIn);
+        pfPassword.addActionListener(new java.awt.event.ActionListener() {
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            // När Enter trycks i pfPassword, anropa inloggningsmetoden
+            btnLoggaInActionPerformed(evt);
+                }
+        });
         lblFelmeddelande.setVisible(false);
     }
 
