@@ -304,7 +304,7 @@ public class LäggTillProjekt extends javax.swing.JFrame {
                 idb.insert(insertQuery);
                 lblSuccess.setText("Projekt tillagd!");
             } catch (InfException e) {
-                lblSuccess.setText("Error");
+                lblSuccess.setText("Error, problem med query / värden som inmatats och kommit förbi valideringen");
             }
         } else {
             lblSuccess.setText("Handläggare kunde inte hittas");
