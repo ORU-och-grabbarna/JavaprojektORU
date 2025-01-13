@@ -191,7 +191,7 @@ public class MenyAdmin extends javax.swing.JFrame {
      * @param evt The event that triggered this action (button click).
      */
     private void btnPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartnerActionPerformed
-        // TODO add your handling code here:        new AdminPartner(idb).setVisible(true);
+        new AdminPartner(idb).setVisible(true);
     }//GEN-LAST:event_btnPartnerActionPerformed
     /**
      * Event handler for when the Land button is clicked. Opens the "AdminLand"
