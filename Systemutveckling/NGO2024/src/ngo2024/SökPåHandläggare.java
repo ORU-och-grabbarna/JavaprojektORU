@@ -170,10 +170,16 @@ public class SökPåHandläggare extends javax.swing.JFrame {
             return;
         }
         try { 
-        String sql = "SELECT anstalld.aid, anstalld.fornamn, anstalld.efternamn, anstalld.adress, anstalld.epost, anstalld.telefon, anstalld.anstallningsdatum, anstalld.avdelning " +
-                     "FROM handlaggare " +
-                     "JOIN anstalld ON handlaggare.aid = anstalld.aid " +
-                     "WHERE CONCAT(anstalld.fornamn, ' ', anstalld.efternamn) LIKE '%" + searchInput + "%' OR anstalld.epost LIKE '%" + searchInput + "%'";
+        String sql = "SELECT anstalld.aid, anstalld.fornamn, anstalld.efternamn, anstalld.adress, " +
+             "anstalld.epost, anstalld.telefon, anstalld.anstallningsdatum, anstalld.avdelning " +
+             "FROM anstalld " +
+             "WHERE anstalld.avdelning = (" +
+             "    SELECT avdelning " +
+             "    FROM anstalld " +
+             "    WHERE epost = '" + inloggadAnvandare + "'" +
+             ") " +
+             "AND (CONCAT(anstalld.fornamn, ' ', anstalld.efternamn) LIKE '%" + searchInput + "%' " +
+             "     OR anstalld.epost LIKE '%" + searchInput + "%')";
         
         HashMap<String, String> employee = idb.fetchRow(sql);
         
