@@ -170,6 +170,7 @@ public class Meny extends javax.swing.JFrame {
             case ("Sök handläggare"):
                 SökPåHandläggare handläggaresök = new SökPåHandläggare (idb, inloggadAnvandare);
     handläggaresök.setVisible(true);
+    break;
     
     
     
