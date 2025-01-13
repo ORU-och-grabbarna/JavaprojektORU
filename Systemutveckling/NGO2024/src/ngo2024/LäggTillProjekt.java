@@ -250,8 +250,9 @@ public class LäggTillProjekt extends javax.swing.JFrame {
         String efternamn = tfEfternamn.getText().toLowerCase();
         String land = tfLand.getText();
 
-        if (!Validator.isValidName(projektnamn)) {
+        if (!Validator.isValidProjektName(projektnamn)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Projekt namn får endast bestå av bokstäver och mellanslag.");
+            return;
         }
         if (!Validator.isValidDate(startdatum) || !Validator.isValidDate(slutdatum)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Start och slut datum måste vara på formatet YYYY-MM-DD");
@@ -265,9 +266,7 @@ public class LäggTillProjekt extends javax.swing.JFrame {
         // hitta aid till projektchefen
         String hittaAid = "SELECT aid FROM anstalld WHERE fornamn = '" + förnamn + "' " + "AND efternamn = '" + efternamn + "'";
 
-        // kontrollera om det är en handläggare
-        String controlHandläggare = "SELECT aid FROM handlaggare WHERE aid = '" + aid + "'";
-        String handläggare = null;
+      
 
         try {
             aid = idb.fetchSingle(hittaAid);
@@ -276,6 +275,11 @@ public class LäggTillProjekt extends javax.swing.JFrame {
             lblSuccess.setText("Kunde inte hitta personens anställnings id.");
         }
 
+        
+          // kontrollera om det är en handläggare
+        String controlHandläggare = "SELECT aid FROM handlaggare WHERE aid = '" + aid + "'";
+        String handläggare = null;
+        
         try {
             handläggare = idb.fetchSingle(controlHandläggare);
         } catch (InfException ex) {
