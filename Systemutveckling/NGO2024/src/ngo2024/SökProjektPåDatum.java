@@ -171,11 +171,11 @@ performSearch();
             JOptionPane.showMessageDialog(this, "Vänligen ange giltiga datum i formatet YYYY-MM-DD.");
             return;
         }
-        String sql = "SELECT pid, projektnamn, beskrivning, startdatum, slutdatum, kostnad, statud, prioritet, projektchef, land "
+        String sql = "SELECT pid, projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, projektchef, land "
                 + "FROM projekt "
                 + "WHERE startdatum >= '" + startDatum + "' "
                 + "AND slutdatum <= '" + slutDatum + "' "
-                + "AND statud = 'Pågående'";
+                + "AND status = 'Pågående'";
         try {
             ArrayList<HashMap<String, String>> results = idb.fetchRows(sql);
             if (results == null || results.isEmpty()) {
