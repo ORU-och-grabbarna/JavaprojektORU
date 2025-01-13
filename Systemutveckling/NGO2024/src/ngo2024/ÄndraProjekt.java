@@ -370,8 +370,9 @@ public class ÄndraProjekt extends javax.swing.JFrame {
         String efternamn = tfEfternamn.getText();
         String land = tfLand.getText();
 
-        if (!Validator.isValidName(projektNamn)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Projekt namn får endast bestå av bokstäver och mellanslag.");
+        if (!Validator.isValidProjektName(projektNamn)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Projekt namn får endast bestå av bokstäver, mellanslag och siffror.");
+            return;
         }
         if (!Validator.isValidDate(startDatum) || !Validator.isValidDate(slutDatum)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Start och slut datum måste vara på formatet YYYY-MM-DD");
