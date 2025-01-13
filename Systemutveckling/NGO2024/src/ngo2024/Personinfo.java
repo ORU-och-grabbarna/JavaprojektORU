@@ -253,7 +253,22 @@ try {
                    + "WHERE epost = '" + inloggadAnvandare + "';";
 
 idb.update(updateQuery);
+try {
+    idb.update(updateQuery);
+    // Kör uppdateringen
+    javax.swing.JOptionPane.showMessageDialog(this, 
+        "Dina uppgifter har uppdaterats framgångsrikt!", 
+        "Uppdatering lyckades",
+        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+} catch (InfException e) {
+    javax.swing.JOptionPane.showMessageDialog(this, 
+        "Fel vid uppdatering: " + e.getMessage(), 
+        "Fel", 
+        javax.swing.JOptionPane.ERROR_MESSAGE);
 }
+}
+
+
 catch (InfException e) {
         javax.swing.JOptionPane.showMessageDialog (this, "Fel vid uppdatering: " + e.getMessage());
     
