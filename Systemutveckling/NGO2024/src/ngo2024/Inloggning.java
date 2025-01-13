@@ -42,6 +42,7 @@ public class Inloggning extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         pfPassword = new javax.swing.JPasswordField();
         checkBoxPassword = new javax.swing.JCheckBox();
+        lblCreators = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +83,9 @@ public class Inloggning extends javax.swing.JFrame {
             }
         });
 
+        lblCreators.setFont(new java.awt.Font("Berlin Sans FB", 0, 12)); // NOI18N
+        lblCreators.setText("Made by team TheGrind");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,7 +113,10 @@ public class Inloggning extends javax.swing.JFrame {
                         .addGap(147, 147, 147)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnÅterställ)
-                            .addComponent(btnLoggaIn))))
+                            .addComponent(btnLoggaIn)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblCreators)))
                 .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -133,7 +140,9 @@ public class Inloggning extends javax.swing.JFrame {
                 .addComponent(btnLoggaIn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnÅterställ)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(lblCreators)
+                .addContainerGap())
         );
 
         pack();
@@ -165,7 +174,7 @@ public class Inloggning extends javax.swing.JFrame {
                 if ("1".equals(dbAdmin)) {
                     new MenyAdmin (idb, ePost).setVisible(true);
                 } else if (dbProjektChef!= null) {
-                    new MenyProjektChef (idb, ePost).setVisible(true);
+                    new Meny (idb, ePost).setVisible(true);
                   
                 } else {
                     new Meny (idb, ePost).setVisible(true);
@@ -240,6 +249,7 @@ public class Inloggning extends javax.swing.JFrame {
     private javax.swing.JButton btnÅterställ;
     private javax.swing.JCheckBox checkBoxPassword;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblCreators;
     private javax.swing.JLabel lblEpost;
     private javax.swing.JLabel lblFelmeddelande;
     private javax.swing.JLabel lblLosenord;
