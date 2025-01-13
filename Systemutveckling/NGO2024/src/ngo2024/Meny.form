@@ -23,36 +23,21 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="btnPersonalPaAvdelning" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="btnHallbarhetsmal" alignment="0" max="32767" attributes="0"/>
-                          <Component id="BtnPersoninfo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="BtnMinaprojekt" alignment="0" max="32767" attributes="0"/>
-                          <Component id="BtnPersonal" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace pref="110" max="32767" attributes="0"/>
-                              <Component id="lblInloggadAnvandare" min="-2" pref="116" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-                              <Component id="btnSökHandläggare" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblSDG" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="110" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnSökPåProjekt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="comboBoxHandläggare" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="comboBoxProjektchef" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="lblInloggadAnvandare" min="-2" pref="134" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -61,95 +46,78 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="BtnPersoninfo" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblInloggadAnvandare" min="-2" pref="28" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="BtnMinaprojekt" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSökHandläggare" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboBoxHandläggare" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLogout" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboBoxProjektchef" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblInloggadAnvandare" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="BtnPersonal" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnHallbarhetsmal" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Component id="btnPersonalPaAvdelning" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnSökPåProjekt" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+              <Component id="lblSDG" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="102" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="BtnPersoninfo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Personinfo"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPersoninfoActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnMinaprojekt">
-      <Properties>
-        <Property name="text" type="java.lang.String" value=" Mina projekt"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnMinaprojektActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnPersonal">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Min Avdelnings Projekt"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnPersonalActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="lblInloggadAnvandare">
       <Properties>
         <Property name="text" type="java.lang.String" value="inloggadanv&#xe4;ndare"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnHallbarhetsmal">
+    <Component class="javax.swing.JComboBox" name="comboBoxHandl&#xe4;ggare">
       <Properties>
-        <Property name="text" type="java.lang.String" value="H&#xe5;llbarhetsm&#xe5;l"/>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="8">
+            <StringItem index="0" value="&lt;Handl&#xe4;ggare&gt;"/>
+            <StringItem index="1" value="Mina projekt"/>
+            <StringItem index="2" value="S&#xf6;k handl&#xe4;ggare"/>
+            <StringItem index="3" value="Min avdelnings projekt"/>
+            <StringItem index="4" value="H&#xe5;llbarhetsm&#xe5;l"/>
+            <StringItem index="5" value="S&#xf6;k p&#xe5; projekt"/>
+            <StringItem index="6" value="Personinfo"/>
+            <StringItem index="7" value="Personalen p&#xe5; min avdelning"/>
+          </StringArray>
+        </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHallbarhetsmalActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxHandl&#xe4;ggareActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnLogout">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Logga ut"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogoutActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnPersonalPaAvdelning">
+    <Component class="javax.swing.JComboBox" name="comboBoxProjektchef">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Personalen p&#xe5; min avdelning"/>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="&lt;Projektchef meny&gt;"/>
+            <StringItem index="1" value="Mina projekt"/>
+          </StringArray>
+        </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPersonalPaAvdelningActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxProjektchefActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="btnS&#xf6;kP&#xe5;Projekt">
+    <Component class="javax.swing.JLabel" name="lblSDG">
       <Properties>
-        <Property name="text" type="java.lang.String" value="S&#xf6;k p&#xe5; Projekt"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Algerian" size="78" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="SDG SWEDEN"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnS&#xf6;kP&#xe5;ProjektActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnS&#xf6;kHandl&#xe4;ggare">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="S&#xf6;k Handl&#xe4;ggare"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnS&#xf6;kHandl&#xe4;ggareActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

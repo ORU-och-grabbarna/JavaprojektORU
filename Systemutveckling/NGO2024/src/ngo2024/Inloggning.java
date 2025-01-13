@@ -174,7 +174,7 @@ public class Inloggning extends javax.swing.JFrame {
                 if ("1".equals(dbAdmin)) {
                     new MenyAdmin (idb, ePost).setVisible(true);
                 } else if (dbProjektChef!= null) {
-                    new MenyProjektChef (idb, ePost).setVisible(true);
+                    new Meny (idb, ePost).setVisible(true);
                   
                 } else {
                     new Meny (idb, ePost).setVisible(true);
