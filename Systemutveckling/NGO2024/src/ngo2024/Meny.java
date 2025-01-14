@@ -82,7 +82,7 @@ public class Meny extends javax.swing.JFrame {
         comboBoxProjektchef = new javax.swing.JComboBox<>();
         lblSDG = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblInloggadAnvandare.setText("inloggadanvändare");
 
