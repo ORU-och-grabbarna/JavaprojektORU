@@ -216,7 +216,7 @@ public class SökPåHandläggare extends javax.swing.JFrame {
 
     /**
      * The main method that launches the application.
-     * 
+     *
      * @param args Command-line arguments (not used)
      */
     public static void main(String args[]) {

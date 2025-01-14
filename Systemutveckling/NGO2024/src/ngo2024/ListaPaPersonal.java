@@ -14,9 +14,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jamie
  */
-public class ListaPaPersonal extends javax.swing.JFrame {
-    
-    
+public class ListaPaPersonal extends javax.swing.JFrame { 
     private InfDB idb;
     private String inloggadAnvandare;
 
@@ -30,36 +28,27 @@ public class ListaPaPersonal extends javax.swing.JFrame {
         fyllPersonalListaTabell();
 
     }
-    
-    
-
-    
-    
-    
-    public void fyllPersonalListaTabell () {
-        
+   
+    /**
+     * This method fills the table with employees via an SQL query
+     * that matches the signed-in employee's department
+     */
+    public void fyllPersonalListaTabell () { 
         try {
-    
     String sql = """
         SELECT anstalld.fornamn, anstalld.efternamn, anstalld.epost, anstalld.telefon 
         FROM anstalld 
         WHERE avdelning IN (
             SELECT avdelning 
             FROM anstalld 
-            WHERE epost = '""" + inloggadAnvandare + "' )";
-
-    
+            WHERE epost = '""" + inloggadAnvandare + "' )";   
     ArrayList<HashMap<String, String>> personalAvdelning = idb.fetchRows(sql);
-
-    
-    DefaultTableModel model = new DefaultTableModel(
+  DefaultTableModel model = new DefaultTableModel(
         new String[]{"Förnamn", "Efternamn", "Epost", "Telefon"}, 0
     );
-
+  
     // Sätt modellen till tabellen
     tblPersonalPaAvdelning.setModel(model);
-
-    
     if (personalAvdelning != null) {
         for (HashMap<String, String> rad : personalAvdelning) {
             model.addRow(new Object[]{
@@ -73,33 +62,8 @@ public class ListaPaPersonal extends javax.swing.JFrame {
 } catch (InfException e) {
     javax.swing.JOptionPane.showMessageDialog(this, "Ett fel inträffade vid hämtning av personal.");
 }
-
-        
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-        
-        
-        
-        
-        
-        
-       
-    
-    
-    
-    
-    
-    
-    
-    
-
+}
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
