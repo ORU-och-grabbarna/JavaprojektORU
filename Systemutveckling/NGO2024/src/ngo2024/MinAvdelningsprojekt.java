@@ -10,7 +10,7 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 /**
  *
- * @author diyar
+ * @author diyar & antonio
  */
 public class MinAvdelningsprojekt extends javax.swing.JFrame {
     private InfDB idb;
@@ -77,6 +77,7 @@ public class MinAvdelningsprojekt extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProjekt = new javax.swing.JTable();
+        jComboBoxHandläggare = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -93,19 +94,90 @@ public class MinAvdelningsprojekt extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblProjekt);
 
+        jComboBoxHandläggare.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Status meny>", "Pågående", "Avslutat", "Planerat" }));
+        jComboBoxHandläggare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxHandläggareActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 833, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxHandläggare, 0, 116, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jComboBoxHandläggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBoxHandläggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxHandläggareActionPerformed
+    String valtAlternativ = (String) jComboBoxHandläggare.getSelectedItem();
+    String statusFilter = "";
+    switch (valtAlternativ){
+        case "Pågående":
+            statusFilter = "Pågående";
+            break;
+        case "Avslutat":
+            statusFilter = "Avslutat";
+            break;
+        case "Planerat":
+            statusFilter = "Planerat";
+            break;
+        default:
+            javax.swing.JOptionPane.showMessageDialog(this, "Något gick fel!");
+            return;
+    }
+    try {
+        String sql = "SELECT DISTINCT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet FROM projekt "
+                + "JOIN ans_proj ON projekt.pid = ans_proj.pid "
+                + "JOIN anstalld ON ans_proj.aid = anstalld.aid "
+                + "WHERE anstalld.avdelning = ("
+                + " SELECT avdelning FROM anstalld WHERE epost = '" + inloggadAnvandare + "'"
+                + ") AND status = '" + statusFilter + "'";
+        
+        ArrayList<HashMap<String, String>> resultat = idb.fetchRows(sql);
+        
+        if (resultat == null || resultat.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Inga projekt hittades! Sök igen!");
+            return;   
+        }
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Projektnamn");
+        model.addColumn("Beskrivning");
+        model.addColumn("Startdatum");
+        model.addColumn("Slutdatum");
+        model.addColumn("Kostnad");
+        model.addColumn("Status");
+        model.addColumn("Prioritet");
+        for (HashMap<String, String> rad : resultat) {
+            model.addRow(new Object[]{
+                rad.get("projektnamn"),
+                rad.get("beskrivning"),
+                rad.get("startdatum"),
+                rad.get("slutdatum"),
+                rad.get("kostnad"),
+                rad.get("status"),
+                rad.get("prioritet"),
+            });
+        }
+        tblProjekt.setModel(model);
+    } catch (InfException e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Fel vid hämtning av projekt: " + e.getMessage());
+    }
+    }//GEN-LAST:event_jComboBoxHandläggareActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,6 +215,7 @@ public class MinAvdelningsprojekt extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jComboBoxHandläggare;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProjekt;
     // End of variables declaration//GEN-END:variables
