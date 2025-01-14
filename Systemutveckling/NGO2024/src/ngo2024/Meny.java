@@ -149,7 +149,7 @@ public class Meny extends javax.swing.JFrame {
     private void comboBoxHandläggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxHandläggareActionPerformed
         String valtAlternativ = (String) comboBoxHandläggare.getSelectedItem();
         
-        
+        // Använder mig av switch och cases istället för massor av if och if else, ser snyggare ut, mer modernt.
         switch (valtAlternativ) {
             
             case ("Mina projekt"):
@@ -191,9 +191,7 @@ public class Meny extends javax.swing.JFrame {
         break;
         
         
-        default: javax.swing.JOptionPane.showMessageDialog (this, "Error");
-            break;
-                
+        
             
                 
             
