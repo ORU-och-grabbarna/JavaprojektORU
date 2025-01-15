@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ngo2024;
-
+import javax.swing.*;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -15,6 +15,7 @@ public class Meny extends javax.swing.JFrame {
     
     private InfDB idb;
     private String inloggadAnvandare;
+    private JLabel timeLabel;
     
     
 
@@ -27,6 +28,9 @@ public class Meny extends javax.swing.JFrame {
         initComponents();
         lblInloggadAnvandare.setText(inloggadAnvandare);
         kontrolleraBehörighet();
+        lblTimeLabel.setText("00:00:00");
+        Clock clock = new Clock();
+        clock.startClock(lblTimeLabel);
     
     }
 
@@ -81,6 +85,9 @@ public class Meny extends javax.swing.JFrame {
         btnLoggaUt = new javax.swing.JButton();
         comboBoxProjektchef = new javax.swing.JComboBox<>();
         lblSDG = new javax.swing.JLabel();
+        lblTimeLabel = new javax.swing.JLabel();
+        lblLokalTid = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,24 +117,41 @@ public class Meny extends javax.swing.JFrame {
         lblSDG.setFont(new java.awt.Font("Algerian", 0, 78)); // NOI18N
         lblSDG.setText("SDG SWEDEN");
 
+        lblTimeLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblTimeLabel.setText("00:00:00");
+
+        lblLokalTid.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblLokalTid.setText("Lokal tid:");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ngo2024/image/asdasd.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnLoggaUt)
-                .addGap(18, 18, 18)
-                .addComponent(comboBoxHandläggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(comboBoxProjektchef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
-                .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblSDG)
-                .addGap(126, 126, 126))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 124, Short.MAX_VALUE)
+                        .addComponent(lblSDG)
+                        .addGap(126, 126, 126))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnLoggaUt)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboBoxHandläggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboBoxProjektchef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLokalTid)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTimeLabel)
+                        .addGap(97, 97, 97)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,9 +162,19 @@ public class Meny extends javax.swing.JFrame {
                     .addComponent(btnLoggaUt)
                     .addComponent(comboBoxHandläggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboBoxProjektchef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69)
+                .addGap(73, 73, 73)
                 .addComponent(lblSDG)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblLokalTid)
+                            .addComponent(lblTimeLabel))
+                        .addGap(20, 20, 20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -267,7 +301,10 @@ public class Meny extends javax.swing.JFrame {
     private javax.swing.JButton btnLoggaUt;
     private javax.swing.JComboBox<String> comboBoxHandläggare;
     private javax.swing.JComboBox<String> comboBoxProjektchef;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblInloggadAnvandare;
+    private javax.swing.JLabel lblLokalTid;
     private javax.swing.JLabel lblSDG;
+    private javax.swing.JLabel lblTimeLabel;
     // End of variables declaration//GEN-END:variables
 }
