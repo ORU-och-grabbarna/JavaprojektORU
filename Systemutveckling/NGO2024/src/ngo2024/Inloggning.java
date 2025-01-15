@@ -138,7 +138,7 @@ public class Inloggning extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -158,10 +158,10 @@ public class Inloggning extends javax.swing.JFrame {
                         .addComponent(btnLoggaIn)
                         .addGap(18, 18, 18)
                         .addComponent(btnÅterställ)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2))
-                    .addComponent(lblCreators))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addGap(6, 6, 6))
+                    .addComponent(lblCreators)))
         );
 
         pack();
