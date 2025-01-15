@@ -86,7 +86,7 @@ public class Meny extends javax.swing.JFrame {
 
         lblInloggadAnvandare.setText("inloggadanvändare");
 
-        comboBoxHandläggare.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Handläggare meny>", "Mina projekt", "Sök på projekt", "Sök handläggare", "Hållbarhetsmål", "Personalen på min avdelning", "Min avdelnings projekt" }));
+        comboBoxHandläggare.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Handläggare meny>", "Mina projekt", "Sök på projekt", "Sök handläggare", "Hållbarhetsmål", "Personalen på min avdelning", "Min avdelnings projekt", "Personinfo", "Partner uppgifter" }));
         comboBoxHandläggare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxHandläggareActionPerformed(evt);
@@ -189,6 +189,14 @@ public class Meny extends javax.swing.JFrame {
                      ListaPaPersonal personalfönster = new ListaPaPersonal (idb, inloggadAnvandare);
         personalfönster.setVisible(true);
         break;
+        
+        
+        
+        
+            case ("Partner uppgifter"):
+                PartnerSamarbete partFönster = new PartnerSamarbete (idb, inloggadAnvandare);
+                partFönster.setVisible(true);
+                break;
         
         
         
