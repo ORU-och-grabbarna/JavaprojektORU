@@ -144,8 +144,36 @@ public class TaBortAnställd extends javax.swing.JFrame {
             String aid = idb.fetchSingle(selectAid);
             String deleteAnstalld = "DELETE FROM anstalld WHERE aid =" + "'" + aid + "'";
             String deleteAnsProj = "DELETE FROM ans_proj WHERE aid =" + "'" + aid + "'";
+            String deleteHandlaggare = "DELETE FROM handlaggare WHERE aid =" + "'" + aid + "'";
+            String nullMentor = "UPDATE handlaggare SET mentor = NULL WHERE mentor = '" + aid + "'";
+            String nullProjektChef = "UPDATE projekt SET projektchef = NULL WHERE projektchef = '" + aid + "'";
+            String nullAvdelning = "UPDATE avdelning SET chef = NULL WHERE chef = '" + aid + "'";
 
             String selectAdmin = "SELECT behorighetsniva FROM admin WHERE aid = " + "'" + aid + "'";
+
+            
+            // Ta bort/Sätt till null där aid förekommer som främmande nyckel
+            try {
+                idb.update(nullMentor);
+            } catch (InfException e) {
+                lblSuccess.setText("Kunde inte ta bort handläggare som mentor");
+            }
+
+            try {
+                idb.update(nullProjektChef);
+            } catch (InfException e) {
+                lblSuccess.setText("Kunde inte ta bort handläggare som projektchef");
+            }
+            try {
+                idb.delete(deleteAnsProj);
+            } catch (InfException e) {
+                lblSuccess.setText("Kunde inte radera från ans_proj i databasen");
+            }
+            try{
+                idb.update(nullAvdelning);
+            }catch (InfException e){
+                lblSuccess.setText("Kunde inte ta bort anställd som avdelningschef");
+            }
 
             String behörighetsnivå = idb.fetchSingle(selectAdmin);
 
@@ -154,32 +182,12 @@ public class TaBortAnställd extends javax.swing.JFrame {
                 String deleteAdmin = "DELETE FROM admin WHERE aid =" + "'" + aid + "'";
 
                 try {
-                    idb.delete(deleteAnsProj);
-                } catch (InfException e) {
-                    lblSuccess.setText("Kunde inte radera från ans_proj i databasen");
-                }
-
-                try {
                     idb.delete(deleteAdmin);
                 } catch (InfException e) {
                     lblSuccess.setText("Kunde inte ta bort admin");
                 }
 
             } else {
-                String deleteHandlaggare = "DELETE FROM handlaggare WHERE aid =" + "'" + aid + "'";
-                String nullMentor = "UPDATE handlaggare SET mentor = NULL WHERE mentor = '" + aid + "'";
-                String nullProjektChef = "UPDATE projekt SET projektchef = NULL WHERE projektchef = '" + aid + "'";
-                try {
-                    idb.update(nullMentor);
-                } catch (InfException e) {
-                    lblSuccess.setText("Kunde inte ta bort handläggare som mentor");
-                }
-
-                try {
-                    idb.update(nullProjektChef);
-                } catch (InfException e) {
-                    lblSuccess.setText("Kunde inte ta bort handläggare som projektchef");
-                }
                 try {
                     idb.delete(deleteHandlaggare);
                 } catch (InfException e) {
@@ -190,11 +198,12 @@ public class TaBortAnställd extends javax.swing.JFrame {
 
             try {
                 idb.delete(deleteAnstalld);
+                lblSuccess.setText("Operationen lyckades");
             } catch (InfException e) {
                 lblSuccess.setText("Kunde inte ta bort admin som anställd");
             }
 
-            lblSuccess.setText("Operationen lyckades");
+            
 
         } catch (InfException e) {
             // fel medelleande här
