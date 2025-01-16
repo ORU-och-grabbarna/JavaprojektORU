@@ -143,7 +143,7 @@ public class TaBortAnställd extends javax.swing.JFrame {
             String selectAid = "SELECT aid FROM anstalld where fornamn = '" + fNamn + "'" + "AND efternamn = '" + eNamn + "'";
             String aid = idb.fetchSingle(selectAid);
             String deleteAnstalld = "DELETE FROM anstalld WHERE aid =" + "'" + aid +"'";
-
+            String deleteAnsProj = "DELETE FROM ans_proj WHERE aid =" + "'" + aid +"'";
             
 
             String selectAdmin = "SELECT behorighetsniva FROM admin WHERE aid = " + "'" + aid + "'";
@@ -153,14 +153,37 @@ public class TaBortAnställd extends javax.swing.JFrame {
             // for admin:
             if (behörighetsnivå != null) {
                 String deleteAdmin = "DELETE FROM admin WHERE aid =" + "'" + aid + "'";
-                idb.delete(deleteAdmin);
-                idb.delete(deleteAnstalld);
+                
+                try{
+                    idb.delete(deleteAdmin);
+                }catch (InfException e){
+                    lblSuccess.setText("Kunde inte ta bort admin");
+                }
                 
             }else{
                 String deleteHandlaggare = "DELETE FROM handlaggare WHERE aid =" + "'" + aid + "'";
-                idb.delete(deleteHandlaggare);
-                idb.delete(deleteAnstalld);
+                
+                 try{
+                    idb.delete(deleteHandlaggare);
+                }catch (InfException e){
+                    lblSuccess.setText("Kunde inte ta bort handläggare");
+                }
+                 
             }
+            
+            try{
+                idb.delete(deleteAnsProj);
+            }catch (InfException e){
+                lblSuccess.setText("Kunde inte radera från ans_proj i databasen");
+            }
+            
+            try{
+               idb.delete(deleteAnstalld);
+            }catch (InfException e){
+               lblSuccess.setText("Kunde inte ta bort admin som anställd");
+            }
+            
+                
             
             lblSuccess.setText("Operationen lyckades");
  
