@@ -10,24 +10,26 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 
 /**
- * This class represents the user interface for deleting an employee from the system.
- * The form allows an administrator to input the first name and last name of an employee,
- * and upon clicking the "OK" button, the employee's record will be deleted from the database.
- * If the employee is an admin, their record will be removed from both the "admin" and "anstalld" tables.
- * If the employee is a handläggare , their record will be removed from both the "handlaggare" 
+ * This class represents the user interface for deleting an employee from the
+ * system. The form allows an administrator to input the first name and last
+ * name of an employee, and upon clicking the "OK" button, the employee's record
+ * will be deleted from the database. If the employee is an admin, their record
+ * will be removed from both the "admin" and "anstalld" tables. If the employee
+ * is a handläggare , their record will be removed from both the "handlaggare"
  * and "anstalld" tables.
- * 
- * The class interacts with a database (InfDB) to perform the necessary delete operations.
- * 
+ *
+ * The class interacts with a database (InfDB) to perform the necessary delete
+ * operations.
+ *
  * @author Mohammed
  */
 public class TaBortAnställd extends javax.swing.JFrame {
-    
+
     private InfDB idb;
 
     /**
-     * Creates a new TaBortAnställd frame.
-     * Initializes the components and sets up the database connection.
+     * Creates a new TaBortAnställd frame. Initializes the components and sets
+     * up the database connection.
      *
      * @param idb The InfDB instance to be used for database operations.
      */
@@ -118,33 +120,30 @@ public class TaBortAnställd extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
   /**
-     * Event handler for when the OK button is clicked.
-     * It retrieves the first name and last name from the text fields and attempts to delete the employee
-     * from the database. The method also checks if the employee is an admin or a handläggare 
-     * and deletes the appropriate records.
+     * Event handler for when the OK button is clicked. It retrieves the first
+     * name and last name from the text fields and attempts to delete the
+     * employee from the database. The method also checks if the employee is an
+     * admin or a handläggare and deletes the appropriate records.
      *
-     * If the deletion is successful, a success message is displayed. If there is an error, 
-     * a failure message is shown instead.
-     * 
+     * If the deletion is successful, a success message is displayed. If there
+     * is an error, a failure message is shown instead.
+     *
      * @param evt The event that triggered this action (button click).
      */
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
-        
-        
-            // gör en delete där du använder namnet
-            String fNamn = tfFörnamn.getText();
-            String eNamn = tfEfternamn.getText();
-            
-            
-            // behöver göra olika under frågor beroende på om det är en handläggare eller admin
-            // se om det är handläggare eller admin
-          try {
+
+        // gör en delete där du använder namnet
+        String fNamn = tfFörnamn.getText();
+        String eNamn = tfEfternamn.getText();
+
+        // behöver göra olika under frågor beroende på om det är en handläggare eller admin
+        // se om det är handläggare eller admin
+        try {
             String selectAid = "SELECT aid FROM anstalld where fornamn = '" + fNamn + "'" + "AND efternamn = '" + eNamn + "'";
             String aid = idb.fetchSingle(selectAid);
-            String deleteAnstalld = "DELETE FROM anstalld WHERE aid =" + "'" + aid +"'";
-            String deleteAnsProj = "DELETE FROM ans_proj WHERE aid =" + "'" + aid +"'";
-            
+            String deleteAnstalld = "DELETE FROM anstalld WHERE aid =" + "'" + aid + "'";
+            String deleteAnsProj = "DELETE FROM ans_proj WHERE aid =" + "'" + aid + "'";
 
             String selectAdmin = "SELECT behorighetsniva FROM admin WHERE aid = " + "'" + aid + "'";
 
@@ -153,48 +152,56 @@ public class TaBortAnställd extends javax.swing.JFrame {
             // for admin:
             if (behörighetsnivå != null) {
                 String deleteAdmin = "DELETE FROM admin WHERE aid =" + "'" + aid + "'";
-                
-                try{
+
+                try {
+                    idb.delete(deleteAnsProj);
+                } catch (InfException e) {
+                    lblSuccess.setText("Kunde inte radera från ans_proj i databasen");
+                }
+
+                try {
                     idb.delete(deleteAdmin);
-                }catch (InfException e){
+                } catch (InfException e) {
                     lblSuccess.setText("Kunde inte ta bort admin");
                 }
-                
-            }else{
+
+            } else {
                 String deleteHandlaggare = "DELETE FROM handlaggare WHERE aid =" + "'" + aid + "'";
-                
-                 try{
+                String nullMentor = "UPDATE handlaggare SET mentor = NULL WHERE mentor = '" + aid + "'";
+                String nullProjektChef = "UPDATE projekt SET projektchef = NULL WHERE projektchef = '" + aid + "'";
+                try {
+                    idb.update(nullMentor);
+                } catch (InfException e) {
+                    lblSuccess.setText("Kunde inte ta bort handläggare som mentor");
+                }
+
+                try {
+                    idb.update(nullProjektChef);
+                } catch (InfException e) {
+                    lblSuccess.setText("Kunde inte ta bort handläggare som projektchef");
+                }
+                try {
                     idb.delete(deleteHandlaggare);
-                }catch (InfException e){
+                } catch (InfException e) {
                     lblSuccess.setText("Kunde inte ta bort handläggare");
                 }
-                 
+
             }
-            
-            try{
-                idb.delete(deleteAnsProj);
-            }catch (InfException e){
-                lblSuccess.setText("Kunde inte radera från ans_proj i databasen");
+
+            try {
+                idb.delete(deleteAnstalld);
+            } catch (InfException e) {
+                lblSuccess.setText("Kunde inte ta bort admin som anställd");
             }
-            
-            try{
-               idb.delete(deleteAnstalld);
-            }catch (InfException e){
-               lblSuccess.setText("Kunde inte ta bort admin som anställd");
-            }
-            
-                
-            
+
             lblSuccess.setText("Operationen lyckades");
- 
+
         } catch (InfException e) {
             // fel medelleande här
             lblSuccess.setText("Operationen misslyckades");
         }
-            
-            
-        
-        
+
+
     }//GEN-LAST:event_btnOKActionPerformed
 
     /**
