@@ -73,7 +73,7 @@ public class Validator {
      */
     public static boolean isValidPhoneNumber (String phoneNumber) {
         
-        return phoneNumber != null && phoneNumber.matches("^\\d{7,15}$");
+        return phoneNumber != null && phoneNumber.matches("^\\d{3}-\\d{3}-\\d{4}$");
     }
     
     
