@@ -332,7 +332,7 @@ public class AdminAvdelning extends javax.swing.JFrame {
             return;
         }
         if (!Validator.isValidPhoneNumber(telefon)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror!");
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste vara av formatet XXX-XXX-XXXX");
             return;
         }
         if (!Validator.isValidName(stadNamn)) {
@@ -418,7 +418,7 @@ public class AdminAvdelning extends javax.swing.JFrame {
             return;
         }
         if (!Validator.isValidPhoneNumber(telefon)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste bestå av 7-15 siffror!");
+            javax.swing.JOptionPane.showMessageDialog(this, "Telefon numret måste vara av formatet XXX-XXX-XXXX");
             return;
         }
         if (!Validator.isValidName(stadNamn)) {
